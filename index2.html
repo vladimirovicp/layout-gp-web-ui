@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    details {
+      margin-left: 15px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    li {
+      padding: 2px 0;
+    }
+  </style>
+</head>
+<body>
+  <details>
+    <summary>Folder 1</summary>
+    <ul>
+      <li>File 1</li>
+      <li>File 2</li>
+    </ul>
+  </details>
+  <details>
+    <summary>Folder 2</summary>
+    <ul>
+      <li>File 3</li>
+      <li>File 4</li>
+    </ul>
+  </details>
+
+  <script>
+    // Пример: добавление нового файла в папку
+    function addFile(folder, fileName) {
+      const ul = folder.querySelector('ul');
+      const li = document.createElement('li');
+      li.textContent = fileName;
+      ul.appendChild(li);
+    }
+
+    // Пример использования:
+    const folder1 = document.querySelector('details');
+    addFile(folder1, 'New File');
+  </script>
+</body>
+</html>

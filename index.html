@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    .smooth-details {
+      margin-left: 15px;
+      overflow: hidden;
+    }
+    .smooth-details summary {
+      cursor: pointer;
+      font-weight: bold;
+      display: block;
+      padding: 5px 0;
+    }
+    .smooth-details ul {
+      list-style-type: none;
+      padding-left: 20px;
+      margin: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .smooth-details[open] ul {
+      max-height: 500px;
+      transition: max-height 0.5s ease-in;
+    }
+    .smooth-details li {
+      padding: 2px 0;
+    }
+  </style>
+</head>
+<body>
+  <details class="smooth-details">
+    <summary>Folder 1</summary>
+    <ul>
+      <li>File 1</li>
+      <li>File 2</li>
+    </ul>
+  </details>
+  <details class="smooth-details">
+    <summary>Folder 2</summary>
+    <ul>
+      <li>File 3</li>
+      <li>File 4</li>
+    </ul>
+  </details>
+
+  <script>
+    document.querySelectorAll('.smooth-details').forEach(details => {
+      details.addEventListener('click', (e) => {
+        if (details.hasAttribute('open')) {
+          const ul = details.querySelector('ul');
+          ul.style.maxHeight = ul.scrollHeight + 'px';
+          setTimeout(() => {
+            ul.style.maxHeight = '0';
+          }, 10);
+        }
+      });
+
+      details.addEventListener('toggle', (e) => {
+        const ul = details.querySelector('ul');
+        if (details.open) {
+          ul.style.maxHeight = ul.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
