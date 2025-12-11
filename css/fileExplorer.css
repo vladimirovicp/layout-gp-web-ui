@@ -1,0 +1,113 @@
+/* Base styles */
+body {
+  margin: 0;
+  /* font-family: Arial, sans-serif; */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr;
+  min-height: 100vh;
+}
+
+/* CSS for the sidebar */
+#sidebar {
+  background-color: #f9f9f9;
+  border-right: 1px solid #ccc;
+  padding: 1rem;
+  height: 100%;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+  margin: 0;
+}
+
+ul ul {
+  display: none;
+}
+
+.folder::before {
+  content: "📂";
+  margin-right: 5px;
+}
+
+.file::before {
+  content: "📄";
+  margin-right: 5px;
+}
+
+.folder,
+.file {
+  cursor: pointer;
+}
+
+.arrow {
+  display: inline-block;
+  width: 20px;
+}
+
+.selected {
+  background-color: #e0e0e0;
+}
+
+/* CSS for the main content */
+#main {
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive layout for larger screens */
+@media (min-width: 768px) {
+  body {
+    grid-template-columns: 300px 1fr; /* Sidebar and main content */
+    grid-template-rows: auto 1fr;
+    height: 100vh; /* Force the layout to take full viewport height */
+  }
+
+  #sidebar {
+    grid-column: 1;
+    grid-row: 2;
+    height: calc(100vh - 2rem); /* Full height minus the header height */
+  }
+
+  #main {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  header {
+    grid-column: 1 / 3; /* Span the header across both columns */
+  }
+}
+
+/* For smaller screens */
+@media (max-width: 767px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+  }
+
+  #sidebar {
+    height: auto; /* Sidebar height adjusts to content for small screens */
+  }
+}

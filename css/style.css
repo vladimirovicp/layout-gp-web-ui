@@ -1,0 +1,40 @@
+.gpui__modal{
+    
+}
+
+.gpui__modal .modal-dialog{
+    width: 90%;
+    height: 90vh;
+}
+
+.gpui__modal .modal-content{
+    
+}
+
+.gpui__modal .facet{
+    border: 1px solid #d1d1d1;
+}
+
+.sidebar-pf .search-filter input{
+    width: calc(100% - 4px);
+}
+
+.gpui__panel-left{
+    padding-top: 15px;
+}
+
+.gpui__panel-left .facet-controls{
+    padding-bottom: 15px;
+}
+
+
+.gpui__structure{
+    padding-top: 5px;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    overflow: auto;
+}
+
+.gpui__structure ul li{
+    white-space: nowrap;
+}
