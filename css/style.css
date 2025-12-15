@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.gpui__container {
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+  display: flex;
+}
+.gpui__container .left-panel {
+  border: 1px solid #ebe6e7;
+  padding: 10px;
+  min-width: 250px;
+  width: 300px;
+}
+.gpui__container .right-panel {
+  border: 1px solid #ebe6e7;
+  padding: 10px;
+  flex: 1 1 0; /* растягивается на всё оставшееся пространство */
+  min-width: 300px; /* ← минимальная ширина */
+}
+.gpui__container .right-panel .policy_name {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ebe6e7;
+}
+.gpui__container .right-panel__container {
+  height: 100%;
+  display: flex;
+}
+.gpui__container .right-panel__container .sub_left-panel {
+  width: 70%;
+}
+.gpui__container .right-panel__container .sub_right-panel {
+  width: 30%;
+}
+.gpui__container .right-panel__container .sub_divider {
+  cursor: col-resize;
+  width: 8px;
+  background-color: #ebe6e7;
+}
+.gpui__container .divider {
+  cursor: col-resize;
+  width: 8px;
+  background-color: #ebe6e7;
+}/*# sourceMappingURL=style.css.map */

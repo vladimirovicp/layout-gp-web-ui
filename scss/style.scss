@@ -1,0 +1,65 @@
+.gpui{
+    &__container{
+        width: 100%;
+        height: 100vh;
+        padding: 10px;
+
+        //background-color: #e1e1e1;
+
+        display: flex;
+
+        .left-panel{
+            //flex-grow: 40;
+            border: 1px solid #ebe6e7;
+            padding: 10px;
+
+            min-width: 250px;
+            width: 300px;
+            //flex: 0 0 auto;
+
+        }
+
+        .right-panel{
+            //flex-grow: 60;
+            border: 1px solid #ebe6e7;
+            padding: 10px;
+
+              flex: 1 1 0; /* растягивается на всё оставшееся пространство */
+              min-width: 300px; /* ← минимальная ширина */
+
+
+              .policy_name{
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ebe6e7;
+              }
+
+              &__container{
+                height: 100%;
+                display: flex;
+
+                .sub_left-panel{
+                    width: 70%;
+                    
+                }
+
+                .sub_right-panel{
+                    width: 30%;
+                }
+
+                .sub_divider{
+                    cursor: col-resize;
+                    width: 8px;
+                    background-color: #ebe6e7;
+                }
+                
+              }
+        }
+
+        .divider{
+            cursor: col-resize;
+            width: 8px;
+            background-color: #ebe6e7;
+        }
+    }
+}
