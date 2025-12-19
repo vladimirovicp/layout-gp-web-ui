@@ -16,6 +16,7 @@
             min-width: 250px;
             width: 300px;
             //flex: 0 0 auto;
+            background-color: #6a8173;
 
         }
 
@@ -24,8 +25,10 @@
             border: 1px solid #ebe6e7;
             padding: 10px;
 
+            background-color: #4a5c67;
+
               flex: 1 1 0; /* растягивается на всё оставшееся пространство */
-              min-width: 300px; /* ← минимальная ширина */
+              min-width: 498px; /* ← минимальная ширина */
 
 
               .policy_name{
@@ -35,16 +38,35 @@
               }
 
               &__container{
-                height: 100%;
+                //height: 100%;
                 display: flex;
+
+                    background-color: #574e2e;
 
                 .sub_left-panel{
                     width: 70%;
+                    min-width: 200px;
+                    background-color: #795151;
+
+                    .policy_status{
+                        list-style: none;
+                        padding-left: 0;
+
+                        li{
+                            label{
+                                cursor: pointer;
+                            }
+                            
+                        }
+                    }
                     
                 }
 
                 .sub_right-panel{
-                    width: 30%;
+                    //width: 30%;
+                    min-width: 275px;
+                    background-color: #33573c;
+                    flex: 1 1 0;
                 }
 
                 .sub_divider{
@@ -60,6 +82,20 @@
             cursor: col-resize;
             width: 8px;
             background-color: #ebe6e7;
+        }
+
+        .supported-on{
+
+            &__box{
+                background-color: #e1e1e1;
+                padding: 10px;
+            }
+
+            &__info{
+
+                height: 110px;
+                overflow: auto;
+            }
         }
     }
 }
