@@ -1,0 +1,79 @@
+@charset "UTF-8";
+.gpui__container {
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+  display: flex;
+}
+.gpui__container .left-panel {
+  border: 1px solid #ebe6e7;
+  padding: 10px;
+  min-width: 250px;
+  width: 300px;
+  background-color: #6a8173;
+}
+.gpui__container .right-panel {
+  border: 1px solid #ebe6e7;
+  padding: 10px;
+  background-color: #4a5c67;
+  flex: 1 1 0; /* растягивается на всё оставшееся пространство */
+  min-width: 498px; /* ← минимальная ширина */
+}
+.gpui__container .right-panel .policy_name {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ebe6e7;
+}
+.gpui__container .right-panel__container {
+  display: flex;
+  background-color: #574e2e;
+}
+.gpui__container .right-panel__container .sub_left-panel {
+  width: 70%;
+  min-width: 200px;
+  background-color: #795151;
+}
+.gpui__container .right-panel__container .sub_left-panel .policy_status {
+  list-style: none;
+  padding-left: 0;
+}
+.gpui__container .right-panel__container .sub_left-panel .policy_status li label {
+  cursor: pointer;
+}
+.gpui__container .right-panel__container .sub_right-panel {
+  min-width: 275px;
+  background-color: #33573c;
+  flex: 1 1 0;
+}
+.gpui__container .right-panel__container .sub_divider {
+  cursor: col-resize;
+  width: 8px;
+  background-color: #ebe6e7;
+}
+.gpui__container .divider {
+  cursor: col-resize;
+  width: 8px;
+  background-color: #ebe6e7;
+}
+.gpui__container .supported-on__box {
+  background-color: #e1e1e1;
+  padding: 10px;
+}
+.gpui__container .supported-on__info {
+  height: 110px;
+  overflow: auto;
+}
+.gpui__container .comment__label {
+  display: block;
+}
+.gpui__container .comment__textarea {
+  width: 100%;
+}
+.gpui__container .help__box {
+  background-color: #e1e1e1;
+  padding: 10px;
+}
+.gpui__container .help__info {
+  height: calc(100vh - 392px);
+  overflow: auto;
+}
