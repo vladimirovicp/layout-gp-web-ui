@@ -85,7 +85,6 @@
         }
 
         .supported-on{
-
             &__box{
                 background-color: #e1e1e1;
                 padding: 10px;
@@ -94,6 +93,32 @@
             &__info{
 
                 height: 110px;
+                overflow: auto;
+            }
+        }
+
+        .comment{
+            &__box{
+
+            }
+
+            &__label{
+                display: block;
+            }
+
+            &__textarea{
+                width: 100%;
+            }
+        }
+
+        .help{
+            &__box{
+                background-color: #e1e1e1;
+                padding: 10px;
+            }
+
+            &__info{
+                height: calc(100vh - 392px);
                 overflow: auto;
             }
         }

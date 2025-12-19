@@ -62,4 +62,18 @@
 .gpui__container .supported-on__info {
   height: 110px;
   overflow: auto;
+}
+.gpui__container .comment__label {
+  display: block;
+}
+.gpui__container .comment__textarea {
+  width: 100%;
+}
+.gpui__container .help__box {
+  background-color: #e1e1e1;
+  padding: 10px;
+}
+.gpui__container .help__info {
+  height: calc(100vh - 392px);
+  overflow: auto;
 }/*# sourceMappingURL=style.css.map */
