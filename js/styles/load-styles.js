@@ -1,6 +1,7 @@
 export function loadMainStyles() {
     loadStyles('../css/reset.css');
     loadStyles('./css/style.css');
+    loadStyles('./css/test.css');
 }
 
 function loadStyles(href) {

@@ -1,0 +1,171 @@
+$orange: orange;
+$border: #e4e4e4;
+$border-radius: 3px;
+
+@mixin box-sizing($sizing: border-box) {
+  -ms-box-sizing: $sizing;
+  -moz-box-sizing: $sizing;
+  -webkit-box-sizing: $sizing;
+  box-sizing: $sizing;
+}
+
+// body {
+//   background: #f400bc87;
+// }
+
+/*#region dataTree*/
+////////////////////////////////////////////////////////// CSS Family Tree  /////////////////////////////////////////////
+
+.dataTree {
+  text-align: left;
+  padding: 10px;
+  width: 100%;
+  @include box-sizing;
+
+  .tree {
+    li {
+      margin: 0 0 0 5px;
+      list-style-type: none;
+      position: relative;
+      padding: 10px 0px 0 0;
+      &:before {
+        content: "";
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: auto;
+        left: -15px;
+        border-left: 1px dotted $border;
+        //bottom: 50px;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 20px;
+        right: auto;
+        left: -15px;
+        width: 15px;
+        height: 20px;
+        border-top: 1px dotted $border;
+      }
+
+      &:last-child {
+        &:before {
+          height: 20px;
+        } /*Remove connectors after last child*/
+      }
+
+      &.view,
+      &.closed,
+      &.opened {
+        > span:before,
+        > span:after {
+          position: absolute;
+          top: 15px;
+        }
+
+        .pending_changes {
+          color: $orange;
+          position: relative;
+          &:before {
+            position: absolute;
+            top: -11px;
+            left: 15px;
+          }
+        }
+      }
+
+      &.opened > span:before {
+        left: 2px;
+      }
+      &.closed > span:before {
+        left: 2px;
+      }
+      &.view > span:after {
+        right: calc(90% - 65px);
+        left: auto;
+        right: 500px;
+      }
+
+      span {
+        display: inline-block;
+        font-size: 11px;
+        font-family: arial, verdana, tahoma, sans-serif;
+        padding: 5px 10px 5px 10px;
+        border-radius: $border-radius;
+        -webkit-border-radius: $border-radius;
+        -moz-border-radius: $border-radius;
+
+        /*We will apply the hover effect the the lineage of the element also*/
+        &:hover,
+        &:hover + ul li span {
+          //background: #f4faff;
+          //font-weight: bolder;
+          cursor: pointer;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+
+        /*Connector styles on hover*/
+        &:hover + ul li::after,
+        &:hover + ul li::before,
+        &:hover + ul::before,
+        &:hover + ul ul::before {
+          border-color: #94a0b4;
+        }
+      }
+
+      .changes {
+        position: relative;
+        display: inline-block;
+        &:before {
+          color: $orange;
+          font-size: 15px;
+          content: "*";
+          position: absolute;
+          top: 0px;
+          left: 0px;
+        }
+        > select {
+          height: auto;
+          padding: 2px 5px;
+          margin-left: 10px;
+          border: 1px solid;
+        }
+      }
+    }
+
+    > ul {
+      //Parent
+      > li {
+        &:before,
+        &:after {
+          border: 0;
+        } /*Remove connectors before root*/
+      }
+    }
+  }
+}
+/*#endregion*/
+
+
+/* Скрываем все вложенные <ul> внутри дерева */
+.dataTree .tree ul ul{
+    display: none;
+}
+
+/* Показываем только если родительский <li> имеет класс .opened */
+.dataTree .tree li.opened > ul {
+    display: block;
+}
+
+
+.folder{
+  display: inline;
+  background: url(../assets/img/svg/folder-2.svg);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+}

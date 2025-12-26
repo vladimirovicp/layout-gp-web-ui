@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/*#region dataTree*/
+.dataTree {
+  text-align: left;
+  padding: 10px;
+  width: 100%;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dataTree .tree li {
+  margin: 0 0 0 5px;
+  list-style-type: none;
+  position: relative;
+  padding: 10px 0px 0 0;
+}
+.dataTree .tree li:before {
+  content: "";
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: auto;
+  left: -15px;
+  border-left: 1px dotted #e4e4e4;
+}
+.dataTree .tree li:after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: auto;
+  left: -15px;
+  width: 15px;
+  height: 20px;
+  border-top: 1px dotted #e4e4e4;
+}
+.dataTree .tree li:last-child {
+  /*Remove connectors after last child*/
+}
+.dataTree .tree li:last-child:before {
+  height: 20px;
+}
+.dataTree .tree li.view > span:before,
+.dataTree .tree li.view > span:after, .dataTree .tree li.closed > span:before,
+.dataTree .tree li.closed > span:after, .dataTree .tree li.opened > span:before,
+.dataTree .tree li.opened > span:after {
+  position: absolute;
+  top: 15px;
+}
+.dataTree .tree li.view .pending_changes, .dataTree .tree li.closed .pending_changes, .dataTree .tree li.opened .pending_changes {
+  color: orange;
+  position: relative;
+}
+.dataTree .tree li.view .pending_changes:before, .dataTree .tree li.closed .pending_changes:before, .dataTree .tree li.opened .pending_changes:before {
+  position: absolute;
+  top: -11px;
+  left: 15px;
+}
+.dataTree .tree li.opened > span:before {
+  left: 2px;
+}
+.dataTree .tree li.closed > span:before {
+  left: 2px;
+}
+.dataTree .tree li.view > span:after {
+  right: calc(90% - 65px);
+  left: auto;
+  right: 500px;
+}
+.dataTree .tree li span {
+  display: inline-block;
+  font-size: 11px;
+  font-family: arial, verdana, tahoma, sans-serif;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  /*We will apply the hover effect the the lineage of the element also*/
+  /*Connector styles on hover*/
+}
+.dataTree .tree li span:hover, .dataTree .tree li span:hover + ul li span {
+  cursor: pointer;
+}
+.dataTree .tree li span:hover {
+  text-decoration: underline;
+}
+.dataTree .tree li span:hover + ul li::after, .dataTree .tree li span:hover + ul li::before, .dataTree .tree li span:hover + ul::before, .dataTree .tree li span:hover + ul ul::before {
+  border-color: #94a0b4;
+}
+.dataTree .tree li .changes {
+  position: relative;
+  display: inline-block;
+}
+.dataTree .tree li .changes:before {
+  color: orange;
+  font-size: 15px;
+  content: "*";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.dataTree .tree li .changes > select {
+  height: auto;
+  padding: 2px 5px;
+  margin-left: 10px;
+  border: 1px solid;
+}
+.dataTree .tree > ul > li {
+  /*Remove connectors before root*/
+}
+.dataTree .tree > ul > li:before, .dataTree .tree > ul > li:after {
+  border: 0;
+}
+
+/*#endregion*/
+/* Скрываем все вложенные <ul> внутри дерева */
+.dataTree .tree ul ul {
+  display: none;
+}
+
+/* Показываем только если родительский <li> имеет класс .opened */
+.dataTree .tree li.opened > ul {
+  display: block;
+}
+
+.folder {
+  display: inline;
+  background: url(../assets/img/svg/folder-2.svg);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+}/*# sourceMappingURL=test.css.map */
