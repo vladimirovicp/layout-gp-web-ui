@@ -1,0 +1,33 @@
+.gp {
+    &__container {
+        background-color: #fff;
+    }
+
+    &__main {
+        width: 100%;
+        height: calc( 100% - 64px - 48px );
+        display: flex;
+    }
+}
+
+.tree-view {
+    padding-left: 24px;
+    width: 432px;
+    height: 100%;
+    //border-right: 1px solid #d1d1d1;
+}
+
+.divider{
+    width: 5px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    
+    cursor: col-resize;
+
+    &__line{
+        background-color: #d1d1d1;
+        width: 1px;
+        height: 100%;
+    }
+}
