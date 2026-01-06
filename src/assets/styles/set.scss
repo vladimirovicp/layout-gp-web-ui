@@ -11,10 +11,27 @@
 }
 
 .tree-view {
+    padding-top: 24px;
     padding-left: 24px;
     width: 432px;
     height: 100%;
-    //border-right: 1px solid #d1d1d1;
+    overflow: auto;
+
+    ul{
+         list-style-type: none;
+         padding-left: 14px;
+
+         li{
+            
+            padding-top: 8px;
+            white-space: nowrap; 
+
+            span{
+                // padding-top: 4px;
+                // padding-bottom: 4px;
+            }
+         }
+    }
 }
 
 .divider{

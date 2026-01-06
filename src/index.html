@@ -1,38 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPUI</title>
-</head>
-<body>
-
-    <div class="gp__container">
-
-        <div class="gp__header">
-            header
-        </div>
-
-        <div class="gp__main">
-            <div class="tree-view"></div>
-
-            <div class="divider">
-                <div class="divider__line"></div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GPUI</title>
+    </head>
+    <body>
+        <div class="gp__container">
+            <div class="gp__header">
+                header
             </div>
-
-            <div class="workspace">
-
+            <div class="gp__main">
+                <div class="tree-view">
+                    <ul>
+                        <li>
+                            <span>Локальная групповая политика</span>
+                            <ul>
+                                <li>
+                                    <span>Компьютер</span>
+                                    <ul>
+                                        <li>
+                                            Администранивные шаблоны
+                                            <ul>
+                                                <li>
+                                                    Система Alt
+                                                    <ul>
+                                                        <li>Безопасность</li>
+                                                        <li>Виртуализация</li>
+                                                        <li>Графическая подсистема</li>
+                                                        <li>...</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Настройки
+                                            <ul>
+                                                <li>
+                                                    Настройки системы
+                                                    <ul>
+                                                        <li>Значки</li>
+                                                        <li>Окружение</li>
+                                                        <li>Папки</li>
+                                                        <li>Реестр</li>
+                                                        <li>Сетевые диски</li>
+                                                        <li>Сетевые папки</li>
+                                                        <li>Файлы</li>
+                                                        <li>Ini файлы</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Настройки системы
+                                            <ul>
+                                                <li>
+                                                    Скрипты
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Пользователь
+                                    <ul>
+                                        <li>Администранивные шаблоны</li>
+                                        <li>Настройки</li>
+                                        <li>Настройки системы</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="divider">
+                    <div class="divider__line"></div>
+                </div>
+                <div class="workspace"></div>
+            </div>
+            <div class="gp__footer">
+                footer
             </div>
         </div>
-
-        
-
-        <div class="gp__footer">
-            footer
-        </div>
-
-    </div>
-    
-    <script type="module" src="./index.js"></script>
-</body>
+        <script type="module" src="./index.js"></script>
+    </body>
 </html>
