@@ -32,6 +32,46 @@
             }
          }
     }
+
+
+    .tree-item{
+        display: flex;
+        align-items: center;
+        height: 16px;
+
+    }
+
+    .icon-switcher{
+        background-image: url(../img/svg/arrow.svg);
+        width: 12px;
+        height: 10px;
+        display: flex;
+        margin-right: 8px;
+        
+    }
+
+    .view{
+        &.opened{
+            .icon-switcher{
+                transform: rotate(0deg);
+            }
+            
+        }
+
+        &.closed{
+            .icon-switcher{
+                transform: rotate(-90deg);
+            }
+
+            .tree-view__list{
+                display: none;
+            }
+        }
+    }
+
+
+
+
 }
 
 .divider{
