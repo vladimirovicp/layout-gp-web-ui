@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GPUI</title>
+    </head>
+    <body>
+
+        <!-- <ol class="main__list">
+            <li><a href="/pages/list/">list</li>
+            <li><a href="/pages/test/">test</li>
+            <li><a href="/pages/tree/">tree</li>
+        </ol> -->
+
+
+        <div class="gp__container">
+            <div class="gp__header">
+                header
+            </div>
+            <div class="gp__main">
+                <div class="tree-view">
+                    <ul class="tree-view__list">
+                        <li class="view folder opened">
+                            <span class="tree-item">
+                                <span class="icon-switcher"></span>
+                                <span class="tree-item__title">[Локальная групповая политика]</span>
+                            </span>
+                            <ul class="tree-view__list">
+                                <li class="view folder opened">
+                                    <span class="tree-item">
+                                        <span class="icon-switcher"></span>
+                                        <span class="icon ico-computer"></span>
+                                        <span class="tree-item__title">Компьютер</span>
+                                    </span>
+                                    <ul class="tree-view__list">
+                                        <li class="view folder closed">
+                                            <span class="tree-item">
+                                                <span class="icon-switcher"></span>
+                                                <span class="icon ico-folder"></span>
+                                                <span class="tree-item__title">Администранивные шаблоны</span>
+                                            </span>
+                                            <ul class="tree-view__list">
+                                                <li class="view folder closed">
+                                                    <span class="tree-item">
+                                                        <span class="icon-switcher"></span>
+                                                        <span class="icon ico-folder"></span>
+                                                        <span class="tree-item__title">Система Alt</span>
+                                                    </span>
+                                                    <ul class="tree-view__list">
+                                                        <li class="view file">
+                                                            <span class="tree-item">
+                                                                <span class="icon ico-folder"></span>
+                                                                <span class="tree-item__title">Безопасность</span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="view file">
+                                                            <span class="tree-item">
+                                                                <span class="icon ico-folder"></span>
+                                                                <span class="tree-item__title">Виртуализация</span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="view file">
+                                                            <span class="tree-item">
+                                                                <span class="icon ico-folder"></span>
+                                                                <span class="tree-item__title">Графическая подсистема</span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="view file">
+                                                            <span class="tree-item">
+                                                                <span class="icon ico-folder"></span>
+                                                                <span class="tree-item__title">...</span>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="view folder opened">
+                                            <span class="tree-item">
+                                                <span class="icon-switcher"></span>
+                                                <span class="icon ico-folder"></span>
+                                                <span class="tree-item__title">Настройки</span>
+                                            </span>
+                                            <ul class="tree-view__list">
+                                                <li class="view folder opened">
+                                                    <span class="tree-item">
+                                                        <span class="icon-switcher"></span>
+                                                        <span class="icon ico-folder"></span>
+                                                        <span class="tree-item__title">Настройки системы</span>
+                                                    </span>
+                                                </span>
+                                                <ul class="tree-view__list">
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Значки</span>
+                                                        </span>
+                                                    </li>
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Окружение</span>
+                                                        </span>
+                                                        
+                                                    </li>
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Папки</span>
+                                                        </span>
+                                                    </li>
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Реестр</span>
+                                                        </span>
+                                                    </li>
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Сетевые диски</span>
+                                                        </span>
+                                                    </li>
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Сетевые папки</span>
+                                                        </span>
+                                                    </li>
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Файлы</span>
+                                                        </span>
+                                                    </li>
+                                                    <li class="view file">
+                                                        <span class="tree-item">
+                                                            <span class="icon ico-file"></span>
+                                                            <span class="tree-item__title">Ini файлы</span>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="view folder closed">
+                                        <span class="tree-item">
+                                            <span class="icon-switcher"></span>
+                                            <span class="icon ico-folder"></span>
+                                            <span class="tree-item__title">Настройки системы</span>
+                                        </span>
+                                        <ul class="tree-view__list">
+                                            <li class="view folder closed">
+                                                <span class="tree-item">
+                                                    <span class="icon-switcher"></span>
+                                                    <span class="icon ico-folder"></span>
+                                                    <span class="tree-item__title">Скрипты</span>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="view folder opened">
+                                <span class="tree-item">
+                                    <span class="icon-switcher"></span>
+                                    <span class="icon ico-user"></span>
+                                    <span class="tree-item__title">Пользователь</span>
+                                </span>
+                                <ul class="tree-view__list">
+                                    <li class="view folder closed">
+                                        <span class="tree-item">
+                                            <span class="icon-switcher"></span>
+                                            <span class="icon ico-folder"></span>
+                                            <span class="tree-item__title">Администранивные шаблоны</span>
+                                        </span>
+                                    </li>
+                                    <li class="view folder closed">
+                                        <span class="tree-item">
+                                            <span class="icon-switcher"></span>
+                                            <span class="icon ico-folder"></span>
+                                            <span class="tree-item__title">Настройки</span>
+                                        </span>
+                                    </li>
+                                    <li class="view folder closed">
+                                        <span class="tree-item">
+                                            <span class="icon-switcher"></span>
+                                            <span class="icon ico-folder"></span>
+                                            <span class="tree-item__title">Настройки системы</span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="divider">
+                <div class="divider__line"></div>
+            </div>
+            <div class="workspace"></div>
+        </div>
+        <div class="gp__footer">
+            footer
+        </div>
+    </div>
+    <script type="module" src="./index.js"></script>
+</body>
+</html>
