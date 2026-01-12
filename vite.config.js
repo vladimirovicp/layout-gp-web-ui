@@ -12,9 +12,11 @@ export default defineConfig({
        minifyCSS: 'lightningcss',
        rollupOptions: {
             input: {
-                index: resolve(__dirname, `${FRONT_PATH}/index.html`),
-                about: resolve(__dirname, `${FRONT_PATH}/pages/test/index.html`),
+                index: resolve(__dirname, 'src/index.html'),
+                list: resolve(__dirname, 'src/pages/list/index.html'),
+                test: resolve(__dirname, `${FRONT_PATH}/pages/test/index.html`),
             }
         },
+        outDir: '../dist',
    },
 });
