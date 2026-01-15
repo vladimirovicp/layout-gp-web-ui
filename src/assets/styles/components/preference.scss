@@ -15,6 +15,54 @@
             background-color: #fff;
             height: 100%;
         }
+
+        &__settings{
+
+            padding: 5px;
+
+            &-title{
+                font-weight: 600;
+                padding-bottom: 5px;
+            }
+
+            &-data{
+                border: 1px solid #d1d1d1;
+                width: 100%;
+                padding: 5px 15px;
+                
+            }
+
+            &-item{
+                display: flex;
+                padding-bottom: 10px;
+                justify-content: space-between;
+
+                &.empty{
+                    color: #8b8d8f;
+                }
+            }
+
+        }
+
+        &__description{
+            padding: 5px;
+
+            &-title{
+                font-weight: 600;
+                padding-bottom: 5px;
+            }
+
+            &-data{
+                border: 1px solid #d1d1d1;
+                background: #fff;
+                height: 292px;
+                padding: 5px 15px;
+
+                &.empty{
+                    color: #8b8d8f;
+                }
+            }
+        }
     }
 
     .preference__divider{
@@ -24,6 +72,7 @@
         justify-content: center;
 
         cursor: col-resize;
+        background: linear-gradient(to right, #f5f5f5 50%, #fff 50% 50%);
     }
 
 }
