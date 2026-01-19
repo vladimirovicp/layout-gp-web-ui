@@ -10,6 +10,16 @@
     }
 }
 
+.btn{
+    border: 1px solid #d1d1d1;
+    width: 80px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 .tree-view {
     padding-top: 24px;
     padding-left: 24px;
