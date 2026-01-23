@@ -29,9 +29,24 @@
         }
 
         input[type="text"]{
+            font-size: 12px;
             width: 100%;
             height: 100%;
             padding: 5px;
+        }
+
+        input[type="number"]{
+            font-size: 12px;
+            width: 100%;
+            height: 100%;
+            padding: 5px;            
+        }
+
+        textarea{
+            font-size: 12px;
+            width: 100%;
+            height: 34px;
+            resize: none;
         }
     }
 }

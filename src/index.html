@@ -327,7 +327,7 @@
                                             
                                             <div class="field__line"></div>
 
-                                            <div class="field select">
+                                            <div class="field field__input field__input--path">
                                                 <div class="field__label">Название:</div>
                                                 <div class="field__element">
                                                     <input type="text" placeholder="/home/user" />
@@ -371,29 +371,69 @@
 
                                             <div class="field__line"></div>
 
-                                            <div class="field select">
+                                            <div class="field field__input field__input--path">
                                                 <div class="field__label">Целевой путь:</div>
                                                 <div class="field__element">
                                                     <input type="text" placeholder="/home/user" />
                                                 </div>
                                             </div> 
 
-                                            <div class="field select">
+                                            <div class="field field__input">
                                                 <div class="field__label">Аргументы:</div>
                                                 <div class="field__element">
                                                     <input type="text" />
                                                 </div>
                                             </div> 
 
-                                            <div class="field select">
+                                            <div class="field__line"></div>
+
+                                            <div class="field field__input field__input--path">
                                                 <div class="field__label">Путь к файлу значка:</div>
                                                 <div class="field__element">
                                                     <input type="text" />
                                                 </div>
                                             </div> 
 
-                                            
+                                            <div class="field select">
+                                                <div class="field__label">Индекс значка:</div>
+                                                <div class="field__element">
+                                                    <input type="number" disabled value="0"/>
+                                                </div>
+                                            </div> 
 
+                                            <div class="field__line"></div>
+
+                                            <div class="field field__input field__input--path">
+                                                <div class="field__label">Начинать:</div>
+                                                <div class="field__element">
+                                                    <input type="text" />
+                                                </div>
+                                            </div> 
+
+                                            <div class="field field__input field__input--hotkey">
+                                                <div class="field__label">Быстрая клавиша:</div>
+                                                <div class="field__element">
+                                                    <input type="text" placeholder="Введи комбинацию клавиш"/>
+                                                </div>
+                                            </div>  
+
+                                            <div class="field select">
+                                                <div class="field__label">Запуск:</div>
+                                                <div class="field__element">
+                                                    <select name="select">
+                                                        <option value="value1" selected>Обычное окно</option>
+                                                        <option value="value2">Свёрнутое</option>
+                                                        <option value="value3">Увеличенное</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="field field__comment">
+                                                <div class="field__label">Комментарий:</div>
+                                                <div class="field__element">
+                                                    <textarea name="comment"></textarea>
+                                                </div>
+                                            </div>  
                                             
                                         </div>
                                         <div id="tab-general" class="tab-content">
