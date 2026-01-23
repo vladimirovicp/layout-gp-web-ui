@@ -20,18 +20,20 @@ export function preference(){
         const table = workspace.querySelector('.preference__table');
 
         table.addEventListener('click', function(event) {
-        // Игнорируем клики не по строкам tbody
-        const row = event.target.closest('tr');
-        if (!row || !table.contains(row) || row.querySelector('th')) return;
+            // Игнорируем клики не по строкам tbody
+            const row = event.target.closest('tr');
+            if (!row || !table.contains(row) || row.querySelector('th')) return;
 
-        // Удаляем класс 'active' у всех строк
-        table.querySelectorAll('tr.active').forEach(tr => tr.classList.remove('active'));
+            // Удаляем класс 'active' у всех строк
+            table.querySelectorAll('tr.active').forEach(tr => tr.classList.remove('active'));
 
-        // Добавляем класс 'active' к текущей строке
-        row.classList.add('active');
+            // Добавляем класс 'active' к текущей строке
+            row.classList.add('active');
     });
 
     }
+
+
 
 
 

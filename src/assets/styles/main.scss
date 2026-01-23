@@ -3,10 +3,6 @@
 @use 'components/header/header.scss';
 @use 'components/footer/footer.scss';
 
-@use 'components/preference';
+@use 'components/preference.scss';
 @use 'components/fields/fields.scss';
-
-// #d1d1d1
-
-
-//
+@use 'components/btns/btns.scss'
