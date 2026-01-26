@@ -307,11 +307,11 @@
                                 <div class="preference__modal-content">
                                     <div class="preference__modal-tabs">
                                         <div class="tab-buttons">
-                                            <div class="preference__tab-button active" data-tab="tab-basic">Основные настройки</div>
-                                            <div class="preference__tab-button " data-tab="tab-general">Общие</div>
+                                            <div class="preference__tab-button " data-tab="tab-basic">Основные настройки</div>
+                                            <div class="preference__tab-button active" data-tab="tab-general">Общие</div>
                                         </div>
                                     
-                                      <div id="tab-basic" class="tab-content active">
+                                      <div id="tab-basic" class="tab-content">
 
                                             <div class="field select">
                                                 <div class="field__label">Действие:</div>
@@ -436,9 +436,50 @@
                                             </div>  
                                             
                                         </div>
-                                        <div id="tab-general" class="tab-content">
-                                            <h3>Содержимое вкладки 2</h3>
-                                            <p>Это второй блок.</p>
+                                        <div id="tab-general" class="tab-content active">
+
+                                            <div class="field field__checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="option1">
+                                                    <span class="field__label-checkbox">Остановить обработку элементов при ошибке</span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="field field__checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="option2">
+                                                    <span class="field__label-checkbox">Выполнять в контексте безопасности текущего пользователя (опция пользовательских политик)</span>
+                                                </label>
+                                            </div>            
+                                            
+                                            <div class="field field__checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="option3">
+                                                    <span class="field__label-checkbox">Удалить элемент, если больше не применим</span>
+                                                </label>
+                                            </div>     
+                                            
+                                            <div class="field field__checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="option4" disabled>
+                                                    <span class="field__label-checkbox">Применить только один раз</span>
+                                                </label>
+                                            </div> 
+
+                                            <div class="field field__checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="option5" disabled>
+                                                    <span class="field__label-checkbox">Выбор элементов</span>
+                                                </label>
+                                            </div>  
+                                            
+                                            <div class="field field__description">
+                                                <div class="field__label">Комментарий:</div>
+                                                <div class="field__element">
+                                                    <textarea name="description"></textarea>
+                                                </div>
+                                            </div>                                             
+
                                         </div>
                                     </div>
                                 </div>

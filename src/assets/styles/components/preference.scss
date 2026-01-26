@@ -152,10 +152,11 @@
             }
 
             &-tabs{
-                
+                height: 492px;
 
                 .tab-buttons{
                     display: flex;
+                    height: 26px;
                     .preference__tab-button{
                         width: 50%;
                         height: 26px;
@@ -185,11 +186,13 @@
 
                 .tab-content{
                     display: none;
-
+                    
+                    flex-direction: column;
+                    height: calc(100% - 26px);
 
                     &.active{
                         padding: 20px;
-                        display: block;
+                        display: flex;
                     }
                 }
             }
