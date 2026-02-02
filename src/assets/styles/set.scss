@@ -10,6 +10,10 @@
     }
 }
 
+// .btn{
+
+// }
+
 .tree-view {
     padding-top: 24px;
     padding-left: 24px;
@@ -48,7 +52,7 @@
         height: 10px;
         display: flex;
         margin-right: 8px;
-        
+        flex-shrink: 0
     }
 
     .icon{
@@ -56,6 +60,7 @@
         height: 16px;
         display: flex;
         margin-right: 8px;
+        flex-shrink: 0;
         &.ico-computer{
             background-image: url(../img/svg/ico/computer.svg);
         }
@@ -111,4 +116,9 @@
         width: 1px;
         height: 100%;
     }
+}
+
+
+.workspace{
+    flex: 1 1 0px;
 }

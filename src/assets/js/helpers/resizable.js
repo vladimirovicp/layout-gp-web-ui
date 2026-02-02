@@ -21,7 +21,16 @@ export function resizable(dividerClass,firstPanelClass,containerClass){
     if (!isResizing) return;
     const newWidth = startWidth + (e.clientX - startX);
     const minWidth = 50; // Минимальная ширина левой панели
-    const maxWidth = container.offsetWidth - 50; // Максимальная ширина (с учётом правой панели)
+
+    let maxWidth = 0;
+
+    if(dividerClass === '.preference__divider'){
+      maxWidth = 200;
+    } else{
+      maxWidth = container.offsetWidth - 50; // Максимальная ширина (с учётом правой панели)
+    }
+
+    
 
     if (newWidth > minWidth && newWidth < maxWidth) {
       panel.style.width = `${newWidth}px`;
