@@ -1,7 +1,6 @@
-export function renderHeader(container) {
+export function renderMain(container) {
     const element = createElement('div', {
-        className: 'gp__header',
-        text: 'header'
+        className: 'gp__main'
     });
     container.appendChild(element.getElement());
     return element; // Возвращаем экземпляр ElementCreator для возможности использования его методов
