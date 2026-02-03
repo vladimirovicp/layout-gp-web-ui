@@ -5,6 +5,7 @@ import {renderFooter} from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 
 
+
 const container = document.getElementById('gp__container');
 
 if(container){
@@ -13,7 +14,7 @@ if(container){
     const footer = renderFooter(container);
 
 
-    
+
     // Инициализация resizable функционала после сборки компонентов
     const dividerElement = divider.getElement();
     const treeViewElement = treeView.getElement();
