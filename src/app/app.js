@@ -3,6 +3,7 @@ import {renderHeader} from './components/header/header';
 import {renderMain} from './components/main/main';
 import {renderFooter} from './components/footer/footer';
 import { resizable } from './util/resizable.js';
+import { t } from './locales/translations.js';
 
 
 
@@ -26,6 +27,11 @@ if(container){
     setTimeout(() => {
         header.setText('header2');
     }, 5000);
+
+
+    // Пример вывода переводов
+
+    console.log(t('policies.localGroupPolicy'));
 }
 
 

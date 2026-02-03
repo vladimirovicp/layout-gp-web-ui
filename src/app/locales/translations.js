@@ -2,7 +2,7 @@ import en from './en.js';
 import ru from './ru.js';
 
 const translations = { en, ru };
-let currentLang = 'en';
+let currentLang = 'ru';
 
 export function t(key) {
   const keys = key.split('.');
