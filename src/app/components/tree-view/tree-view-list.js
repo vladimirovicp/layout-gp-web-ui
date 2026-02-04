@@ -123,13 +123,13 @@ export const treeViewList = [
                 ]
             },
             {
-                title: 'Пользователь',
+                title: t('policies.user'),
                 type: 'folder',
                 opened: true,
                 icon: 'ico-user',
                 children: [
                     {
-                        title: 'Администранивные шаблоны',
+                        title: t('adminTemplates'),
                         type: 'folder',
                         opened: false,
                         icon: 'ico-folder'
@@ -239,8 +239,11 @@ function renderTreeList(items) {
  * @param {Object} item - Данные элемента
  */
 function toggleFolder(listItem, item) {
+
     const element = listItem.getElement();
     const nestedList = element.querySelector('ul.tree-view__list');
+
+    console.log(element);
     
     if (!nestedList) return;
     
