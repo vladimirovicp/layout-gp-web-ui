@@ -4,9 +4,9 @@ import { renderDivider } from '../divider/divider.js';
 import { renderWorkspace } from '../workspace/workspace.js';
 
 export function renderMain(container) {
-    const treeView = renderTreeView();
-    const divider = renderDivider();
     const workspace = renderWorkspace();
+    const treeView = renderTreeView(workspace);
+    const divider = renderDivider();
     
     const main = createElement('div', {
         className: 'gp__main',

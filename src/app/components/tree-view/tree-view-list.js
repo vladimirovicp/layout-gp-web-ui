@@ -1,6 +1,43 @@
 import { t } from '../../locales/translations.js';
 import { createElement } from '../../util/element-creator.js';
 
+/**
+ * Простой state store для отслеживания выбранного элемента дерева
+ */
+const treeViewState = {
+    selectedItem: null,
+    workspace: null,
+    
+    /**
+     * Устанавливает workspace элемент
+     * @param {ElementCreator} workspace - Элемент workspace
+     */
+    setWorkspace(workspace) {
+        this.workspace = workspace;
+    },
+    
+    /**
+     * Устанавливает выбранный элемент
+     * @param {Object} item - Данные выбранного элемента
+     * @param {Element} element - DOM элемент, по которому был клик
+     */
+    setSelectedItem(item, element) {
+        this.selectedItem = { item, element };
+
+        console.log('item',item);
+        console.log('element',element)
+        
+        // Обновляем workspace
+        if (this.workspace) {
+            const titleElement = element.querySelector('.tree-item__title');
+            if (titleElement) {
+                const titleText = titleElement.textContent || titleElement.innerText;
+                this.workspace.setText(titleText);
+            }
+        }
+    }
+};
+
 export const treeViewList = [
     {
         title: t('policies.localGroupPolicy'),
@@ -63,7 +100,7 @@ export const treeViewList = [
                                 icon: 'ico-folder',
                                 children: [
                                     {
-                                        title: 'Значки',
+                                        title: t('preferences.shortcuts'),
                                         type: 'file',
                                         icon: 'ico-file'
                                     },
@@ -206,15 +243,33 @@ function renderTreeItem(item) {
         if (item.type === 'folder' && !item.opened) {
             nestedList.setStyle({ display: 'none' });
         }
-        
-        // Добавляем обработчик клика для переключения открыто/закрыто
-        if (item.type === 'folder') {
-            treeItem.on('click', (e) => {
-                e.stopPropagation();
-                toggleFolder(listItem, item);
-            });
-        }
     }
+    
+    // Добавляем обработчик клика на все элементы дерева
+    treeItem.on('click', (e) => {
+        e.stopPropagation();
+        const clickedElement = e.currentTarget;
+        
+        // Выводим в консоль элемент, по которому был клик
+        console.log('Клик по элементу:', clickedElement);
+        
+        // Удаляем класс active у всех элементов tree-item
+        const allTreeItems = document.querySelectorAll('.tree-item');
+        allTreeItems.forEach(treeItemEl => {
+            treeItemEl.classList.remove('active');
+        });
+        
+        // Добавляем класс active к кликнутому элементу
+        clickedElement.classList.add('active');
+        
+        // Для папок переключаем состояние открыто/закрыто
+        if (item.type === 'folder' && item.children && item.children.length > 0) {
+            toggleFolder(listItem, item);
+        }
+        
+        // Обновляем состояние выбранного элемента
+        treeViewState.setSelectedItem(item, clickedElement);
+    });
     
     return listItem;
 }
@@ -243,8 +298,6 @@ function toggleFolder(listItem, item) {
     const element = listItem.getElement();
     const nestedList = element.querySelector('ul.tree-view__list');
 
-    console.log(element);
-    
     if (!nestedList) return;
     
     const isOpened = element.classList.contains('opened');
@@ -265,8 +318,12 @@ function toggleFolder(listItem, item) {
 /**
  * Рендерит дерево из данных treeViewList
  * @param {Array} data - Данные дерева (по умолчанию treeViewList)
+ * @param {ElementCreator} workspace - Элемент workspace для отображения выбранного элемента
  * @returns {ElementCreator} - Корневой элемент ul
  */
-export function renderTreeViewList(data = treeViewList) {
+export function renderTreeViewList(data = treeViewList, workspace = null) {
+    if (workspace) {
+        treeViewState.setWorkspace(workspace);
+    }
     return renderTreeList(data);
 }

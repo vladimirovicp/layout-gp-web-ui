@@ -138,6 +138,19 @@ export default {
       badLogLevel: 'Bad log level:',
       badPolicyName: 'Bad policy name:'
     },
+
+    // Настройки (Preferences)
+    preferences: {
+      environment: 'Environment',
+      files: 'Files',
+      folders: 'Folders',
+      registry: 'Registry',
+      networkShares: 'Network Shares',
+      driveMaps: 'Drive Maps',
+      iniFiles: 'Ini File',
+      shortcut: 'Shortcut',
+      shortcuts: 'Shortcuts',
+    },
   
     // Сообщения
     messages: {
@@ -146,6 +159,7 @@ export default {
       errorWritingFile: 'Error writing file:',
       errorReadingFile: 'Error reading file:'
     },
+
   
     // Drives Widget
     drives: {

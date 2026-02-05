@@ -121,6 +121,59 @@ export default {
       badLogLevel: 'Неверный уровень логирования:',
       badPolicyName: 'Ошибочное название политики:'
     },
+
+    // Настройки (Preferences)
+    preferences: {
+      title: 'Настройки',
+      description: 'Политики настроек.',
+      systemSettings: 'Настройки Системы',
+      systemSettingsDesc: 'Политики устанавливающие настройки системы.',
+      environment: 'Окружение',
+      environmentDesc: 'Настройки переменных окружения.',
+      files: 'Файлы',
+      filesDesc: 'Политика настройки файлов.',
+      folders: 'Папки',
+      foldersDesc: 'Политики настройки папок.',
+      iniFiles: 'Ini файлы',
+      iniFilesDesc: 'Политики настройки Ini файлов.',
+      registry: 'Реестр',
+      registryDesc: 'Настройки политик реестра.',
+      networkShares: 'Сетевые папки',
+      networkSharesDesc: 'Настройки сетевых папок.',
+      shortcuts: 'Значки',
+      shortcutsDesc: 'Настройки значков.',
+      driveMaps: 'Сетевые диски',
+      driveMapsDesc: 'Настройки сетевых дисков.',
+      // Типы политик
+      mappedDrive: 'Сетевой диск',
+      environmentVariable: 'Переменные окружения',
+      file: 'Файл',
+      folder: 'Папки',
+      iniFile: 'Ini файл',
+      registryValue: 'Значение реестра',
+      networkShare: 'Сетевая папка',
+      shortcut: 'Значок',
+      dataSource: 'Источник данных',
+      device: 'Устройство',
+      localGroup: 'Локальная группа',
+      localUser: 'Локальный пользователь',
+      vpnConnection: 'VPN Подключение',
+      dialUpConnection: 'Dial-Up подключение',
+      powerOptions: 'Настройки управления питанием',
+      powerScheme: 'Настройки схем питания',
+      sharedPrinter: 'Общий принтер',
+      tcpipPrinter: 'TCP/IP Принтер',
+      localPrinter: 'Локальный принтер',
+      folderOptions: 'Настройки папок',
+      openWith: 'Открыть с помощью',
+      // Действия
+      actions: {
+        create: 'Создать',
+        replace: 'Заменить',
+        update: 'Обновить',
+        delete: 'Удалить'
+      }
+    },
   
     // Сообщения
     messages: {

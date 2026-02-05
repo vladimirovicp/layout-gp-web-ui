@@ -43,6 +43,13 @@
         align-items: center;
         height: 16px;
         cursor: pointer;
+        transition: color 0.3s ease;
+
+        
+
+        &.active{
+            color: #297FB0;
+        }
 
     }
 
