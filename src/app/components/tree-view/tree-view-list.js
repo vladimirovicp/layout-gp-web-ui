@@ -1,43 +1,6 @@
 import { t } from '../../locales/translations.js';
 import { createElement } from '../../util/element-creator.js';
 
-/**
- * Простой state store для отслеживания выбранного элемента дерева
- */
-const treeViewState = {
-    selectedItem: null,
-    workspace: null,
-    
-    /**
-     * Устанавливает workspace элемент
-     * @param {ElementCreator} workspace - Элемент workspace
-     */
-    setWorkspace(workspace) {
-        this.workspace = workspace;
-    },
-    
-    /**
-     * Устанавливает выбранный элемент
-     * @param {Object} item - Данные выбранного элемента
-     * @param {Element} element - DOM элемент, по которому был клик
-     */
-    setSelectedItem(item, element) {
-        this.selectedItem = { item, element };
-
-        console.log('item',item);
-        console.log('element',element)
-        
-        // Обновляем workspace
-        if (this.workspace) {
-            const titleElement = element.querySelector('.tree-item__title');
-            if (titleElement) {
-                const titleText = titleElement.textContent || titleElement.innerText;
-                this.workspace.setText(titleText);
-            }
-        }
-    }
-};
-
 export const treeViewList = [
     {
         title: t('policies.localGroupPolicy'),
@@ -192,9 +155,10 @@ export const treeViewList = [
 /**
  * Рекурсивно создает элемент дерева из данных
  * @param {Object} item - Элемент дерева
+ * @param {Object} treeViewState - State дерева (передаётся из App)
  * @returns {ElementCreator} - Созданный элемент li
  */
-function renderTreeItem(item) {
+function renderTreeItem(item, treeViewState) {
     const classes = ['view'];
     
     if (item.type === 'folder') {
@@ -236,7 +200,7 @@ function renderTreeItem(item) {
     
     // Если есть дочерние элементы, создаем вложенный список
     if (item.children && item.children.length > 0) {
-        const nestedList = renderTreeList(item.children);
+        const nestedList = renderTreeList(item.children, treeViewState);
         listItem.append(nestedList);
         
         // Скрываем вложенный список, если папка закрыта
@@ -267,8 +231,10 @@ function renderTreeItem(item) {
             toggleFolder(listItem, item);
         }
         
-        // Обновляем состояние выбранного элемента
-        treeViewState.setSelectedItem(item, clickedElement);
+        // Обновляем состояние выбранного элемента (state из App)
+        if (treeViewState) {
+            treeViewState.setSelectedItem(item, clickedElement);
+        }
     });
     
     return listItem;
@@ -277,12 +243,13 @@ function renderTreeItem(item) {
 /**
  * Создает список элементов дерева
  * @param {Array} items - Массив элементов дерева
+ * @param {Object} treeViewState - State дерева (передаётся из App)
  * @returns {ElementCreator} - Созданный элемент ul
  */
-function renderTreeList(items) {
+function renderTreeList(items, treeViewState) {
     const list = createElement('ul', {
         className: 'tree-view__list',
-        children: items.map(item => renderTreeItem(item))
+        children: items.map(item => renderTreeItem(item, treeViewState))
     });
     
     return list;
@@ -319,11 +286,12 @@ function toggleFolder(listItem, item) {
  * Рендерит дерево из данных treeViewList
  * @param {Array} data - Данные дерева (по умолчанию treeViewList)
  * @param {ElementCreator} workspace - Элемент workspace для отображения выбранного элемента
+ * @param {Object} treeViewState - State дерева (передаётся из App)
  * @returns {ElementCreator} - Корневой элемент ul
  */
-export function renderTreeViewList(data = treeViewList, workspace = null) {
-    if (workspace) {
+export function renderTreeViewList(data = treeViewList, workspace = null, treeViewState = null) {
+    if (workspace && treeViewState) {
         treeViewState.setWorkspace(workspace);
     }
-    return renderTreeList(data);
+    return renderTreeList(data, treeViewState);
 }
