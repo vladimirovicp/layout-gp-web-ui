@@ -9,7 +9,13 @@
 
         <div class="gp__container">
             <div class="gp__header">
-                header
+                <div class="gp__search"></div>
+                <div class="gp__nav"></div>
+                <div class="gp__control">
+                    <button class="button active">Создать</button>
+                    <button class="button">Изменить</button>
+                    <button class="button">Удалить</button>
+                </div>
             </div>
             <div class="gp__main">
                 <div class="tree-view">
@@ -202,31 +208,31 @@
                             <div class="preference__settings-data">
                                 <div class="preference__settings-item">
                                     <div class="preference__settings-name">Не обрабатывать элементы в расширении при ошибке:</div>
-                                    <div class="preference__settings-value">Нет</div>
+                                    <div class="preference__settings-value"></div>
                                 </div>
                                 <div class="preference__settings-item">
                                     <div class="preference__settings-name">Запускать в контексте пользователя:</div>
-                                    <div class="preference__settings-value">Да</div>
+                                    <div class="preference__settings-value"></div>
                                 </div>
                                 <div class="preference__settings-item">
                                     <div  class="preference__settings-name">Удалить, если не применимо:</div>
-                                    <div class="preference__settings-value">Нет</div>
+                                    <div class="preference__settings-value"></div>
                                 </div>  
                                 <div class="preference__settings-item empty">
                                     <div  class="preference__settings-name">Применить один раз:</div>
-                                    <div class="preference__settings-value">Нет</div>
+                                    <div class="preference__settings-value"></div>
                                 </div>         
                                      
                                 <div class="preference__settings-item empty">
                                     <div  class="preference__settings-name">Отфильтровано:</div>
-                                    <div class="preference__settings-value">Нет</div>
+                                    <div class="preference__settings-value"></div>
                                 </div>      
                                 <div class="preference__settings-item empty">
                                     <div  class="preference__settings-name">Отключено:</div>
-                                    <div class="preference__settings-value">Нет</div>
+                                    <div class="preference__settings-value"></div>
                                </div>                                                          <div class="preference__settings-item empty">
                                     <div  class="preference__settings-name">Отключено уровнем выше:</div>
-                                    <div class="preference__settings-value">Нет</div>
+                                    <div class="preference__settings-value"></div>
                                 </div>                
                             </div>
                         </div>
@@ -244,54 +250,11 @@
                         <div class="divider__line"></div>
                     </div>
                     <div class="preference__data-table">
-                        <table class="preference__table">
-                            <thead>
-                            <tr>
-                                <th>Имя</th>
-                                <th>Очередность</th>
-                                <th>Действие</th>
-                                <th>Значение</th>
-                                <th>Пользователь</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="active">
-                                <td>admin</td>
-                                <td>1</td>
-                                <td>Создать</td>
-                                <td>100</td>
-                                <td>admin</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>1</td>
-                                <td>Создать</td>
-                                <td>100</td>
-                                <td>admin</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>1</td>
-                                <td>Создать</td>
-                                <td>100</td>
-                                <td>admin</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>1</td>
-                                <td>Создать</td>
-                                <td>100</td>
-                                <td>admin</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>1</td>
-                                <td>Создать</td>
-                                <td>100</td>
-                                <td>admin</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="preference__data-empty">
+                            <div class="preference__data-message">
+                                В настоящий момент политик не добавлено
+                            </div>
+                        </div>
                     </div>
 
                 </div>
