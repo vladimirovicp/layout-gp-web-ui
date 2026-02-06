@@ -1,5 +1,5 @@
 import { t } from '../../locales/translations.js';
-import { treepreferences } from './tree-view-system-settings-items.js';
+import { treepreferences } from './tree-view-preferences.js';
 
 export const treeViewList = [
     {
