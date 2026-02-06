@@ -85,6 +85,10 @@
                 &.empty{
                     color: #8b8d8f;
                 }
+
+                &.disable{
+                    background: transparent;
+                }
             }
         }
 
