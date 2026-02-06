@@ -201,36 +201,32 @@
                             <div class="preference__settings-title">Настройки:</div>
                             <div class="preference__settings-data">
                                 <div class="preference__settings-item">
-                                    <div>Не обрабатывать элементы в расширении при ошибке:</div>
-                                    <div>Нет</div>
+                                    <div class="preference__settings-name">Не обрабатывать элементы в расширении при ошибке:</div>
+                                    <div class="preference__settings-value">Нет</div>
                                 </div>
                                 <div class="preference__settings-item">
-                                    <div>Запускать в контексте пользователя:</div>
-                                    <div>Да</div>
+                                    <div class="preference__settings-name">Запускать в контексте пользователя:</div>
+                                    <div class="preference__settings-value">Да</div>
                                 </div>
                                 <div class="preference__settings-item">
-                                    <div>Удалить, если не применимо:</div>
-                                    <div>Нет</div>
+                                    <div  class="preference__settings-name">Удалить, если не применимо:</div>
+                                    <div class="preference__settings-value">Нет</div>
                                 </div>  
                                 <div class="preference__settings-item empty">
-                                    <div>Применить один раз:</div>
-                                    <div>Нет</div>
+                                    <div  class="preference__settings-name">Применить один раз:</div>
+                                    <div class="preference__settings-value">Нет</div>
                                 </div>         
-                                
+                                     
                                 <div class="preference__settings-item empty">
-                                    <div>Применить один раз:</div>
-                                    <div>Нет</div>
+                                    <div  class="preference__settings-name">Отфильтровано:</div>
+                                    <div class="preference__settings-value">Нет</div>
                                 </div>      
                                 <div class="preference__settings-item empty">
-                                    <div>Отфильтровано:</div>
-                                    <div>Нет</div>
-                                </div>      
-                                <div class="preference__settings-item empty">
-                                    <div>Отключено:</div>
-                                    <div>Нет</div>
+                                    <div  class="preference__settings-name">Отключено:</div>
+                                    <div class="preference__settings-value">Нет</div>
                                </div>                                                          <div class="preference__settings-item empty">
-                                    <div>Отключено уровнем выше:</div>
-                                    <div>Нет</div>
+                                    <div  class="preference__settings-name">Отключено уровнем выше:</div>
+                                    <div class="preference__settings-value">Нет</div>
                                 </div>                
                             </div>
                         </div>
@@ -296,203 +292,6 @@
                             </tr>
                             </tbody>
                         </table>
-
-                        <div class="preference__modal active">
-                            <div class="preference__modal-wrapper">
-                                <div class="preference__modal-header">
-                                    <div class="title">Диалог настроек</div>
-                                    <div class="close"></div>
-                                </div>
-
-                                <div class="preference__modal-content">
-                                    <div class="preference__modal-tabs">
-                                        <div class="tab-buttons">
-                                            <div class="preference__tab-button " data-tab="tab-basic">Основные настройки</div>
-                                            <div class="preference__tab-button active" data-tab="tab-general">Общие</div>
-                                        </div>
-                                    
-                                      <div id="tab-basic" class="tab-content">
-
-                                            <div class="field select">
-                                                <div class="field__label">Действие:</div>
-                                                <div class="field__element">
-                                                    <select name="select">
-                                                        <option value="value1" selected>Создать</option>
-                                                        <option value="value2">Заменить</option>
-                                                        <option value="value3">Обновить</option>
-                                                        <option value="value3">Удалить</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="field__line"></div>
-
-                                            <div class="field field__input field__input--path">
-                                                <div class="field__label">Название:</div>
-                                                <div class="field__element">
-                                                    <input type="text" placeholder="/home/user" />
-                                                </div>
-                                            </div>  
-                                            
-                                            <div class="field select">
-                                                <div class="field__label">Тип цели:</div>
-                                                <div class="field__element">
-                                                    <select name="select">
-                                                        <option value="value1" selected>Объект файловой системы</option>
-                                                        <option value="value2">URL-адрес</option>
-                                                        <option value="value3">Объект оболочки</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="field select">
-                                                <div class="field__label">Место нахождения:</div>
-                                                <div class="field__element">
-                                                    <select name="select">
-                                                        <option value="value1" selected>[Укажите полный путь]</option>
-                                                        <option value="value2">Рабочий стол</option>
-                                                        <option value="value3">Стартовое меню</option>
-                                                        <option value="value4">Программы</option>
-                                                        <option value="value5">Запуск</option>
-                                                        <option value="value6">Избранное</option>
-                                                        <option value="value7">Ссылки</option>
-                                                        <option value="value8">Отправить</option>
-                                                        <option value="value9">Недавние</option>
-                                                        <option value="value10">Панель быстрого запуска</option>
-                                                        <option value="value11">Мои места в Сети</option>
-                                                        <option value="value12">Общий Рабочий стол</option>
-                                                        <option value="value13">Общее Стартовое меню</option>
-                                                        <option value="value14">Общие Программы</option>
-                                                        <option value="value15">Общий Запуск</option>
-                                                        <option value="value16">Общие Избранное</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="field__line"></div>
-
-                                            <div class="field field__input field__input--path">
-                                                <div class="field__label">Целевой путь:</div>
-                                                <div class="field__element">
-                                                    <input type="text" placeholder="/home/user" />
-                                                </div>
-                                            </div> 
-
-                                            <div class="field field__input">
-                                                <div class="field__label">Аргументы:</div>
-                                                <div class="field__element">
-                                                    <input type="text" />
-                                                </div>
-                                            </div> 
-
-                                            <div class="field__line"></div>
-
-                                            <div class="field field__input field__input--path">
-                                                <div class="field__label">Путь к файлу значка:</div>
-                                                <div class="field__element">
-                                                    <input type="text" />
-                                                </div>
-                                            </div> 
-
-                                            <div class="field select">
-                                                <div class="field__label">Индекс значка:</div>
-                                                <div class="field__element">
-                                                    <input type="number" disabled value="0"/>
-                                                </div>
-                                            </div> 
-
-                                            <div class="field__line"></div>
-
-                                            <div class="field field__input field__input--path">
-                                                <div class="field__label">Начинать:</div>
-                                                <div class="field__element">
-                                                    <input type="text" />
-                                                </div>
-                                            </div> 
-
-                                            <div class="field field__input field__input--hotkey">
-                                                <div class="field__label">Быстрая клавиша:</div>
-                                                <div class="field__element">
-                                                    <input type="text" placeholder="Введи комбинацию клавиш"/>
-                                                </div>
-                                            </div>  
-
-                                            <div class="field select">
-                                                <div class="field__label">Запуск:</div>
-                                                <div class="field__element">
-                                                    <select name="select">
-                                                        <option value="value1" selected>Обычное окно</option>
-                                                        <option value="value2">Свёрнутое</option>
-                                                        <option value="value3">Увеличенное</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="field field__comment">
-                                                <div class="field__label">Комментарий:</div>
-                                                <div class="field__element">
-                                                    <textarea name="comment"></textarea>
-                                                </div>
-                                            </div>  
-                                            
-                                        </div>
-                                        <div id="tab-general" class="tab-content active">
-
-                                            <div class="field field__checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="option1">
-                                                    <span class="field__label-checkbox">Остановить обработку элементов при ошибке</span>
-                                                </label>
-                                            </div>
-                                            
-                                            <div class="field field__checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="option2">
-                                                    <span class="field__label-checkbox">Выполнять в контексте безопасности текущего пользователя (опция пользовательских политик)</span>
-                                                </label>
-                                            </div>            
-                                            
-                                            <div class="field field__checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="option3">
-                                                    <span class="field__label-checkbox">Удалить элемент, если больше не применим</span>
-                                                </label>
-                                            </div>     
-                                            
-                                            <div class="field field__checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="option4" disabled>
-                                                    <span class="field__label-checkbox">Применить только один раз</span>
-                                                </label>
-                                            </div> 
-
-                                            <div class="field field__checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="option5" disabled>
-                                                    <span class="field__label-checkbox">Выбор элементов</span>
-                                                </label>
-                                            </div>  
-                                            
-                                            <div class="field field__description">
-                                                <div class="field__label">Комментарий:</div>
-                                                <div class="field__element">
-                                                    <textarea name="description"></textarea>
-                                                </div>
-                                            </div>                                             
-
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                
-
-                                <div class="preference__modal-footer">
-                                    <div class="btn btn-cancel">Отмена</div>
-                                    <div class="btn btn-oк">Ок</div>
-                                </div>
-                            </div>
-                                
-                        </div>
                     </div>
 
                 </div>

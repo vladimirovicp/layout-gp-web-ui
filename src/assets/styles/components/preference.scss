@@ -9,6 +9,9 @@
             height: 100%;
             width: 50px;
             width: 200px;
+            overflow-x: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         &__data{
@@ -19,15 +22,18 @@
         &__settings{
 
             padding: 5px;
+            min-width: 199px;
 
             &-title{
                 font-weight: 600;
                 padding-bottom: 5px;
+                
             }
 
             &-data{
                 border: 1px solid #d1d1d1;
                 width: 100%;
+                height: 325px;
                 padding: 5px 15px;
                 
             }
@@ -42,10 +48,24 @@
                 }
             }
 
+            &-name{
+                width: 116px;
+                flex-shrink: 0;
+            }
+
+            &-value{
+                width: 30px;
+                flex-shrink: 0;
+                text-align: right;
+            }
+
         }
 
         &__description{
             padding: 5px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
 
             &-title{
                 font-weight: 600;
@@ -55,8 +75,11 @@
             &-data{
                 border: 1px solid #d1d1d1;
                 background: #fff;
-                height: 292px;
+                min-height: 150px;
+                max-height: 292px;
                 padding: 5px 15px;
+                min-width: 189px;
+                flex-grow: 1;
 
                 &.empty{
                     color: #8b8d8f;
