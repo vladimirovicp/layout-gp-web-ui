@@ -26,10 +26,6 @@
     }
 }
 
-// .btn{
-
-// }
-
 .tree-view {
     padding-top: 24px;
     padding-left: 24px;
@@ -40,26 +36,21 @@
     ul{
          list-style-type: none;
          padding-left: 14px;
-
          li{
-            
             padding-top: 8px;
             white-space: nowrap; 
-
-            span{
-                // padding-top: 4px;
-                // padding-bottom: 4px;
-            }
          }
     }
-
 
     .tree-item{
         display: flex;
         align-items: center;
         height: 16px;
         cursor: pointer;
-
+        transition: color 0.3s ease;
+        &.active{
+            color: #297FB0;
+        }
     }
 
     .icon-switcher{
