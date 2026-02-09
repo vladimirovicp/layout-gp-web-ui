@@ -5,6 +5,7 @@ import {renderFooter} from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { t } from './locales/translations.js';
 import { renderPreferencesTemplate } from './components/workspace/preferences-template.js';
+import { renderDefaultTemplate } from './components/tree-view/default-template.js';
 
 /**
  * State для дерева: выбранный элемент и workspace
@@ -31,6 +32,13 @@ const treeViewState = {
                 const preferencesTemplate = renderPreferencesTemplate();
                 this.workspace.append(preferencesTemplate);
             }    
+        } else{
+            if (this.workspace) {
+                // Очищаем workspace и добавляем шаблон по умолчанию
+                this.workspace.clear();
+                const defaultTemplate = renderDefaultTemplate();
+                this.workspace.append(defaultTemplate);
+            } 
         }
 
 
@@ -61,9 +69,9 @@ if(container){
     resizable(dividerElement, treeViewElement, mainElement);
     
     // Изменяем текст header на "header2" через 5 секунд используя ElementCreator
-    setTimeout(() => {
-        header.setText('header2');
-    }, 5000);
+    // setTimeout(() => {
+    //     header.setText('header2');
+    // }, 5000);
 
 
     // Пример вывода переводов

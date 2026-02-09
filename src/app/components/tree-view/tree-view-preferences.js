@@ -4,6 +4,7 @@ import { t } from '../../locales/translations.js';
 export const treepreferences = [
     {
         title: t('preferences.shortcuts'),
+        name:'shortcuts',
         type: 'file',
         icon: 'ico-file',
         template: 'preferences'
