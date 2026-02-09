@@ -4,6 +4,7 @@ import {renderMain} from './components/main/main';
 import {renderFooter} from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { t } from './locales/translations.js';
+import { renderPreferencesTemplate } from './components/workspace/preferences-template.js';
 
 /**
  * State для дерева: выбранный элемент и workspace
@@ -25,11 +26,10 @@ const treeViewState = {
 
         if(template === 'preferences'){
             if (this.workspace) {
-                const titleElement = element.querySelector('.tree-item__title');
-                if (titleElement) {
-                    const titleText = titleElement.textContent || titleElement.innerText;
-                    this.workspace.setText(titleText);
-                }
+                // Очищаем workspace и добавляем шаблон preferences
+                this.workspace.clear();
+                const preferencesTemplate = renderPreferencesTemplate();
+                this.workspace.append(preferencesTemplate);
             }    
         }
 
