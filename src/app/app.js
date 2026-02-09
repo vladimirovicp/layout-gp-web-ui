@@ -13,32 +13,80 @@ import { renderDefaultTemplate } from './components/tree-view/default-template.j
 const treeViewState = {
     selectedItem: null,
     workspace: null,
+    header: null,
+    btnCreateHandler: null,
 
     setWorkspace(workspace) {
         this.workspace = workspace;
     },
 
+    setHeader(header) {
+        this.header = header;
+    },
+
     setSelectedItem(item, element) {
+        // Удаляем предыдущий обработчик событий, если он существует
+        if (this.btnCreateHandler && this.header) {
+            const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
+            if (btnCreate) {
+                btnCreate.removeEventListener('click', this.btnCreateHandler);
+            }
+            this.btnCreateHandler = null;
+        }
+
         this.selectedItem = { item, element };
 
         const template = item.template;
 
-        console.log(template);
+        //console.log(template);
 
         if(template === 'preferences'){
-            if (this.workspace) {
-                // Очищаем workspace и добавляем шаблон preferences
-                this.workspace.clear();
-                const preferencesTemplate = renderPreferencesTemplate();
-                this.workspace.append(preferencesTemplate);
-            }    
+
+            const namePreference = item.name;
+
+            if(namePreference){
+                if (this.workspace) {
+                    // Очищаем workspace и добавляем шаблон preferences
+                    this.workspace.clear();
+                    const preferencesTemplate = renderPreferencesTemplate();
+                    this.workspace.append(preferencesTemplate);
+                }
+                // Добавляем класс active к header и кнопке preferences__btn-create
+                if (this.header) {
+                    this.header.addClass('active');
+                    const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
+                    if (btnCreate) {
+                        btnCreate.classList.add('active');
+                        btnCreate.setAttribute('data-preferences-name', namePreference);
+                        
+                        // Добавляем обработчик события для кнопки
+                        this.btnCreateHandler = (e) => {
+                            if (btnCreate.classList.contains('active')) {
+                                const preferencesName = btnCreate.getAttribute('data-preferences-name');
+                                console.log(preferencesName);
+                            }
+                        };
+                        btnCreate.addEventListener('click', this.btnCreateHandler);
+                    }
+                }
+            }
+
+
         } else{
             if (this.workspace) {
                 // Очищаем workspace и добавляем шаблон по умолчанию
                 this.workspace.clear();
                 const defaultTemplate = renderDefaultTemplate();
                 this.workspace.append(defaultTemplate);
-            } 
+            }
+            // Убираем класс active у header и кнопки preferences__btn-create
+            if (this.header) {
+                this.header.removeClass('active');
+                const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
+                if (btnCreate) {
+                    btnCreate.classList.remove('active');
+                }
+            }
         }
 
 
@@ -56,6 +104,7 @@ const container = document.getElementById('gp__container');
 
 if(container){
     const header = renderHeader(container);
+    treeViewState.setHeader(header);
     const { main, treeView, divider, workspace } = renderMain(container, treeViewState);
     const footer = renderFooter(container);
 

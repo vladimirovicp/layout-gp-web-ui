@@ -10,7 +10,8 @@ export const treepreferences = [
         template: 'preferences'
     },
     {
-        title: 'Окружение',
+        title: t('preferences.environment'),
+        name:'environment',
         type: 'file',
         icon: 'ico-file',
         template: 'preferences'
