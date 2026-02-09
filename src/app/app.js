@@ -18,13 +18,29 @@ const treeViewState = {
 
     setSelectedItem(item, element) {
         this.selectedItem = { item, element };
-        if (this.workspace) {
-            const titleElement = element.querySelector('.tree-item__title');
-            if (titleElement) {
-                const titleText = titleElement.textContent || titleElement.innerText;
-                this.workspace.setText(titleText);
-            }
+
+        const template = item.template;
+
+        console.log(template);
+
+        if(template === 'preferences'){
+            if (this.workspace) {
+                const titleElement = element.querySelector('.tree-item__title');
+                if (titleElement) {
+                    const titleText = titleElement.textContent || titleElement.innerText;
+                    this.workspace.setText(titleText);
+                }
+            }    
         }
+
+
+        // if (this.workspace) {
+        //     const titleElement = element.querySelector('.tree-item__title');
+        //     if (titleElement) {
+        //         const titleText = titleElement.textContent || titleElement.innerText;
+        //         this.workspace.setText(titleText);
+        //     }
+        // }
     }
 };
 

@@ -66,7 +66,7 @@ function renderTreeItem(item, treeViewState) {
         const clickedElement = e.currentTarget;
         
         // Выводим в консоль элемент, по которому был клик
-        console.log('Клик по элементу:', clickedElement);
+        //console.log('Клик по элементу:', clickedElement);
         
         // Удаляем класс active у всех элементов tree-item
         const allTreeItems = document.querySelectorAll('.tree-item');
