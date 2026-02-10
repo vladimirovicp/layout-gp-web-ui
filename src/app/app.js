@@ -5,6 +5,7 @@ import {renderFooter} from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { t } from './locales/translations.js';
 import { renderPreferencesTemplate } from './components/workspace/preferences-template.js';
+import { renderPreferencesShortcutsTemplate } from './components/workspace/preferences-template-shortcuts.js';
 import { renderDefaultTemplate } from './components/tree-view/default-template.js';
 
 /**
@@ -64,6 +65,23 @@ const treeViewState = {
                             if (btnCreate.classList.contains('active')) {
                                 const preferencesName = btnCreate.getAttribute('data-preferences-name');
                                 console.log(preferencesName);
+
+                                // Если выбрано "shortcuts", заполняем вкладку tab-basic шаблоном ярлыков
+                                if (preferencesName === 'shortcuts') {
+                                    const tabBasicElement = document.getElementById('tab-basic');
+
+                                    if (tabBasicElement) {
+                                        // Очищаем содержимое вкладки
+                                        tabBasicElement.innerHTML = '';
+
+                                        // Рендерим шаблон настроек ярлыка и добавляем его в tab-basic
+                                        const shortcutsTemplate = renderPreferencesShortcutsTemplate();
+
+                                        if (shortcutsTemplate && typeof shortcutsTemplate.getElement === 'function') {
+                                            tabBasicElement.appendChild(shortcutsTemplate.getElement());
+                                        }
+                                    }
+                                }
                             }
                         };
                         btnCreate.addEventListener('click', this.btnCreateHandler);
