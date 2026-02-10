@@ -4,6 +4,8 @@ import {renderMain} from './components/main/main';
 import {renderFooter} from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { t } from './locales/translations.js';
+import { renderPreferencesTemplate } from './components/workspace/preferences-template.js';
+import { renderDefaultTemplate } from './components/tree-view/default-template.js';
 
 /**
  * State для дерева: выбранный элемент и workspace
@@ -11,20 +13,90 @@ import { t } from './locales/translations.js';
 const treeViewState = {
     selectedItem: null,
     workspace: null,
+    header: null,
+    btnCreateHandler: null,
 
     setWorkspace(workspace) {
         this.workspace = workspace;
     },
 
+    setHeader(header) {
+        this.header = header;
+    },
+
     setSelectedItem(item, element) {
+        // Удаляем предыдущий обработчик событий, если он существует
+        if (this.btnCreateHandler && this.header) {
+            const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
+            if (btnCreate) {
+                btnCreate.removeEventListener('click', this.btnCreateHandler);
+            }
+            this.btnCreateHandler = null;
+        }
+
         this.selectedItem = { item, element };
-        if (this.workspace) {
-            const titleElement = element.querySelector('.tree-item__title');
-            if (titleElement) {
-                const titleText = titleElement.textContent || titleElement.innerText;
-                this.workspace.setText(titleText);
+
+        const template = item.template;
+
+        //console.log(template);
+
+        if(template === 'preferences'){
+
+            const namePreference = item.name;
+
+            if(namePreference){
+                if (this.workspace) {
+                    // Очищаем workspace и добавляем шаблон preferences
+                    this.workspace.clear();
+                    const preferencesTemplate = renderPreferencesTemplate();
+                    this.workspace.append(preferencesTemplate);
+                }
+                // Добавляем класс active к header и кнопке preferences__btn-create
+                if (this.header) {
+                    this.header.addClass('active');
+                    const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
+                    if (btnCreate) {
+                        btnCreate.classList.add('active');
+                        btnCreate.setAttribute('data-preferences-name', namePreference);
+                        
+                        // Добавляем обработчик события для кнопки
+                        this.btnCreateHandler = (e) => {
+                            if (btnCreate.classList.contains('active')) {
+                                const preferencesName = btnCreate.getAttribute('data-preferences-name');
+                                console.log(preferencesName);
+                            }
+                        };
+                        btnCreate.addEventListener('click', this.btnCreateHandler);
+                    }
+                }
+            }
+
+
+        } else{
+            if (this.workspace) {
+                // Очищаем workspace и добавляем шаблон по умолчанию
+                this.workspace.clear();
+                const defaultTemplate = renderDefaultTemplate();
+                this.workspace.append(defaultTemplate);
+            }
+            // Убираем класс active у header и кнопки preferences__btn-create
+            if (this.header) {
+                this.header.removeClass('active');
+                const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
+                if (btnCreate) {
+                    btnCreate.classList.remove('active');
+                }
             }
         }
+
+
+        // if (this.workspace) {
+        //     const titleElement = element.querySelector('.tree-item__title');
+        //     if (titleElement) {
+        //         const titleText = titleElement.textContent || titleElement.innerText;
+        //         this.workspace.setText(titleText);
+        //     }
+        // }
     }
 };
 
@@ -32,6 +104,7 @@ const container = document.getElementById('gp__container');
 
 if(container){
     const header = renderHeader(container);
+    treeViewState.setHeader(header);
     const { main, treeView, divider, workspace } = renderMain(container, treeViewState);
     const footer = renderFooter(container);
 
@@ -45,9 +118,9 @@ if(container){
     resizable(dividerElement, treeViewElement, mainElement);
     
     // Изменяем текст header на "header2" через 5 секунд используя ElementCreator
-    setTimeout(() => {
-        header.setText('header2');
-    }, 5000);
+    // setTimeout(() => {
+    //     header.setText('header2');
+    // }, 5000);
 
 
     // Пример вывода переводов

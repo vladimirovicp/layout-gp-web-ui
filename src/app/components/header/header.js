@@ -1,7 +1,33 @@
+import { createElement } from '../../util/element-creator.js';
+
 export function renderHeader(container) {
     const element = createElement('div', {
         className: 'gp__header',
-        text: 'header'
+        children: [
+            createElement('div', {
+                className: 'gp__search'
+            }),
+            createElement('div', {
+                className: 'gp__nav'
+            }),
+            createElement('div', {
+                className: 'gp__control',
+                children: [
+                    createElement('button', {
+                        className: ['button', 'preferences__btn-create'],
+                        text: 'Создать'
+                    }),
+                    createElement('button', {
+                        className: ['button', 'preferences__btn-edit'],
+                        text: 'Изменить'
+                    }),
+                    createElement('button', {
+                        className: ['button','preferences__btn-delete'],
+                        text: 'Удалить'
+                    })
+                ]
+            })
+        ]
     });
     container.appendChild(element.getElement());
     return element; // Возвращаем экземпляр ElementCreator для возможности использования его методов

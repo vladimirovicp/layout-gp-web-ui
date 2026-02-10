@@ -11,3 +11,24 @@
         border: 1px solid #297FB0;
     }
 }
+
+.button{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    
+    font: inherit;
+    color: inherit;
+    
+    outline: none;
+    box-shadow: none;
+    
+    color: #D1D1D1;
+   
+
+    &.active{
+        cursor: pointer;
+        color: #363636;
+    }
+}
