@@ -66,7 +66,7 @@ export function renderPreferencesTemplate() {
                 ]
             }),
             createElement('div', {
-                className: ['preference__modal', 'active'],
+                className: 'preference__modal',
                 children: [
                     createElement('div', {
                         className: 'preference__modal-wrapper',

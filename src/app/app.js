@@ -64,7 +64,7 @@ const treeViewState = {
                         this.btnCreateHandler = (e) => {
                             if (btnCreate.classList.contains('active')) {
                                 const preferencesName = btnCreate.getAttribute('data-preferences-name');
-                                console.log(preferencesName);
+                                //console.log(preferencesName);
 
                                 // Если выбрано "shortcuts", заполняем вкладку tab-basic шаблоном ярлыков
                                 if (preferencesName === 'shortcuts') {
@@ -78,10 +78,21 @@ const treeViewState = {
                                         const shortcutsTemplate = renderPreferencesShortcutsTemplate();
 
                                         if (shortcutsTemplate && typeof shortcutsTemplate.getElement === 'function') {
+
+                                            // Диалог настроек -> Основные настройки Добавляем шаблон "значоки"(shortcuts)
                                             tabBasicElement.appendChild(shortcutsTemplate.getElement());
                                         }
                                     }
                                 }
+
+                                // Добавляем класс active к модальному окну preference__modal в workspace
+                                if (this.workspace) {
+                                    const preferenceModal = this.workspace.getElement().querySelector('.preference__modal');
+                                    if (preferenceModal) {
+                                        preferenceModal.classList.add('active');
+                                    }
+                                }
+
                             }
                         };
                         btnCreate.addEventListener('click', this.btnCreateHandler);
