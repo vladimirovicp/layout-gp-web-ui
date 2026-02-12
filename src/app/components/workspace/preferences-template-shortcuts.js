@@ -11,6 +11,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Действие
             createElement('div', {
                 className: ['field', 'select'],
+                attrs: {
+                    'data-name': 'action'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
