@@ -30,11 +30,9 @@ function createTableRow(row, active = false) {
  */
 export function renderPreferencesTableShortcuts(rows = []) {
     const defaultRows = [
+        { SHORTCUT_PATH: 'admin', order: 1, action: 'Создать', value: 100 },
+        { SHORTCUT_PATH: 'admin', order: 1, action: 'Создать', value: 100 },
         { name: 'admin', order: 1, action: 'Создать', value: 100 },
-        { name: 'admin', order: 1, action: 'Создать', value: 100 },
-        { name: 'admin', order: 1, action: 'Создать', value: 100 },
-        { name: 'admin', order: 1, action: 'Создать', value: 100 },
-        { name: 'admin', order: 1, action: 'Создать', value: 100}
     ];
 
     const dataRows = rows.length > 0 ? rows : defaultRows;
