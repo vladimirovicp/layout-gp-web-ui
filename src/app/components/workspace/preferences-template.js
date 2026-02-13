@@ -1,5 +1,9 @@
 import { createElement } from '../../util/element-creator.js';
 import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
+import { renderPreferencesTableShortcuts } from './preferences-table-shortcuts.js';
+
+
+
 
 /**
  * Рендерит шаблон preferences для workspace
@@ -54,15 +58,7 @@ export function renderPreferencesTemplate() {
             createElement('div', {
                 className: 'preference__data-table',
                 children: [
-                    createElement('div', {
-                        className: 'preference__data-empty',
-                        children: [
-                            createElement('div', {
-                                className: 'preference__data-message',
-                                text: 'В настоящий момент политик не добавлено'
-                            })
-                        ]
-                    })
+                    renderPreferencesTableShortcuts()
                 ]
             }),
             createElement('div', {
