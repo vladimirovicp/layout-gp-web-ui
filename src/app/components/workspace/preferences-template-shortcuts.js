@@ -12,7 +12,7 @@ export function renderPreferencesShortcutsTemplate() {
             createElement('div', {
                 className: ['field', 'select'],
                 attrs: {
-                    'data-name': 'action'
+                    'data-name': 'ACTION'
                 },
                 children: [
                     createElement('div', {
@@ -29,26 +29,26 @@ export function renderPreferencesShortcutsTemplate() {
                                 children: [
                                     createElement('option', {
                                         attrs: {
-                                            value: 'create',
+                                            value: '0',
                                             selected: 'selected'
                                         },
                                         text: 'Создать'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'replace'
+                                            value: '1'
                                         },
                                         text: 'Заменить'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'update'
+                                            value: '2'
                                         },
                                         text: 'Обновить'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'delete'
+                                            value: '3'
                                         },
                                         text: 'Удалить'
                                     })
@@ -67,6 +67,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Название
             createElement('div', {
                 className: ['field', 'field__input', 'field__input--path'],
+                attrs: {
+                    'data-name': 'SHORTCUT_PATH'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -78,7 +81,6 @@ export function renderPreferencesShortcutsTemplate() {
                             createElement('input', {
                                 attrs: {
                                     type: 'text',
-                                    placeholder: '/home/user'
                                 }
                             })
                         ]
@@ -89,6 +91,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Тип цели
             createElement('div', {
                 className: ['field', 'select'],
+                attrs: {
+                    'data-name': 'TARGET_TYPE'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -131,6 +136,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Место нахождения
             createElement('div', {
                 className: ['field', 'select'],
+                attrs: {
+                    'data-name': 'LOCATION'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -140,104 +148,101 @@ export function renderPreferencesShortcutsTemplate() {
                         className: 'field__element',
                         children: [
                             createElement('select', {
-                                attrs: {
-                                    name: 'location'
-                                },
                                 children: [
                                     createElement('option', {
                                         attrs: {
-                                            value: 'path',
+                                            value: '0',
                                             selected: 'selected'
                                         },
                                         text: '[Укажите полный путь]'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'desktop'
+                                            value: '1'
                                         },
                                         text: 'Рабочий стол'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'startMenu'
+                                            value: '2'
                                         },
                                         text: 'Стартовое меню'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'programs'
+                                            value: '3'
                                         },
                                         text: 'Программы'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'startup'
+                                            value: '4'
                                         },
                                         text: 'Запуск'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'favorites'
+                                            value: '5'
                                         },
                                         text: 'Избранное'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'links'
+                                            value: '6'
                                         },
                                         text: 'Ссылки'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'sendTo'
+                                            value: '7'
                                         },
                                         text: 'Отправить'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'recent'
+                                            value: '8'
                                         },
                                         text: 'Недавние'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'quickLaunch'
+                                            value: '9'
                                         },
                                         text: 'Панель быстрого запуска'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'networkPlaces'
+                                            value: '10'
                                         },
                                         text: 'Мои места в Сети'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'commonDesktop'
+                                            value: '11'
                                         },
                                         text: 'Общий Рабочий стол'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'commonStartMenu'
+                                            value: '12'
                                         },
                                         text: 'Общее Стартовое меню'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'commonPrograms'
+                                            value: '13'
                                         },
                                         text: 'Общие Программы'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'commonStartup'
+                                            value: '14'
                                         },
                                         text: 'Общий Запуск'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'commonFavorites'
+                                            value: '15'
                                         },
                                         text: 'Общие Избранное'
                                     })
@@ -256,6 +261,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Целевой путь
             createElement('div', {
                 className: ['field', 'field__input', 'field__input--path'],
+                attrs: {
+                    'data-name': 'TARGET_PATH'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -278,6 +286,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Аргументы
             createElement('div', {
                 className: ['field', 'field__input'],
+                attrs: {
+                    'data-name': 'ARGUMENTS'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -304,6 +315,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Путь к файлу значка
             createElement('div', {
                 className: ['field', 'field__input', 'field__input--path'],
+                attrs: {
+                    'data-name': 'ICON_PATH'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -325,6 +339,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Индекс значка
             createElement('div', {
                 className: ['field', 'select'],
+                attrs: {
+                    'data-name': 'ICON_INDEX'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -353,6 +370,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Начинать
             createElement('div', {
                 className: ['field', 'field__input', 'field__input--path'],
+                attrs: {
+                    'data-name': 'START_IN'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -374,6 +394,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Быстрая клавиша
             createElement('div', {
                 className: ['field', 'field__input', 'field__input--hotkey'],
+                attrs: {
+                    'data-name': 'SHORTCUT_KEY'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -396,6 +419,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Запуск
             createElement('div', {
                 className: ['field', 'select'],
+                attrs: {
+                    'data-name': 'WINDOW'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',
@@ -411,20 +437,20 @@ export function renderPreferencesShortcutsTemplate() {
                                 children: [
                                     createElement('option', {
                                         attrs: {
-                                            value: 'normal',
+                                            value: '0',
                                             selected: 'selected'
                                         },
                                         text: 'Обычное окно'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'minimized'
+                                            value: '1'
                                         },
                                         text: 'Свёрнутое'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'maximized'
+                                            value: '2'
                                         },
                                         text: 'Увеличенное'
                                     })
@@ -438,6 +464,9 @@ export function renderPreferencesShortcutsTemplate() {
             // Комментарий
             createElement('div', {
                 className: ['field', 'field__comment'],
+                attrs: {
+                    'data-name': 'COMMENT'
+                },
                 children: [
                     createElement('div', {
                         className: 'field__label',

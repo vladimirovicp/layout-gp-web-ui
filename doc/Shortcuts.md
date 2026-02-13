@@ -96,22 +96,22 @@ ShortcutsItem::ShortcutsItem()
 #### 4. Расположение (Location)
 - **Тип**: `QComboBox`
 - **Варианты** (15 локаций):
-  0. [Specify full path] - Указать полный путь
-  1. Desktop - Рабочий стол
-  2. Start Menu - Меню Пуск
-  3. Programs - Программы
-  4. StartUp - Автозагрузка
-  5. Explorer Favorites - Избранное проводника
-  6. Explorer Links - Ссылки проводника
-  7. Send To - Отправить
-  8. Recent - Недавние документы
-  9. Quick Launch ToolBar - Панель быстрого запуска
-  10. My Network Places - Сетевое окружение
-  11. All Users Desktop - Рабочий стол всех пользователей
-  12. All Users Start Menu - Меню Пуск всех пользователей
-  13. All Users Programs - Программы всех пользователей
-  14. All Users StartUp - Автозагрузка всех пользователей
-  15. All Users Explorer Favorites - Избранное всех пользователей
+0. [Specify full path] - Указать полный путь
+1. Desktop - Рабочий стол
+2. Start Menu - Меню Пуск
+3. Programs - Программы
+4. StartUp - Автозагрузка
+5. Explorer Favorites - Избранное проводника
+6. Explorer Links - Ссылки проводника
+7. Send To - Отправить
+8. Recent - Недавние документы
+9. Quick Launch ToolBar - Панель быстрого запуска
+10. My Network Places - Сетевое окружение
+11. All Users Desktop - Рабочий стол всех пользователей
+12. All Users Start Menu - Меню Пуск всех пользователей
+13. All Users Programs - Программы всех пользователей
+14. All Users StartUp - Автозагрузка всех пользователей
+15. All Users Explorer Favorites - Избранное всех пользователей
 
 **Маппинг переменных окружения**:
 - `%DesktopDir%` - Рабочий стол

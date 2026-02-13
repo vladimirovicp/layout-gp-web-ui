@@ -7,6 +7,7 @@ import { t } from './locales/translations.js';
 import { renderPreferencesTemplate } from './components/workspace/preferences-template.js';
 import { renderPreferencesShortcutsTemplate } from './components/workspace/preferences-template-shortcuts.js';
 import { renderDefaultTemplate } from './components/tree-view/default-template.js';
+import './util/mainLocalStorage/shortcuts.js';
 
 /**
  * State для дерева: выбранный элемент и workspace
