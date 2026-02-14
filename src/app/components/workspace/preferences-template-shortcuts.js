@@ -109,20 +109,20 @@ export function renderPreferencesShortcutsTemplate() {
                                 children: [
                                     createElement('option', {
                                         attrs: {
-                                            value: 'filesystem',
+                                            value: '0',
                                             selected: 'selected'
                                         },
                                         text: 'Объект файловой системы'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'url'
+                                            value: '1'
                                         },
                                         text: 'URL-адрес'
                                     }),
                                     createElement('option', {
                                         attrs: {
-                                            value: 'shellObject'
+                                            value: '2'
                                         },
                                         text: 'Объект оболочки'
                                     })

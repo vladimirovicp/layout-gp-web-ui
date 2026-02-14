@@ -7,7 +7,6 @@
 const shortcutsData = [
     {
         "ACTION": 3,
-        "PIDL": "",
         "SHORTCUT_PATH": "Mail",
         "TARGET_TYPE": 2,
         "TARGET_PATH": "/usr/bin/thunderbird",
@@ -22,7 +21,6 @@ const shortcutsData = [
     },
     {
         "ACTION": 0,
-        "PIDL": "",
         "SHORTCUT_PATH": "Mail",
         "TARGET_TYPE": 2,
         "TARGET_PATH": "/usr/bin/thunderbird",
@@ -37,7 +35,6 @@ const shortcutsData = [
     },
     {
         "ACTION": 2,
-        "PIDL": "",
         "SHORTCUT_PATH": "Mail",
         "TARGET_TYPE": 3,
         "TARGET_PATH": "/usr/bin/thunderbird",

@@ -40,9 +40,10 @@ function createTableRow(row, active = false) {
 /**
  * Рендерит таблицу ярлыков (горячих клавиш)
  * @param {Array<Object>} [rows] - Данные строк таблицы
+ * @param {number} [activeIndex=0] - Индекс строки, которой задать класс active
  * @returns {ElementCreator} - Элемент таблицы
  */
-export function renderPreferencesTableShortcuts(rows = []) {
+export function renderPreferencesTableShortcuts(rows = [], activeIndex = 0) {
     const shortcuts = getShortcutsFromLocalStorage();
     const defaultRows = shortcuts.map((item, index) => ({
         SHORTCUT_PATH: item.SHORTCUT_PATH ?? '',
@@ -70,8 +71,9 @@ export function renderPreferencesTableShortcuts(rows = []) {
         });
     }
 
+    const safeActiveIndex = Math.max(0, Math.min(activeIndex, dataRows.length - 1));
     const tbodyRows = dataRows.map((row, index) =>
-        createTableRow(row, index === 0)
+        createTableRow(row, index === safeActiveIndex)
     );
 
     const table = createElement('table', {
@@ -95,7 +97,7 @@ export function renderPreferencesTableShortcuts(rows = []) {
         ]
     });
 
-    document.dispatchEvent(new CustomEvent('preferences-row-select', { detail: { index: 0 } }));
+    document.dispatchEvent(new CustomEvent('preferences-row-select', { detail: { index: safeActiveIndex } }));
 
     return table;
 }
