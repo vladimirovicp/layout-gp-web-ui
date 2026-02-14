@@ -146,6 +146,13 @@ if(container){
     const mainElement = main.getElement();
     
     resizable(dividerElement, treeViewElement, mainElement);
+
+    document.addEventListener('preferences-row-select', (e) => {
+        const headerEl = header.getElement();
+        const buttons = headerEl.querySelectorAll('.preferences__btn-create, .preferences__btn-edit, .preferences__btn-delete');
+        const index = e.detail.index;
+        buttons.forEach((btn) => btn.setAttribute('data-preferences-index', String(index)));
+    });
     
     // Изменяем текст header на "header2" через 5 секунд используя ElementCreator
     // setTimeout(() => {
