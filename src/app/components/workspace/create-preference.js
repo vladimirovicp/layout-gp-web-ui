@@ -53,6 +53,16 @@ export function collectPreferencesFromTabBasic(tabBasicEl) {
 }
 
 /**
+ * Устанавливает режим модалки «создание» (data-preferences-mode="create").
+ * Вызывать при открытии модалки по кнопке создания.
+ * @param {HTMLElement} modalEl - элемент .preference__modal
+ */
+export function setModalCreateMode(modalEl) {
+    if (!modalEl) return;
+    modalEl.setAttribute('data-preferences-mode', 'create');
+}
+
+/**
  * Определяет ключ localStorage по модалке (data-preferences-name) и сохраняет
  * собранные данные в localStorage. Для "shortcuts" обновляет/добавляет элемент в массив.
  * @param {HTMLElement} modalEl - элемент .preference__modal

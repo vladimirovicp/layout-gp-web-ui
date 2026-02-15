@@ -65,6 +65,8 @@ function getStoredPreferenceData(modalEl) {
         return null;
     }
 
+    
+
     try {
         const raw = localStorage.getItem(storageKey);
         return raw ? JSON.parse(raw) : null;
@@ -141,6 +143,7 @@ export function openModalForEdit(btnEdit, modalEl) {
     if (name != null) modalEl.setAttribute('data-preferences-name', name);
     if (index != null) modalEl.setAttribute('data-preferences-index', index);
     else modalEl.removeAttribute('data-preferences-index');
+    modalEl.setAttribute('data-preferences-mode', 'edit');
 
     syncModalFromStoredData(modalEl);
     modalEl.classList.add('active');

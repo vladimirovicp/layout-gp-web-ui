@@ -8,6 +8,7 @@ import { renderPreferencesTemplate } from './components/workspace/preferences-te
 import { renderPreferencesShortcutsTemplate } from './components/workspace/preferences-template-shortcuts.js';
 import { handleDeletePreference } from './components/workspace/delete-preference.js';
 import { openModalForEdit } from './components/workspace/edit-preference.js';
+import { setModalCreateMode } from './components/workspace/create-preference.js';
 import { renderDefaultTemplate } from './components/tree-view/default-template.js';
 import './util/mainLocalStorage/shortcuts.js';
 
@@ -107,6 +108,7 @@ const treeViewState = {
                                         const name = btnCreate.getAttribute('data-preferences-name');
                                         if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
                                         preferenceModal.removeAttribute('data-preferences-index');
+                                        setModalCreateMode(preferenceModal);
                                         preferenceModal.classList.add('active');
                                     }
                                 }
@@ -118,6 +120,7 @@ const treeViewState = {
 
                     if (btnEdit){
                         btnEdit.classList.add('active');
+
                     }
 
                     if (btnDelete){

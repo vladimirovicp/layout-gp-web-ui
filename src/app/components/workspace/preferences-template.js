@@ -150,7 +150,9 @@ export function renderPreferencesTemplate() {
                                         events: {
                                             click: (event) => {
                                                 const modal = event.target.closest('.preference__modal');
-                                                if (modal) {
+                                                if (!modal) return;
+                                                const mode = modal.getAttribute('data-preferences-mode');
+                                                if (mode === 'create' || mode === 'edit') {
                                                     savePreferencesFromModal(modal);
                                                     const storageKey = modal.getAttribute('data-preferences-name');
                                                     if (storageKey === 'shortcuts') {
