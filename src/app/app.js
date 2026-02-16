@@ -6,7 +6,11 @@ import { resizable } from './util/resizable.js';
 import { t } from './locales/translations.js';
 import { renderPreferencesTemplate } from './components/workspace/preferences-template.js';
 import { renderPreferencesShortcutsTemplate } from './components/workspace/preferences-template-shortcuts.js';
+import { handleDeletePreference } from './components/workspace/delete-preference.js';
+import { openModalForEdit } from './components/workspace/edit-preference.js';
+import { setModalCreateMode } from './components/workspace/create-preference.js';
 import { renderDefaultTemplate } from './components/tree-view/default-template.js';
+import './util/mainLocalStorage/shortcuts.js';
 
 /**
  * State для дерева: выбранный элемент и workspace
@@ -55,10 +59,22 @@ const treeViewState = {
                 // Добавляем класс active к header и кнопке preferences__btn-create
                 if (this.header) {
                     this.header.addClass('active');
-                    const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
+                    const headerEl = this.header.getElement();
+                    const btnCreate = headerEl.querySelector('.preferences__btn-create');
+                    const btnEdit = headerEl.querySelector('.preferences__btn-edit');
+                    const btnDelete = headerEl.querySelector('.preferences__btn-delete');
+
+                    // Устанавливаем data-preferences-name и data-preferences-index для всех кнопок preferences (как для btn-create)
+                    [btnCreate, btnEdit, btnDelete].forEach((btn) => {
+                        if (btn) {
+                            btn.setAttribute('data-preferences-name', namePreference);
+                            //btn.removeAttribute('data-preferences-index');
+                            if (btn !== btnCreate) btn.classList.remove('active'); // edit/delete active только при выборе строки
+                        }
+                    });
+
                     if (btnCreate) {
                         btnCreate.classList.add('active');
-                        btnCreate.setAttribute('data-preferences-name', namePreference);
                         
                         // Добавляем обработчик события для кнопки
                         this.btnCreateHandler = (e) => {
@@ -85,10 +101,14 @@ const treeViewState = {
                                     }
                                 }
 
-                                // Добавляем класс active к модальному окну preference__modal в workspace
+                                // Добавляем класс active к модальному окну preference__modal в workspace и передаём data-атрибуты с кнопки
                                 if (this.workspace) {
                                     const preferenceModal = this.workspace.getElement().querySelector('.preference__modal');
                                     if (preferenceModal) {
+                                        const name = btnCreate.getAttribute('data-preferences-name');
+                                        if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
+                                        preferenceModal.removeAttribute('data-preferences-index');
+                                        setModalCreateMode(preferenceModal);
                                         preferenceModal.classList.add('active');
                                     }
                                 }
@@ -96,6 +116,15 @@ const treeViewState = {
                             }
                         };
                         btnCreate.addEventListener('click', this.btnCreateHandler);
+                    }
+
+                    if (btnEdit){
+                        btnEdit.classList.add('active');
+
+                    }
+
+                    if (btnDelete){
+                        btnDelete.classList.add('active');
                     }
                 }
             }
@@ -108,13 +137,18 @@ const treeViewState = {
                 const defaultTemplate = renderDefaultTemplate();
                 this.workspace.append(defaultTemplate);
             }
-            // Убираем класс active у header и кнопки preferences__btn-create
+            // Убираем класс active у header и кнопок preferences
             if (this.header) {
                 this.header.removeClass('active');
-                const btnCreate = this.header.getElement().querySelector('.preferences__btn-create');
-                if (btnCreate) {
-                    btnCreate.classList.remove('active');
-                }
+                const headerEl = this.header.getElement();
+                ['.preferences__btn-create', '.preferences__btn-edit', '.preferences__btn-delete'].forEach((sel) => {
+                    const btn = headerEl.querySelector(sel);
+                    if (btn) {
+                        btn.classList.remove('active');
+                        btn.removeAttribute('data-preferences-name');
+                        btn.removeAttribute('data-preferences-index');
+                    }
+                });
             }
         }
 
@@ -145,7 +179,63 @@ if(container){
     const mainElement = main.getElement();
     
     resizable(dividerElement, treeViewElement, mainElement);
-    
+
+    document.addEventListener('preferences-row-select', (e) => {
+        const headerEl = header.getElement();
+        const btnCreate = headerEl.querySelector('.preferences__btn-create');
+        const btnDelete = headerEl.querySelector('.preferences__btn-delete');
+        const btnEdit = headerEl.querySelector('.preferences__btn-edit');
+        const index = e.detail.index;
+        const name = btnCreate?.getAttribute('data-preferences-name');
+        // data-preferences-index и data-preferences-name для всех кнопок — как для btn-create
+        [btnCreate, btnEdit, btnDelete].forEach((btn) => {
+            if (btn) {
+                btn.setAttribute('data-preferences-index', String(index));
+                if (name != null) btn.setAttribute('data-preferences-name', name);
+            }
+        });
+        if (btnDelete) btnDelete.classList.add('active');
+        if (btnEdit) btnEdit.classList.add('active');
+    });
+
+    const btnDelete = header.getElement().querySelector('.preferences__btn-delete');
+    if (btnDelete) {
+        btnDelete.addEventListener('click', () => {
+            if (btnDelete.classList.contains('active')) {
+                handleDeletePreference(btnDelete, workspace);
+            }
+        });
+    }
+
+    const btnEdit = header.getElement().querySelector('.preferences__btn-edit');
+    if (btnEdit) {
+        btnEdit.addEventListener('click', () => {
+            if (btnEdit.classList.contains('active') && workspace) {
+                const preferenceModal = workspace.getElement().querySelector('.preference__modal');
+                if (preferenceModal) {
+                    const name = btnEdit.getAttribute('data-preferences-name');
+
+                    const tabBasicElement = document.getElementById('tab-basic');
+                    if (tabBasicElement) {
+                        tabBasicElement.innerHTML = '';
+                        if (name === 'shortcuts') {
+                            const shortcutsTemplate = renderPreferencesShortcutsTemplate();
+
+                            console.log(shortcutsTemplate);
+
+
+                            if (shortcutsTemplate && typeof shortcutsTemplate.getElement === 'function') {
+                                tabBasicElement.appendChild(shortcutsTemplate.getElement());
+                            }
+                        }
+                    }
+
+                    openModalForEdit(btnEdit, preferenceModal);
+                }
+            }
+        });
+    }
+
     // Изменяем текст header на "header2" через 5 секунд используя ElementCreator
     // setTimeout(() => {
     //     header.setText('header2');

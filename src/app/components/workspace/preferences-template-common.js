@@ -116,7 +116,7 @@ export function renderPreferencesCommonTemplate() {
                 children: [
                     createElement('div', {
                         className: 'field__label',
-                        text: 'Комментарий:'
+                        text: 'Описание:'
                     }),
                     createElement('div', {
                         className: 'field__element',

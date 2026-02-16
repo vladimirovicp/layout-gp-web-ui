@@ -1,5 +1,11 @@
 import { createElement } from '../../util/element-creator.js';
 import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
+import { renderPreferencesTableShortcuts } from './preferences-table-shortcuts.js';
+import { savePreferencesFromModal } from './create-preference.js';
+import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
+
+
+
 
 /**
  * Рендерит шаблон preferences для workspace
@@ -54,15 +60,7 @@ export function renderPreferencesTemplate() {
             createElement('div', {
                 className: 'preference__data-table',
                 children: [
-                    createElement('div', {
-                        className: 'preference__data-empty',
-                        children: [
-                            createElement('div', {
-                                className: 'preference__data-message',
-                                text: 'В настоящий момент политик не добавлено'
-                            })
-                        ]
-                    })
+                    renderPreferencesTableShortcuts()
                 ]
             }),
             createElement('div', {
@@ -136,11 +134,44 @@ export function renderPreferencesTemplate() {
                                 children: [
                                     createElement('div', {
                                         className: ['btn', 'btn-cancel'],
-                                        text: 'Отмена'
+                                        text: 'Отмена',
+                                        events: {
+                                            click: (event) => {
+                                                const modal = event.target.closest('.preference__modal');
+                                                if (modal) {
+                                                    modal.classList.remove('active');
+                                                }
+                                            }
+                                        }
                                     }),
                                     createElement('div', {
-                                        className: ['btn', 'btn-oк'],
-                                        text: 'Ок'
+                                        className: ['btn', 'btn-ok'],
+                                        text: 'Ок',
+                                        events: {
+                                            click: (event) => {
+                                                const modal = event.target.closest('.preference__modal');
+                                                if (!modal) return;
+                                                const mode = modal.getAttribute('data-preferences-mode');
+                                                if (mode === 'create' || mode === 'edit') {
+                                                    savePreferencesFromModal(modal);
+                                                    const storageKey = modal.getAttribute('data-preferences-name');
+                                                    if (storageKey === 'shortcuts') {
+                                                        const preferenceRoot = modal.closest('.gp__preference');
+                                                        const tableContainer = preferenceRoot?.querySelector('.preference__data-table');
+                                                        if (tableContainer) {
+                                                            const indexAttr = modal.getAttribute('data-preferences-index');
+                                                            const list = getShortcutsFromLocalStorage();
+                                                            const activeIndex = (indexAttr !== null && indexAttr !== '')
+                                                                ? Math.min(parseInt(indexAttr, 10), list.length - 1)
+                                                                : list.length - 1;
+                                                            tableContainer.innerHTML = '';
+                                                            tableContainer.appendChild(renderPreferencesTableShortcuts([], activeIndex).getElement());
+                                                        }
+                                                    }
+                                                    modal.classList.remove('active');
+                                                }
+                                            }
+                                        }
                                     })
                                 ]
                             })
