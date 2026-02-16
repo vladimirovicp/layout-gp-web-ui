@@ -259,7 +259,7 @@ define([
                             let modalContent = root.querySelector('.modal-content');
                             let modalBody = modalContent.querySelector('.modal-body');
 
-                            modalBody.innerHTML = '<div class="gpui__container"></div>';
+                            modalBody.innerHTML = '<div id="gp__container" class="gpui__container"></div>';
                             //console.log(modalContent);
 
                             //modalBody.innerHTML = `<div>${json_str}</div>`;
