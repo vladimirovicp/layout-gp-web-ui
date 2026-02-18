@@ -6,46 +6,70 @@
 // Данные ярлыков для инициализации
 const shortcutsData = [
     {
-        "ACTION": 3,
-        "SHORTCUT_PATH": "Mail",
-        "TARGET_TYPE": 2,
-        "TARGET_PATH": "/usr/bin/thunderbird",
-        "LOCATION": 1,
-        "ARGUMENTS": "",
-        "START_IN": "",
-        "SHORTCUT_KEY": "",
-        "WINDOW": 0,
-        "COMMENT": "Комментарий для Mail",
-        "ICON_PATH": "/usr/share/icons/default/application.png",
-        "ICON_INDEX": ""
+        basic: {
+            "ACTION": 3,
+            "SHORTCUT_PATH": "Mail",
+            "TARGET_TYPE": 2,
+            "TARGET_PATH": "/usr/bin/thunderbird",
+            "LOCATION": 1,
+            "ARGUMENTS": "",
+            "START_IN": "",
+            "SHORTCUT_KEY": "",
+            "WINDOW": 0,
+            "COMMENT": "Комментарий для Mail",
+            "ICON_PATH": "/usr/share/icons/default/application.png",
+            "ICON_INDEX": ""
+        },
+        common:{
+            "stopOnErrorCheckBox": true,
+            "userContextCheckBox": false,
+            "removeThisCheckBox": false,
+            "description": "моё краткое описание"
+        }
     },
     {
-        "ACTION": 0,
-        "SHORTCUT_PATH": "Mail",
-        "TARGET_TYPE": 2,
-        "TARGET_PATH": "/usr/bin/thunderbird",
-        "LOCATION": 2,
-        "ARGUMENTS": "",
-        "START_IN": "",
-        "SHORTCUT_KEY": "",
-        "WINDOW": 0,
-        "COMMENT": "",
-        "ICON_PATH": "/usr/share/icons/default/application.png",
-        "ICON_INDEX": ""
+        basic: {
+            "ACTION": 0,
+            "SHORTCUT_PATH": "Mail",
+            "TARGET_TYPE": 2,
+            "TARGET_PATH": "/usr/bin/thunderbird",
+            "LOCATION": 2,
+            "ARGUMENTS": "",
+            "START_IN": "",
+            "SHORTCUT_KEY": "",
+            "WINDOW": 0,
+            "COMMENT": "",
+            "ICON_PATH": "/usr/share/icons/default/application.png",
+            "ICON_INDEX": ""
+        },
+        common: {
+            "stopOnErrorCheckBox": false,
+            "userContextCheckBox": true,
+            "removeThisCheckBox": false,
+            "description": "моё краткое описание N2"
+        }
     },
     {
-        "ACTION": 2,
-        "SHORTCUT_PATH": "Mail",
-        "TARGET_TYPE": 3,
-        "TARGET_PATH": "/usr/bin/thunderbird",
-        "LOCATION": 9,
-        "ARGUMENTS": "",
-        "START_IN": "",
-        "SHORTCUT_KEY": "",
-        "WINDOW": 0,
-        "COMMENT": "",
-        "ICON_PATH": "/usr/share/icons/default/application.png",
-        "ICON_INDEX": ""
+        basic: {
+            "ACTION": 2,
+            "SHORTCUT_PATH": "Mail",
+            "TARGET_TYPE": 3,
+            "TARGET_PATH": "/usr/bin/thunderbird",
+            "LOCATION": 9,
+            "ARGUMENTS": "",
+            "START_IN": "",
+            "SHORTCUT_KEY": "",
+            "WINDOW": 0,
+            "COMMENT": "",
+            "ICON_PATH": "/usr/share/icons/default/application.png",
+            "ICON_INDEX": ""
+        },
+        common: {
+            "stopOnErrorCheckBox": false,
+            "userContextCheckBox": false,
+            "removeThisCheckBox": true,
+            "description": "моё краткое описание 3"
+        }
     }
 ];
 
