@@ -1,7 +1,7 @@
 import { createElement } from '../../util/element-creator.js';
 import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
 import { renderPreferencesTableShortcuts } from './preferences-table-shortcuts.js';
-import { savePreferencesFromModal } from './create-preference.js';
+import { savePreferencesFromModal, resetModalFormToDefaults } from './create-preference.js';
 import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
 
 
@@ -82,6 +82,7 @@ export function renderPreferencesTemplate() {
                                             click: (event) => {
                                                 const modal = event.target.closest('.preference__modal');
                                                 if (modal) {
+                                                    resetModalFormToDefaults(modal);
                                                     modal.classList.remove('active');
                                                 }
                                             }
@@ -139,6 +140,7 @@ export function renderPreferencesTemplate() {
                                             click: (event) => {
                                                 const modal = event.target.closest('.preference__modal');
                                                 if (modal) {
+                                                    resetModalFormToDefaults(modal);
                                                     modal.classList.remove('active');
                                                 }
                                             }

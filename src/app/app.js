@@ -8,7 +8,7 @@ import { renderPreferencesTemplate } from './components/workspace/preferences-te
 import { renderPreferencesShortcutsTemplate } from './components/workspace/preferences-template-shortcuts.js';
 import { handleDeletePreference } from './components/workspace/delete-preference.js';
 import { openModalForEdit } from './components/workspace/edit-preference.js';
-import { setModalCreateMode } from './components/workspace/create-preference.js';
+import { setModalCreateMode, resetModalFormToDefaults } from './components/workspace/create-preference.js';
 import { renderDefaultTemplate } from './components/tree-view/default-template.js';
 import './util/mainLocalStorage/shortcuts.js';
 
@@ -78,41 +78,16 @@ const treeViewState = {
                         
                         // Добавляем обработчик события для кнопки
                         this.btnCreateHandler = (e) => {
-                            if (btnCreate.classList.contains('active')) {
-                                const preferencesName = btnCreate.getAttribute('data-preferences-name');
-                                //console.log(preferencesName);
-
-                                // Если выбрано "shortcuts", заполняем вкладку tab-basic шаблоном ярлыков
-                                if (preferencesName === 'shortcuts') {
-                                    const tabBasicElement = document.getElementById('tab-basic');
-
-                                    if (tabBasicElement) {
-                                        // Очищаем содержимое вкладки
-                                        tabBasicElement.innerHTML = '';
-
-                                        // Рендерим шаблон настроек ярлыка и добавляем его в tab-basic
-                                        const shortcutsTemplate = renderPreferencesShortcutsTemplate();
-
-                                        if (shortcutsTemplate && typeof shortcutsTemplate.getElement === 'function') {
-
-                                            // Диалог настроек -> Основные настройки Добавляем шаблон "значоки"(shortcuts)
-                                            tabBasicElement.appendChild(shortcutsTemplate.getElement());
-                                        }
-                                    }
+                            if (btnCreate.classList.contains('active') && this.workspace) {
+                                const preferenceModal = this.workspace.getElement().querySelector('.preference__modal');
+                                if (preferenceModal) {
+                                    const name = btnCreate.getAttribute('data-preferences-name');
+                                    if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
+                                    resetModalFormToDefaults(preferenceModal);
+                                    preferenceModal.removeAttribute('data-preferences-index');
+                                    setModalCreateMode(preferenceModal);
+                                    preferenceModal.classList.add('active');
                                 }
-
-                                // Добавляем класс active к модальному окну preference__modal в workspace и передаём data-атрибуты с кнопки
-                                if (this.workspace) {
-                                    const preferenceModal = this.workspace.getElement().querySelector('.preference__modal');
-                                    if (preferenceModal) {
-                                        const name = btnCreate.getAttribute('data-preferences-name');
-                                        if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
-                                        preferenceModal.removeAttribute('data-preferences-index');
-                                        setModalCreateMode(preferenceModal);
-                                        preferenceModal.classList.add('active');
-                                    }
-                                }
-
                             }
                         };
                         btnCreate.addEventListener('click', this.btnCreateHandler);

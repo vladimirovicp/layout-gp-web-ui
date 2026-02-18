@@ -1,4 +1,10 @@
 import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
+import { resetActiveTabToBasic } from './create-preference.js';
+
+function getValueElement(fieldEl) {
+    return fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea')
+        || fieldEl.querySelector('input[type="checkbox"], input[type="radio"]');
+}
 
 /**
  * Получает текущее значение из элемента поля (для сравнения).
@@ -6,7 +12,7 @@ import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortc
  * @returns {string|number|boolean} - значение поля
  */
 function getFieldValue(fieldEl) {
-    const element = fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea');
+    const element = getValueElement(fieldEl);
     if (!element) return '';
 
     const tagName = element.tagName.toLowerCase();
@@ -27,7 +33,7 @@ function getFieldValue(fieldEl) {
  * @param {string|number|boolean} value - значение для установки
  */
 function setFieldValue(fieldEl, value) {
-    const element = fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea');
+    const element = getValueElement(fieldEl);
     if (!element) return;
 
     const tagName = element.tagName.toLowerCase();
@@ -86,16 +92,19 @@ export function syncModalFromStoredData(modalEl) {
     const stored = getStoredPreferenceData(modalEl);
     if (!stored || typeof stored !== 'object') return;
 
+    const basicData = stored.basic ?? stored;
+    const commonData = stored.common ?? stored;
+
     const tabBasic = modalEl.querySelector('#tab-basic');
     if (tabBasic) {
         tabBasic.querySelectorAll('[data-name]').forEach((fieldEl) => {
             const name = fieldEl.getAttribute('data-name');
-            if (!name || !(name in stored)) return;
-            const valueEl = fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea');
+            if (!name || !(name in basicData)) return;
+            const valueEl = getValueElement(fieldEl);
             if (!valueEl) return;
 
             const current = getFieldValue(fieldEl);
-            const needed = stored[name];
+            const needed = basicData[name];
 
             const currentNorm = typeof current === 'boolean' ? current : (current === undefined || current === null ? '' : String(current));
             const neededNorm = typeof needed === 'boolean' ? needed : (needed === undefined || needed === null ? '' : String(needed));
@@ -110,12 +119,12 @@ export function syncModalFromStoredData(modalEl) {
     if (tabGeneral) {
         tabGeneral.querySelectorAll('[data-name]').forEach((fieldEl) => {
             const name = fieldEl.getAttribute('data-name');
-            if (!name || !(name in stored)) return;
-            const valueEl = fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea');
+            if (!name || !(name in commonData)) return;
+            const valueEl = getValueElement(fieldEl);
             if (!valueEl) return;
 
             const current = getFieldValue(fieldEl);
-            const needed = stored[name];
+            const needed = commonData[name];
 
             const currentNorm = typeof current === 'boolean' ? current : (current === undefined || current === null ? '' : String(current));
             const neededNorm = typeof needed === 'boolean' ? needed : (needed === undefined || needed === null ? '' : String(needed));
@@ -145,6 +154,7 @@ export function openModalForEdit(btnEdit, modalEl) {
     else modalEl.removeAttribute('data-preferences-index');
     modalEl.setAttribute('data-preferences-mode', 'edit');
 
+    resetActiveTabToBasic(modalEl);
     syncModalFromStoredData(modalEl);
     modalEl.classList.add('active');
 }

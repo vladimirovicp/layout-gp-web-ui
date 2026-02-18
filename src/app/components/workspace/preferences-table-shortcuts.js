@@ -45,11 +45,12 @@ function createTableRow(row, active = false) {
  */
 export function renderPreferencesTableShortcuts(rows = [], activeIndex = 0) {
     const shortcuts = getShortcutsFromLocalStorage();
+    const basic = (item) => item.basic ?? item;
     const defaultRows = shortcuts.map((item, index) => ({
-        SHORTCUT_PATH: item.SHORTCUT_PATH ?? '',
+        SHORTCUT_PATH: basic(item).SHORTCUT_PATH ?? '',
         order: index,
-        ACTION: item.ACTION,
-        TARGET_PATH: item.TARGET_PATH ?? ''
+        ACTION: basic(item).ACTION,
+        TARGET_PATH: basic(item).TARGET_PATH ?? ''
     }));
 
     const dataRows = rows.length > 0 ? rows : defaultRows;
