@@ -231,6 +231,12 @@
                         padding: 20px;
                         display: flex;
                     }
+
+                    .preferences-common{
+                        display: flex;
+                        flex-direction: column;
+                        height: calc(100% - 26px);
+                    }
                 }
             }
 

@@ -8,16 +8,16 @@ export function renderPreferencesCommonTemplate() {
     const container = createElement('div', {
         className: 'preferences-common',
         children: [
-            // checkbox 1
             createElement('div', {
                 className: ['field', 'field__checkbox'],
+                attrs: { 'data-name': 'stopOnErrorCheckBox' },
                 children: [
                     createElement('label', {
                         children: [
                             createElement('input', {
                                 attrs: {
                                     type: 'checkbox',
-                                    name: 'option1'
+                                    name: 'stopOnErrorCheckBox_option'
                                 }
                             }),
                             createElement('span', {
@@ -28,16 +28,16 @@ export function renderPreferencesCommonTemplate() {
                     })
                 ]
             }),
-            // checkbox 2
             createElement('div', {
                 className: ['field', 'field__checkbox'],
+                attrs: { 'data-name': 'userContextCheckBox' },
                 children: [
                     createElement('label', {
                         children: [
                             createElement('input', {
                                 attrs: {
                                     type: 'checkbox',
-                                    name: 'option2'
+                                    name: 'userContextCheckBox_option'
                                 }
                             }),
                             createElement('span', {
@@ -48,16 +48,16 @@ export function renderPreferencesCommonTemplate() {
                     })
                 ]
             }),
-            // checkbox 3
             createElement('div', {
                 className: ['field', 'field__checkbox'],
+                attrs: { 'data-name': 'removeThisCheckBox' },
                 children: [
                     createElement('label', {
                         children: [
                             createElement('input', {
                                 attrs: {
                                     type: 'checkbox',
-                                    name: 'option3'
+                                    name: 'removeThisCheckBox_option'
                                 }
                             }),
                             createElement('span', {
@@ -68,16 +68,16 @@ export function renderPreferencesCommonTemplate() {
                     })
                 ]
             }),
-            // checkbox 4 (disabled)
             createElement('div', {
                 className: ['field', 'field__checkbox'],
+                attrs: { 'data-name': 'applyOnceCheckBox' },
                 children: [
                     createElement('label', {
                         children: [
                             createElement('input', {
                                 attrs: {
                                     type: 'checkbox',
-                                    name: 'option4',
+                                    name: 'applyOnceCheckBox_option',
                                     disabled: 'disabled'
                                 }
                             }),
@@ -89,16 +89,16 @@ export function renderPreferencesCommonTemplate() {
                     })
                 ]
             }),
-            // checkbox 5 (disabled)
             createElement('div', {
                 className: ['field', 'field__checkbox'],
+                attrs: { 'data-name': 'itemLevelCheckBox' },
                 children: [
                     createElement('label', {
                         children: [
                             createElement('input', {
                                 attrs: {
                                     type: 'checkbox',
-                                    name: 'option5',
+                                    name: 'itemLevelCheckBox_option',
                                     disabled: 'disabled'
                                 }
                             }),
@@ -110,9 +110,9 @@ export function renderPreferencesCommonTemplate() {
                     })
                 ]
             }),
-            // textarea "Комментарий"
             createElement('div', {
                 className: ['field', 'field__description'],
+                attrs: { 'data-name': 'description' },
                 children: [
                     createElement('div', {
                         className: 'field__label',
