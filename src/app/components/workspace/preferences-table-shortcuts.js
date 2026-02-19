@@ -4,12 +4,63 @@ import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortc
 const ACTION_LABELS = { 0: 'Создать', 1: 'Заменить', 2: 'Обновить', 3: 'Удалить' };
 
 /**
+ * Создаёт элементы настроек для блока .preference__settings-data
+ * @param {Object} common - Объект с данными common (stopOnErrorCheckBox, userContextCheckBox, removeThisCheckBox)
+ * @returns {Array<HTMLElement>} - Массив DOM-элементов
+ */
+function renderSettingsItems(common) {
+    const bool = (val) => val ? 'Да' : 'Нет';
+    const item = (label, value, empty = false) => createElement('div', {
+        className: empty ? ['preference__settings-item', 'empty'] : 'preference__settings-item',
+        children: [
+            createElement('div', { text: label }),
+            createElement('div', { text: value })
+        ]
+    }).getElement();
+
+    return [
+        item('Не обрабатывать элементы в расширении при ошибке:', bool(common.stopOnErrorCheckBox)),
+        item('Запускать в контексте пользователя:', bool(common.userContextCheckBox)),
+        item('Удалить, если не применимо:', bool(common.removeThisCheckBox)),
+        item('Применить один раз:', 'Нет', true),
+        item('Применить один раз:', 'Нет', true),
+        item('Отфильтровано:', 'Нет', true),
+        item('Отключено:', 'Нет', true),
+        item('Отключено уровнем выше:', 'Нет', true),
+    ];
+}
+
+/**
+ * Обновляет блок .preference__info данными из записи с указанным индексом
+ * @param {HTMLElement} preferenceRoot - Корневой элемент .gp__preference
+ * @param {number} index - Индекс записи в localStorage
+ */
+function updatePreferenceInfo(preferenceRoot, index) {
+    if (!preferenceRoot) return;
+    const shortcuts = getShortcutsFromLocalStorage();
+    if (index == null || !shortcuts[index]) return;
+    const common = shortcuts[index].common;
+
+    const descriptionEl = preferenceRoot.querySelector('.preference__description-data');
+    if (descriptionEl) {
+        descriptionEl.textContent = common.description ?? '';
+    }
+
+    const settingsEl = preferenceRoot.querySelector('.preference__settings-data');
+    if (settingsEl) {
+        settingsEl.innerHTML = '';
+        renderSettingsItems(common).forEach(el => settingsEl.appendChild(el));
+    }
+}
+
+/**
  * Создаёт строку таблицы ярлыков
  * @param {Object} row - Данные строки (SHORTCUT_PATH, order, ACTION, TARGET_PATH или name, action, value)
  * @param {boolean} [active] - Активная строка
+ * @param {string} [namePreference='shortcuts'] - Имя таблицы предпочтений
  * @returns {ElementCreator}
  */
-function createTableRow(row, active = false) {
+function createTableRow(row, active = false, namePreference = 'shortcuts') {
     const name = row.SHORTCUT_PATH ?? row.name ?? '';
     const order = row.order ?? '';
     const actionText = row.ACTION != null
@@ -25,6 +76,12 @@ function createTableRow(row, active = false) {
                     tbody.querySelectorAll('tr').forEach((tr) => tr.classList.remove('active'));
                     event.currentTarget.classList.add('active');
                 }
+                
+                // Получаем данные common текущей записи по индексу "Очерёдность"
+                const orderIndex = row.order;
+                const preferenceRoot = event.currentTarget.closest('.gp__preference');
+                updatePreferenceInfo(preferenceRoot, orderIndex);
+                
                 document.dispatchEvent(new CustomEvent('preferences-row-select', { detail: { index: row.order } }));
             }
         },
@@ -41,15 +98,17 @@ function createTableRow(row, active = false) {
  * Рендерит таблицу ярлыков (горячих клавиш)
  * @param {Array<Object>} [rows] - Данные строк таблицы
  * @param {number} [activeIndex=0] - Индекс строки, которой задать класс active
+ * @param {string} [namePreference='shortcuts'] - Имя таблицы предпочтений
  * @returns {ElementCreator} - Элемент таблицы
  */
-export function renderPreferencesTableShortcuts(rows = [], activeIndex = 0) {
+export function renderPreferencesTableShortcuts(rows = [], activeIndex = 0, namePreference = 'shortcuts') {
     const shortcuts = getShortcutsFromLocalStorage();
+    const basic = (item) => item.basic ?? item;
     const defaultRows = shortcuts.map((item, index) => ({
-        SHORTCUT_PATH: item.SHORTCUT_PATH ?? '',
+        SHORTCUT_PATH: basic(item).SHORTCUT_PATH ?? '',
         order: index,
-        ACTION: item.ACTION,
-        TARGET_PATH: item.TARGET_PATH ?? ''
+        ACTION: basic(item).ACTION,
+        TARGET_PATH: basic(item).TARGET_PATH ?? ''
     }));
 
     const dataRows = rows.length > 0 ? rows : defaultRows;
@@ -73,7 +132,7 @@ export function renderPreferencesTableShortcuts(rows = [], activeIndex = 0) {
 
     const safeActiveIndex = Math.max(0, Math.min(activeIndex, dataRows.length - 1));
     const tbodyRows = dataRows.map((row, index) =>
-        createTableRow(row, index === safeActiveIndex)
+        createTableRow(row, index === safeActiveIndex, namePreference)
     );
 
     const table = createElement('table', {
@@ -98,6 +157,14 @@ export function renderPreferencesTableShortcuts(rows = [], activeIndex = 0) {
     });
 
     document.dispatchEvent(new CustomEvent('preferences-row-select', { detail: { index: safeActiveIndex } }));
+
+    // Автоматически заполняем .preference__info данными из записи с индексом safeActiveIndex
+    setTimeout(() => {
+        const preferenceRoot = table.getElement()?.closest('.gp__preference');
+        if (preferenceRoot && dataRows.length > 0) {
+            updatePreferenceInfo(preferenceRoot, safeActiveIndex);
+        }
+    }, 0);
 
     return table;
 }

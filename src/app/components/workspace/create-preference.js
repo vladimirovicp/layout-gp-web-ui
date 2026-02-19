@@ -1,4 +1,6 @@
 import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
+import { renderPreferencesShortcutsTemplate } from './preferences-template-shortcuts.js';
+import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
 
 /** Поля ярлыков, которые в localStorage хранятся как number */
 const SHORTCUT_NUMBER_KEYS = ['ACTION', 'TARGET_TYPE', 'LOCATION', 'WINDOW', 'ICON_INDEX'];
@@ -8,8 +10,13 @@ const SHORTCUT_NUMBER_KEYS = ['ACTION', 'TARGET_TYPE', 'LOCATION', 'WINDOW', 'IC
  * @param {HTMLElement} fieldEl - контейнер поля с data-name
  * @returns {string|number|boolean} - значение поля
  */
+function getValueElement(fieldEl) {
+    return fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea')
+        || fieldEl.querySelector('input[type="checkbox"], input[type="radio"]');
+}
+
 function getFieldValue(fieldEl) {
-    const element = fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea');
+    const element = getValueElement(fieldEl);
     if (!element) return '';
 
     const tagName = element.tagName.toLowerCase();
@@ -44,7 +51,7 @@ export function collectPreferencesFromTabBasic(tabBasicEl) {
         const name = fieldEl.getAttribute('data-name');
         if (!name) return;
         // Пропускаем декоративные элементы (например field__line)
-        const valueEl = fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea');
+        const valueEl = getValueElement(fieldEl);
         if (!valueEl) return;
         data[name] = getFieldValue(fieldEl);
     });
@@ -63,6 +70,47 @@ export function setModalCreateMode(modalEl) {
 }
 
 /**
+ * Переключает активную вкладку на tab-basic.
+ * @param {HTMLElement} modalEl - элемент .preference__modal
+ */
+export function resetActiveTabToBasic(modalEl) {
+    if (!modalEl) return;
+    const basicBtn = modalEl.querySelector('.preference__tab-button[data-tab="tab-basic"]');
+    const generalBtn = modalEl.querySelector('.preference__tab-button[data-tab="tab-general"]');
+    const basicContent = modalEl.querySelector('#tab-basic');
+    const generalContent = modalEl.querySelector('#tab-general');
+
+    if (basicBtn) basicBtn.classList.add('active');
+    if (generalBtn) generalBtn.classList.remove('active');
+    if (basicContent) basicContent.classList.add('active');
+    if (generalContent) generalContent.classList.remove('active');
+}
+
+/**
+ * Сбрасывает форму модалки к значениям по умолчанию: перерисовывает #tab-basic и #tab-general.
+ * @param {HTMLElement} modalEl - элемент .preference__modal
+ */
+export function resetModalFormToDefaults(modalEl) {
+    if (!modalEl) return;
+    resetActiveTabToBasic(modalEl);
+    const preferencesName = modalEl.getAttribute('data-preferences-name');
+
+    const tabBasic = modalEl.querySelector('#tab-basic');
+    if (tabBasic && preferencesName === 'shortcuts') {
+        tabBasic.innerHTML = '';
+        const tpl = renderPreferencesShortcutsTemplate();
+        if (tpl?.getElement) tabBasic.appendChild(tpl.getElement());
+    }
+
+    const tabGeneral = modalEl.querySelector('#tab-general');
+    if (tabGeneral) {
+        tabGeneral.innerHTML = '';
+        const tpl = renderPreferencesCommonTemplate();
+        if (tpl?.getElement) tabGeneral.appendChild(tpl.getElement());
+    }
+}
+
+/**
  * Определяет ключ localStorage по модалке (data-preferences-name) и сохраняет
  * собранные данные в localStorage. Для "shortcuts" обновляет/добавляет элемент в массив.
  * @param {HTMLElement} modalEl - элемент .preference__modal
@@ -74,32 +122,36 @@ export function savePreferencesFromModal(modalEl) {
     if (!storageKey) return;
 
     const tabBasic = modalEl.querySelector('#tab-basic');
-    const collected = collectPreferencesFromTabBasic(tabBasic);
-    if (Object.keys(collected).length === 0) return;
+    const tabGeneral = modalEl.querySelector('#tab-general');
+    const basicData = collectPreferencesFromTabBasic(tabBasic);
+    const commonData = collectPreferencesFromTabBasic(tabGeneral);
+    if (Object.keys(basicData).length === 0) return;
 
     if (storageKey === 'shortcuts') {
-        const normalized = { ...collected };
+        const normalizedBasic = { ...basicData };
         SHORTCUT_NUMBER_KEYS.forEach((key) => {
-            if (key in normalized && normalized[key] !== '') {
-                const n = Number(normalized[key]);
-                normalized[key] = Number.isNaN(n) ? normalized[key] : n;
+            if (key in normalizedBasic && normalizedBasic[key] !== '') {
+                const n = Number(normalizedBasic[key]);
+                normalizedBasic[key] = Number.isNaN(n) ? normalizedBasic[key] : n;
             }
         });
         // TARGET_TYPE: 0 (FILESYSTEM), 1 (URL), 2 (SHELL) — всегда число
-        if ('TARGET_TYPE' in normalized) {
-            const v = Number(normalized.TARGET_TYPE);
-            normalized.TARGET_TYPE = Number.isNaN(v) ? 0 : Math.max(0, Math.min(2, Math.floor(v)));
+        if ('TARGET_TYPE' in normalizedBasic) {
+            const v = Number(normalizedBasic.TARGET_TYPE);
+            normalizedBasic.TARGET_TYPE = Number.isNaN(v) ? 0 : Math.max(0, Math.min(2, Math.floor(v)));
         }
+        const normalizedCommon = { ...commonData };
         const list = getShortcutsFromLocalStorage();
         const indexAttr = modalEl.getAttribute('data-preferences-index');
         const index = indexAttr !== null && indexAttr !== '' ? parseInt(indexAttr, 10) : -1;
+        const entry = { basic: normalizedBasic, common: normalizedCommon };
         if (index >= 0 && index < list.length) {
-            list[index] = { ...list[index], ...normalized };
+            list[index] = entry;
         } else {
-            list.push(normalized);
+            list.push(entry);
         }
         saveShortcutsToLocalStorage(list);
     } else {
-        localStorage.setItem(storageKey, JSON.stringify(collected));
+        localStorage.setItem(storageKey, JSON.stringify(basicData));
     }
 }
