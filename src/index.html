@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Environment</title>
+        <title>Home</title>
     </head>
     <body>
 
@@ -328,41 +328,69 @@
                                             
                                             <div class="field__line"></div>
 
-                                            <div class="field radio" data-name='user'>
-                                                <div class="field__label-radio">Тип переменной</div>
 
-                                                <div class="field__element">
-                                                    <label class="radio__label">
-                                                      <input  type="radio" name="theme" value="true" checked>
-                                                      Пользовательская переменная
-                                                    </label>
-                                                    <label class="radio__label">
-                                                      <input type="radio" name="theme" value="false">
-                                                      Системная переменная
-                                                    </label>
-                                                  </div>
+                                            <div class="environment__group-variable">
+                                                <div class="field radio" data-name='user'>
+                                                    <div class="field__label-radio">Тип переменной</div>
+    
+                                                    <div class="field__element">
+                                                        <label class="radio__label">
+                                                          <input  type="radio" name="theme" value="true" checked>
+                                                          Пользовательская переменная
+                                                        </label>
+                                                        <label class="radio__label">
+                                                          <input type="radio" name="theme" value="false">
+                                                          Системная переменная
+                                                        </label>
+                                                      </div>
+                                                </div>
+    
+                                                <div class="field__line"></div>
+
+                                                <div class="field__wrapper">
+                                                    <div class="field" data-name='name'>
+                                                        <div class="field__label">Имя:</div>
+                                                        <div class="field__element">
+                                                            <input type="text" />
+                                                        </div>
+                                                    </div> 
+
+                                                    <div class="field field__text">
+                                                        <span>или</span>
+                                                    </div>
+
+                                                    <div class="field__checkbox-group">
+                                                        <div class="field field__checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="path">
+                                                                <span class="field__label-checkbox">PATCH</span>
+                                                            </label>
+                                                        </div>
+        
+                                                        <div class="field field__checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="partial">
+                                                                <span class="field__label-checkbox">Частичный</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                             </div>
 
-                                            <div class="field__line"></div>
-
-
-                                            <div class="field field__name-path" data-name='name'>
-                                                <div class="field__label">Имя:</div>
-                                                <div class="field__element">
-                                                    <input type="text" />
-                                                </div>
-                                            </div> 
-
                                             <div class="field field__input" data-name='valueLineEdit'>
-                                                <div class="field__label">Значение:</div>
+                                                <div class="field__label environment__field-label">Значение:</div>
                                                 <div class="field__element">
                                                     <input type="text" />
                                                 </div>
                                             </div> 
-                                            
 
+                                            <div class="field__details">
+                                                <div class="field__details-label">Детали</div>
+                                                <div class="field__details-content">Создание добавит переменную к указанному окружению. Если она уже существует, то значение не будет меняться.</div>
+                                            </div>
 
-                                            
                                         </div>
                                         <div id="tab-general" class="tab-content">
 

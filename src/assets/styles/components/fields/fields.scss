@@ -98,6 +98,20 @@
         }
     }
 
+    &__details{
+        margin-top: 10px;
+
+        &-label{
+            padding-bottom: 10px;
+        }
+
+        &-content{
+            padding: 5px;
+            border: 1px solid #D1D1D1;
+            min-height: 100px;
+        }
+    }
+
     &.radio{
         flex-direction: column;
         height: auto;
@@ -138,6 +152,42 @@
             align-items: center;
             gap: 5px;
             cursor: pointer;
+        }
+    }
+}
+
+.environment{
+
+    &__field-label{
+        width: 92px;
+    }
+
+    &__group{
+        &-variable{
+            .field{
+                &__wrapper{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-bottom: 10px;
+
+                    .field__label{
+                        width: 92px;
+                    }
+                    .field__element{
+                        width: 150px;
+                    }
+                }
+
+                &__checkbox-group{
+                    .field__checkbox{
+                        height: 16px;
+                    }
+                }
+
+
+            }
+        
         }
     }
 }
