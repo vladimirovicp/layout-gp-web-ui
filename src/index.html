@@ -328,68 +328,71 @@
                                             
                                             <div class="field__line"></div>
 
+                                        <!-- Путь -->
 
-                                            <div class="environment__group-variable">
-                                                <div class="field radio" data-name='user'>
-                                                    <div class="field__label-radio">Тип переменной</div>
-    
-                                                    <div class="field__element">
-                                                        <label class="radio__label">
-                                                          <input  type="radio" name="theme" value="true" checked>
-                                                          Пользовательская переменная
-                                                        </label>
-                                                        <label class="radio__label">
-                                                          <input type="radio" name="theme" value="false">
-                                                          Системная переменная
-                                                        </label>
-                                                      </div>
-                                                </div>
-    
-                                                <div class="field__line"></div>
-
-                                                <div class="field__wrapper">
-                                                    <div class="field" data-name='name'>
-                                                        <div class="field__label">Имя:</div>
-                                                        <div class="field__element">
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div> 
-
-                                                    <div class="field field__text">
-                                                        <span>или</span>
-                                                    </div>
-
-                                                    <div class="field__checkbox-group">
-                                                        <div class="field field__checkbox">
-                                                            <label>
-                                                                <input type="checkbox" name="path">
-                                                                <span class="field__label-checkbox">PATCH</span>
-                                                            </label>
-                                                        </div>
-        
-                                                        <div class="field field__checkbox">
-                                                            <label>
-                                                                <input type="checkbox" name="partial">
-                                                                <span class="field__label-checkbox">Частичный</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="field field__input" data-name='valueLineEdit'>
-                                                <div class="field__label environment__field-label">Значение:</div>
+                                            <div class="field field__input field__input--path" data-name="path">
+                                                <div class="field__label">Путь:</div>
                                                 <div class="field__element">
                                                     <input type="text" />
                                                 </div>
-                                            </div> 
+                                            </div>  
 
-                                            <div class="field__details">
-                                                <div class="field__details-label">Детали</div>
-                                                <div class="field__details-content">Создание добавит переменную к указанному окружению. Если она уже существует, то значение не будет меняться.</div>
+                                            <div class="field__label-global">Атрибуты</div>
+
+                                            <div class="field field__checkbox h-auto" data-name="readOnly">
+                                                <label>
+                                                    <input type="checkbox" name="readOnly">
+                                                    <span class="field__label-checkbox">Только для чтения</span>
+                                                </label>
                                             </div>
+                                            <div class="field field__checkbox h-auto" data-name="hidden">
+                                                <label>
+                                                    <input type="checkbox" name="hidden">
+                                                    <span class="field__label-checkbox">Скрытый</span>
+                                                </label>
+                                            </div>
+                                            <div class="field field__checkbox h-auto" data-name="archive">
+                                                <label>
+                                                    <input type="checkbox" name="archive">
+                                                    <span class="field__label-checkbox">Архивный</span>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="field__line"></div>
+
+                                            <div class="field field__checkbox" data-name="deleteThisFolder">
+                                                <label>
+                                                    <input type="checkbox" name="deleteThisFolder" disabled>
+                                                    <span class="field__label-checkbox">Удалить папку (если пустая)</span>
+                                                </label>
+                                            </div>
+                                            <div class="field field__checkbox h-auto" data-name="recursiveDelete">
+                                                <label>
+                                                    <input type="checkbox" name="recursiveDelete" disabled>
+                                                    <span class="field__label-checkbox">Рекурсивное удаление папок (если пустые)</span>
+                                                </label>
+                                            </div>
+                                            <div class="field field__checkbox h-auto" data-name="deleteAllFiles">
+                                                <label>
+                                                    <input type="checkbox" name="deleteAllFiles" disabled>
+                                                    <span class="field__label-checkbox">Удалить все файлы в папке(ах)</span>
+                                                </label>
+                                            </div>
+                                            <div class="field field__checkbox h-auto" data-name="allowDeletionOfReadOnly">
+                                                <label>
+                                                    <input type="checkbox" name="allowDeletionOfReadOnly" disabled>
+                                                    <span class="field__label-checkbox">Разрешить удаление файлов/папок только для чтения</span>
+                                                </label>
+                                            </div>
+                                            <div class="field field__checkbox h-auto" disabled data-name="ignoreErrors">
+                                                <label>
+                                                    <input type="checkbox" name="ignoreErrors" disabled>
+                                                    <span class="field__label-checkbox">Игнорировать ошибки для файлов/папок, которые не могут быть удалены</span>
+                                                </label>
+                                            </div>
+
+
 
                                         </div>
                                         <div id="tab-general" class="tab-content">
