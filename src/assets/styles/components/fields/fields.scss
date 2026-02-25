@@ -3,6 +3,10 @@
     height: 25px;
     margin-bottom: 5px;
 
+    &.h-auto{
+        height: auto;
+    }
+
     &__label{
         width: 144px;
         display: flex;
@@ -12,6 +16,10 @@
 
         &-radio{
             padding-bottom: 10px;
+        }
+
+        &-global{
+            padding-bottom: 5px;
         }
     }
 
@@ -68,6 +76,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            cursor: pointer;
 
             input:disabled + .field__label-checkbox {
                 color: #aaa;
