@@ -28,6 +28,12 @@
         height: 1px;
         background: #d1d1d1;
         margin: 10px 0;
+
+        &-vertical{
+            width: 1px;
+            background: #d1d1d1;
+        }
+
     }
 
     &__element{
@@ -137,6 +143,20 @@
             flex-direction: column;
         }
 
+        &.disabled{
+            .field__label-radio{
+                color: #8B8D8F;
+            }
+
+            .radio__label{
+                color: #8B8D8F;
+                cursor: not-allowed;
+            }
+        }
+
+
+
+
         /*
         input[type="radio"] {
             appearance: none;
@@ -168,6 +188,38 @@
             align-items: center;
             gap: 5px;
             cursor: pointer;
+        }
+    }
+
+    &__group{
+        &_one{
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            .field__label{
+                width: auto;
+                padding-right: 10px; 
+            }
+
+            &.field__group-disk-name{
+                align-items: end;
+
+                .select-half{
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        &-equal{
+            .field{
+                width: 45%;
+            }
+        }
+    }
+
+    &.select{
+        &-half{
+            width: 45%;
         }
     }
 }
