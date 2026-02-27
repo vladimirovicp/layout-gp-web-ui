@@ -329,109 +329,27 @@
                                             <div class="field__line"></div>
                                             
                                             <div class="field field__input field__input--path" data-name='path'>
-                                                <div class="field__label">Путь:</div>
+                                                <div class="field__label">Имя общего сетевого ресурса:</div>
                                                 <div class="field__element">
                                                     <input type="text" />
                                                 </div>
                                             </div>  
 
-
-                                            <div class="field__group_one" data-name="reconnect">
-                                                <div class="field field__checkbox">
-                                                    <label>
-                                                        <span class="field__label-checkbox">Переподключиться:</span>
-                                                        <input type="checkbox" name="reconnect">
-                                                    </label>
+                                            <div class="field field__input field__input--path" data-name='path'>
+                                                <div class="field__label">Путь к каталогу:</div>
+                                                <div class="field__element">
+                                                    <input type="text" />
                                                 </div>
-    
-                                                <div class="field field__input" data-name='name'>
-                                                    <div class="field__label">Название:</div>
-                                                    <div class="field__element">
-                                                        <input type="text" />
-                                                    </div>
-                                                </div> 
-                                            </div>
+                                            </div>  
+
+                                            <div class="field field__comment">
+                                                <div class="field__label">Комментарий:</div>
+                                                <div class="field__element">
+                                                    <textarea name="comment"></textarea>
+                                                </div>
+                                            </div>  
 
                                             <div class="field__line"></div>
-
-                                            <div class="field__group_one field__group-disk-name"  data-name='diskName'>
-                                                <div class="field radio">
-                                                    <div class="field__label-radio">Имя диска</div>
-
-                                                    <div class="field__element">
-                                                        <label class="radio__label">
-                                                        <input  type="radio" name="driveLetter" value="drive" checked>
-                                                        Использовать
-                                                        </label>
-                                                        <label class="radio__label">
-                                                        <input type="radio" name="driveLetter" value="firstAvailable">
-                                                        Первый доступ, начиная с:
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="field select select-half" data-name='driveComboBox'>
-                                                    <div class="field__element">
-                                                        <select name="select">
-                                                            <option value="A" selected>A:</option>
-                                                            <option value="C">C:</option>
-                                                            <option value="D">D:</option>
-                                                            <option value="E">E:</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="field__line"></div>
-
-
-                                            <div class="field__group_one field__group-equal">
-                                                <div class="field radio disabled" data-name='thisDrive'>
-                                                    <div class="field__label-radio">Скрыть/Показать диск</div>
-
-                                                    <div class="field__element">
-                                                        <label class="radio__label">
-                                                        <input  type="radio" name="theme" value="0" disabled>
-                                                        Без изменений
-                                                        </label>
-                                                        <label class="radio__label">
-                                                        <input type="radio" name="theme" value="1" disabled>
-                                                        Скрыть диск
-                                                        </label>
-                                                        <label class="radio__label">
-                                                            <input type="radio" name="theme" value="2" disabled>
-                                                            Показать диск
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="field__line-vertical"></div>
-
-                                                <div class="field radio" data-name='allDrives'>
-                                                    <div class="field__label-radio">Скрыть/Показать все диски</div>
-
-                                                    <div class="field__element">
-                                                        <label class="radio__label">
-                                                            <input  type="radio" name="theme" value="0" checked>
-                                                            Без изменений
-                                                            </label>
-                                                            <label class="radio__label">
-                                                            <input type="radio" name="theme" value="1">
-                                                            Скрыть диск
-                                                            </label>
-                                                            <label class="radio__label">
-                                                                <input type="radio" name="theme" value="2">
-                                                                Показать диск
-                                                            </label>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="field__line"></div>
-
-
 
 
                                         </div>
