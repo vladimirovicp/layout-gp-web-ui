@@ -305,7 +305,7 @@
                                 </div>
 
                                 <div class="preference__modal-content">
-                                    <div class="preference__modal-tabs">
+                                    <div class="preference__modal-tabs preference__modal-tabs-big">
                                         <div class="tab-buttons">
                                             <div class="preference__tab-button active" data-tab="tab-basic">Основные настройки</div>
                                             <div class="preference__tab-button" data-tab="tab-general">Общие</div>
@@ -328,7 +328,7 @@
                                             
                                             <div class="field__line"></div>
                                             
-                                            <div class="field field__input field__input--path" data-name='path'>
+                                            <div class="field field__input field__input--path" data-name='shareName'>
                                                 <div class="field__label">Имя общего сетевого ресурса:</div>
                                                 <div class="field__element">
                                                     <input type="text" />
@@ -342,7 +342,7 @@
                                                 </div>
                                             </div>  
 
-                                            <div class="field field__comment">
+                                            <div class="field field__comment" data-name='comment'>
                                                 <div class="field__label">Комментарий:</div>
                                                 <div class="field__element">
                                                     <textarea name="comment"></textarea>
@@ -351,6 +351,71 @@
 
                                             <div class="field__line"></div>
 
+                                            <div class="field__label-global">Модификаторы действий:</div>
+
+                                            
+                                            <div class="field field__checkbox" data-name="updateAllRegularShares">
+                                                <label>
+                                                    <input type="checkbox" name="updateAllRegularShares" disabled>
+                                                    <span class="field__label-checkbox">Обновление всех регулярных общих сетевых ресурсов</span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="field field__checkbox h-auto" data-name="updateAllHiddenShares">
+                                                <label>
+                                                    <input type="checkbox" name="recursiveDelete" disabled>
+                                                    <span class="field__label-checkbox">Обновление всех скрытых не административных общих сетевых ресурсов</span>
+                                                </label>
+                                            </div>
+                                            <div class="field field__checkbox h-auto" data-name="updateAllAdministrativeDrives">
+                                                <label>
+                                                    <input type="checkbox" name="updateAllAdministrativeDrives" disabled>
+                                                    <span class="field__label-checkbox">Обновление всех административных дисков общих сетевых ресурсов</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="field__line"></div>
+
+                                            <div class="field radio" data-name='LIMIT_USERS'>
+                                                <div class="field__label-radio">Лимит пользователей:</div>
+
+                                                <div class="field__element">
+                                                    <label class="radio__label">
+                                                        <input  type="radio" name="LIMIT_USERS" value="NO_CHANGE" checked>
+                                                        Без изменений
+                                                        </label>
+                                                        <label class="radio__label">
+                                                        <input type="radio" name="LIMIT_USERS" value="MAX_ALLOWED">
+                                                        Максимально допустимое
+                                                        </label>
+                                                        <label class="radio__label">
+                                                            <input type="radio" name="LIMIT_USERS" value="SET_LIMIT">
+                                                            <span class="text">Разрешение на количество пользователей</span>
+                                                            <div class="field__element">
+                                                                <input type="text" />
+                                                            </div>
+                                                        </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="field radio" data-name='ACCESS_BASED_ENUMERATION'>
+                                                <div class="field__label-radio">Перечисление на основе доступа:</div>
+
+                                                <div class="field__element">
+                                                    <label class="radio__label">
+                                                        <input  type="radio" name="ACCESS_BASED_ENUMERATION" value="NO_CHANGE" checked>
+                                                        Без изменений
+                                                        </label>
+                                                        <label class="radio__label">
+                                                        <input type="radio" name="ACCESS_BASED_ENUMERATION" value="ENABLE">
+                                                        Включить
+                                                        </label>
+                                                        <label class="radio__label">
+                                                            <input type="radio" name="ACCESS_BASED_ENUMERATION" value="DISABLE">
+                                                            Отключить
+                                                        </label>
+                                                </div>
+                                            </div>                                            
 
                                         </div>
                                         <div id="tab-general" class="tab-content">
