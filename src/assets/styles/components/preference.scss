@@ -191,6 +191,10 @@
             &-tabs{
                 height: 492px;
 
+                &-big{
+                    height: 560px; 
+                }
+
                 .tab-buttons{
                     display: flex;
                     height: 26px;
