@@ -344,10 +344,4 @@ export default {
       up: 'Up'
     },
   
-    // Preferences
-    preferences: {
-      dialog: 'Preferences dialog',
-      general: 'General',
-      common: 'Common'
-    }
   };

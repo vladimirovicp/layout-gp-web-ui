@@ -7,7 +7,10 @@
     "start": "vite --open",
     "dev": "vite --open",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:scss": "npm run build:scss:min && npm run build:scss:expanded",
+    "build:scss:min": "sass src/assets/styles/main.scss dist/css/main.min.css --style=compressed --no-source-map",
+    "build:scss:expanded": "sass src/assets/styles/main.scss dist/css/main.css --style=expanded --no-source-map"
   },
   "devDependencies": {
     "sass": "^1.97.1",

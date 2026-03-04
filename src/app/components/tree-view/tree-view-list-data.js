@@ -15,7 +15,7 @@ export const treeViewList = [
                 icon: 'ico-computer',
                 children: [
                     {
-                        title: 'Администранивные шаблоны',
+                        title: 'Административные шаблоны',
                         type: 'folder',
                         opened: false,
                         icon: 'ico-folder',
@@ -88,7 +88,7 @@ export const treeViewList = [
                 icon: 'ico-user',
                 children: [
                     {
-                        title: t('adminTemplates'),
+                        title: t('policies.adminTemplates'),
                         type: 'folder',
                         opened: false,
                         icon: 'ico-folder'

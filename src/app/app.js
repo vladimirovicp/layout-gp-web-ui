@@ -144,7 +144,8 @@ if(container){
     const header = renderHeader(container);
     treeViewState.setHeader(header);
     const { main, treeView, divider, workspace } = renderMain(container, treeViewState);
-    const footer = renderFooter(container);
+    //const footer = renderFooter(container);
+    renderFooter(container)
 
 
 

@@ -1,34 +1,53 @@
-.btn{
-    border: 1px solid #d1d1d1;
-    width: 80px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+.gp__container{
 
-    &-oк{
-        border: 1px solid #297FB0;
+    .btn{
+        border: 1px solid #d1d1d1;
+        width: 80px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &-oк{
+            border: 1px solid #297FB0;
+        }
     }
+
+    .button{
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        
+        font: inherit;
+        color: inherit;
+        
+        outline: none;
+        box-shadow: none;
+        
+        color: #D1D1D1;
+    
+
+        &.active{
+            cursor: pointer;
+            color: #363636;
+        }
+
+    }
+
 }
 
-.button{
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    
-    font: inherit;
-    color: inherit;
-    
-    outline: none;
-    box-shadow: none;
-    
-    color: #D1D1D1;
-   
+@media (hover: hover){
+    .gp__container{
+        .button{
+            &.active{
+                transition: color 0.3s ease-in-out;
+                &:hover{
+                    color: #297FB0;
+                }
+            }
 
-    &.active{
-        cursor: pointer;
-        color: #363636;
-    }
+        }
+    } 
 }

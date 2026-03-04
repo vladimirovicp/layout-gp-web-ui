@@ -1,7 +1,10 @@
 .gp {
     &__container {
         background-color: #fff;
-        
+        width: 90%;
+        height: 90vh;
+        margin: 0 auto;
+        margin-top: 5vh;
     }
 
     &__main {
@@ -26,106 +29,109 @@
     }
 }
 
-.tree-view {
-    padding-top: 24px;
-    padding-left: 24px;
-    width: 432px;
-    height: 100%;
-    overflow: auto;
+.gp__container{
 
-    ul{
-         list-style-type: none;
-         padding-left: 14px;
-         li{
-            padding-top: 8px;
-            white-space: nowrap; 
-         }
-    }
-
-    .tree-item{
-        display: flex;
-        align-items: center;
-        height: 16px;
-        cursor: pointer;
-        transition: color 0.3s ease;
-        &.active{
-            color: #297FB0;
-        }
-    }
-
-    .icon-switcher{
-        background-image: url(../img/svg/arrow.svg);
-        width: 12px;
-        height: 10px;
-        display: flex;
-        margin-right: 8px;
-        flex-shrink: 0
-    }
-
-    .icon{
-        width: 16px;
-        height: 16px;
-        display: flex;
-        margin-right: 8px;
-        flex-shrink: 0;
-        &.ico-computer{
-            background-image: url(../img/svg/ico/computer.svg);
-        }
-
-        &.ico-folder{
-            background-image: url(../img/svg/ico/folder.svg);
-        }
-
-        &.ico-user{
-            background-image: url(../img/svg/ico/user.svg);
-        }
-
-        &.ico-file{
-            background-image: url(../img/svg/ico/file.svg);
-        }
-    }
-
-
-    .view{
-        &.opened{
-            .icon-switcher{
-                transform: rotate(0deg);
-            }
-            
-        }
-
-        &.closed{
-            .icon-switcher{
-                transform: rotate(-90deg);
-            }
-
-            .tree-view__list{
-                display: none;
-            }
-        }
-    }
-
-
-
-
-}
-
-.divider{
-    width: 5px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    
-    cursor: col-resize;
-
-    &__line{
-        background-color: #d1d1d1;
-        width: 1px;
+    .tree-view {
+        padding-top: 24px;
+        padding-left: 24px;
+        width: 432px;
         height: 100%;
+        overflow: auto;
+
+        ul{
+            list-style-type: none;
+            padding-left: 14px;
+            li{
+                padding-top: 8px;
+                white-space: nowrap; 
+            }
+        }
+
+        .tree-item{
+            display: flex;
+            align-items: center;
+            height: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            &.active{
+                color: #297FB0;
+            }
+        }
+
+        .icon-switcher{
+            background-image: url(../img/svg/arrow.svg);
+            width: 12px;
+            height: 10px;
+            display: flex;
+            margin-right: 8px;
+            flex-shrink: 0
+        }
+
+        .icon{
+            width: 16px;
+            height: 16px;
+            display: flex;
+            margin-right: 8px;
+            flex-shrink: 0;
+            &.ico-computer{
+                background-image: url(../img/svg/ico/computer.svg);
+            }
+
+            &.ico-folder{
+                background-image: url(../img/svg/ico/folder.svg);
+            }
+
+            &.ico-user{
+                background-image: url(../img/svg/ico/user.svg);
+            }
+
+            &.ico-file{
+                background-image: url(../img/svg/ico/file.svg);
+            }
+        }
+
+
+        .view{
+            &.opened{
+                .icon-switcher{
+                    transform: rotate(0deg);
+                }
+                
+            }
+
+            &.closed{
+                .icon-switcher{
+                    transform: rotate(-90deg);
+                }
+
+                .tree-view__list{
+                    display: none;
+                }
+            }
+        }
+
+
+
+
     }
-}
 
+    .divider{
+        width: 5px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        
+        cursor: col-resize;
 
-.workspace{
-    flex: 1 1 0px;
+        &__line{
+            background-color: #d1d1d1;
+            width: 1px;
+            height: 100%;
+        }
+    }
+
+    .workspace{
+        flex: 1 1 0px;
+    }
+
 }

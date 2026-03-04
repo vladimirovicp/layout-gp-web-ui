@@ -23,7 +23,6 @@ function renderSettingsItems(common) {
         item('Запускать в контексте пользователя:', bool(common.userContextCheckBox)),
         item('Удалить, если не применимо:', bool(common.removeThisCheckBox)),
         item('Применить один раз:', 'Нет', true),
-        item('Применить один раз:', 'Нет', true),
         item('Отфильтровано:', 'Нет', true),
         item('Отключено:', 'Нет', true),
         item('Отключено уровнем выше:', 'Нет', true),

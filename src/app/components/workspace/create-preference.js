@@ -1,39 +1,10 @@
 import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
 import { renderPreferencesShortcutsTemplate } from './preferences-template-shortcuts.js';
 import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
+import { getValueElement, getFieldValue } from '../../util/form-utils.js';
 
 /** Поля ярлыков, которые в localStorage хранятся как number */
 const SHORTCUT_NUMBER_KEYS = ['ACTION', 'TARGET_TYPE', 'LOCATION', 'WINDOW', 'ICON_INDEX'];
-
-/**
- * Получает значение из элемента поля (input, select, textarea, checkbox).
- * @param {HTMLElement} fieldEl - контейнер поля с data-name
- * @returns {string|number|boolean} - значение поля
- */
-function getValueElement(fieldEl) {
-    return fieldEl.querySelector('.field__element input, .field__element select, .field__element textarea')
-        || fieldEl.querySelector('input[type="checkbox"], input[type="radio"]');
-}
-
-function getFieldValue(fieldEl) {
-    const element = getValueElement(fieldEl);
-    if (!element) return '';
-
-    const tagName = element.tagName.toLowerCase();
-    const type = (element.type || '').toLowerCase();
-
-    if (tagName === 'select') {
-        return element.value;
-    }
-    if (tagName === 'input' && (type === 'checkbox' || type === 'radio')) {
-        return element.checked;
-    }
-    if (tagName === 'input' && type === 'number') {
-        const v = element.value;
-        return v === '' ? '' : Number(v);
-    }
-    return element.value;
-}
 
 /**
  * Собирает данные из вкладки #tab-basic: обходит элементы с data-name,
