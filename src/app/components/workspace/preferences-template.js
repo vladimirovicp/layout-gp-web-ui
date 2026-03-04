@@ -1,4 +1,5 @@
 import { createElement } from '../../util/element-creator.js';
+import { resizable } from '../../util/resizable.js';
 import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
 import { renderPreferencesTableShortcuts } from './preferences-table-shortcuts.js';
 import { savePreferencesFromModal, resetModalFormToDefaults } from './create-preference.js';
@@ -213,6 +214,16 @@ export function renderPreferencesTemplate() {
             }
         });
     }
+
+    // Инициализация resizable для preference__divider после добавления в DOM
+    const dividerElement = rootEl.querySelector('.preference__divider');
+    const infoElement = rootEl.querySelector('.preference__info');
+    const containerElement = rootEl;
+    requestAnimationFrame(() => {
+        if (dividerElement && infoElement && containerElement) {
+            resizable(dividerElement, infoElement, containerElement, { minWidth: 100 });
+        }
+    });
 
     return preference;
 }
