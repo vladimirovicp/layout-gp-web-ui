@@ -30,7 +30,7 @@ export function treeView(){
                     console.log(item);
 
                 } else{
-                    console.log('Error treeViev');
+                    console.log('Error treeView');
                 }
 
 
