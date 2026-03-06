@@ -10,9 +10,13 @@
     "preview": "vite preview",
     "build:scss": "npm run build:scss:min && npm run build:scss:expanded",
     "build:scss:min": "sass src/assets/styles/main.scss dist/css/main.min.css --style=compressed --no-source-map",
-    "build:scss:expanded": "sass src/assets/styles/main.scss dist/css/main.css --style=expanded --no-source-map"
+    "build:scss:expanded": "sass src/assets/styles/main.scss dist/css/main.css --style=expanded --no-source-map",
+    "build:js": "npm run build:js:expanded && npm run build:js:min",
+    "build:js:min": "esbuild src/app/app.js --bundle --minify --format=iife --outfile=dist/js/app.min.js",
+    "build:js:expanded": "esbuild src/app/app.js --bundle --format=iife --outfile=dist/js/app.js"
   },
   "devDependencies": {
+    "esbuild": "^0.27.3",
     "sass": "^1.97.1",
     "vite": "^7.2.4"
   }

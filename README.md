@@ -4,3 +4,13 @@
 * [2.2.1.17.1 Атрибуты, специфичные для элемента](./doc/Спецификация%20Microsoft%20MS-GPPref/2.2.1.17.1%20Атрибуты,%20специфичные%20для%20элемента%20(Element-Specific%20Attributes).md)
 
 * [Редактирование объекта групповой политики](https://docs.inno.tech/ru/directory-service/latest/admin-guide/usage/dsm-gpo/dsm-gpo-edit/)
+
+
+---
+
+```js
+export function initApp() {
+    const container = document.getElementById('gp__container');
+    ...
+}
+```
