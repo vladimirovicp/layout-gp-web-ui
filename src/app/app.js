@@ -41,9 +41,12 @@ const treeViewState = {
 
         this.selectedItem = { item, element };
 
+        console.log('item', item);
+        console.log('element', element);
+
         const template = item.template;
 
-        //console.log(template);
+        
 
         if(template === 'preferences'){
 
