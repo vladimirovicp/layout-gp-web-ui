@@ -41,13 +41,16 @@ const treeViewState = {
 
         this.selectedItem = { item, element };
 
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         console.log('item', item);
         console.log('element', element);
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         const template = item.template;
 
         
-
         if(template === 'preferences'){
 
             const namePreference = item.name;
