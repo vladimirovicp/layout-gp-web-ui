@@ -14,26 +14,26 @@ export const treeViewList = [
         icon: null,
         children: [
             {
-                title: 'Компьютер',
+                title: t('policies.machine'),
                 type: 'folder',
                 opened: true,
                 icon: 'ico-computer',
                 children: [
                     {
-                        title: 'Административные шаблоны',
+                        title: t('policies.adminTemplates'),
                         type: 'folder',
                         opened: false,
                         icon: 'ico-folder',
                         children: machineCategories
                     },
                     {
-                        title: 'Настройки',
+                        title: t('preferences.title'),
                         type: 'folder',
                         opened: true,
                         icon: 'ico-folder',
                         children: [
                             {
-                                title: 'Настройки системы',
+                                title: t('preferences.systemSettings'), //'Настройки системы',  
                                 type: 'folder',
                                 opened: true,
                                 icon: 'ico-folder',

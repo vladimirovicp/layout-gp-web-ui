@@ -141,6 +141,8 @@ export default {
 
     // Настройки (Preferences)
     preferences: {
+      title: 'Preferences',
+      systemSettings: 'System settings',
       environment: 'Environment',
       files: 'Files',
       folders: 'Folders',
