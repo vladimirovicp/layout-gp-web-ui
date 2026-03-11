@@ -1,5 +1,10 @@
 import { t } from '../../locales/translations.js';
 import { treepreferences } from './tree-view-preferences.js';
+import { convertPolicySection } from './policy-converter.js';
+import policyData from './policy-en.json';
+
+const machineCategories = convertPolicySection(policyData.Machine);
+const userCategories = convertPolicySection(policyData.User);
 
 export const treeViewList = [
     {
@@ -19,36 +24,7 @@ export const treeViewList = [
                         type: 'folder',
                         opened: false,
                         icon: 'ico-folder',
-                        children: [
-                            {
-                                title: 'Система Alt',
-                                type: 'folder',
-                                opened: false,
-                                icon: 'ico-folder',
-                                children: [
-                                    {
-                                        title: 'Безопасность',
-                                        type: 'file',
-                                        icon: 'ico-folder'
-                                    },
-                                    {
-                                        title: 'Виртуализация',
-                                        type: 'file',
-                                        icon: 'ico-folder'
-                                    },
-                                    {
-                                        title: 'Графическая подсистема',
-                                        type: 'file',
-                                        icon: 'ico-folder'
-                                    },
-                                    {
-                                        title: '...',
-                                        type: 'file',
-                                        icon: 'ico-folder'
-                                    }
-                                ]
-                            }
-                        ]
+                        children: machineCategories
                     },
                     {
                         title: 'Настройки',
@@ -91,7 +67,8 @@ export const treeViewList = [
                         title: t('policies.adminTemplates'),
                         type: 'folder',
                         opened: false,
-                        icon: 'ico-folder'
+                        icon: 'ico-folder',
+                        children: userCategories
                     },
                     {
                         title: 'Настройки',
