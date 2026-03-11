@@ -2,18 +2,28 @@
  * Рекурсивно преобразует узел категории из policy-en.json
  * в формат узла дерева { title, type, opened, icon, children }.
  * @param {Object} categoryNode - узел { category, policies, inherited }
- * @returns {Object} - узел дерева типа folder
+ * @returns {Object|null} - узел дерева типа folder или null, если категория пуста
  */
 function convertPolicyCategory(categoryNode) {
+    const hasInherited = categoryNode.inherited && categoryNode.inherited.length > 0;
+    const hasPolicies = categoryNode.policies && Object.keys(categoryNode.policies).length > 0;
+
+    if (!hasInherited && !hasPolicies) {
+        return null;
+    }
+
     const children = [];
 
-    if (categoryNode.inherited && categoryNode.inherited.length > 0) {
+    if (hasInherited) {
         for (const subCategory of categoryNode.inherited) {
-            children.push(convertPolicyCategory(subCategory));
+            const converted = convertPolicyCategory(subCategory);
+            if (converted !== null) {
+                children.push(converted);
+            }
         }
     }
 
-    if (categoryNode.policies) {
+    if (hasPolicies) {
         for (const [key, policy] of Object.entries(categoryNode.policies)) {
             children.push({
                 title: policy.displayName,
@@ -42,5 +52,7 @@ function convertPolicyCategory(categoryNode) {
  */
 export function convertPolicySection(section) {
     if (!section || !section.categories) return [];
-    return section.categories.map(cat => convertPolicyCategory(cat));
+    return section.categories
+        .map(cat => convertPolicyCategory(cat))
+        .filter(cat => cat !== null);
 }
