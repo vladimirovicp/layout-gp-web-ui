@@ -1,0 +1,36 @@
+.gp{
+    &__admx{
+        &-wrapper{
+            padding: 20px;
+        }
+
+        &-settings{
+            .title{
+                padding-bottom: 20px;   
+            }
+        }
+
+        &-state-policy{
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+
+            &-title{
+                padding-bottom: 10px;
+            }
+
+            label{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                cursor: pointer;
+                padding-bottom: 5px;
+            }
+        }
+
+        &-radio{
+
+        }
+
+    }
+}
