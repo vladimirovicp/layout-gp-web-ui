@@ -1,0 +1,52 @@
+.workspace{
+    .gp__list-children{
+        flex: 1;
+        padding: 20px;
+
+        &__list{
+            list-style-type: none;
+        }
+
+        &__item{
+            padding-bottom: 10px;
+        }
+
+        &-wrapper{
+            
+            display: flex;
+            height: 100%;
+        }
+
+        &-help{
+            width: 0;
+            //border-left: none;
+            height: 100%;
+            //padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: width 0.3s ease, padding 0.3s ease, border-left 0.3s ease;
+
+            padding: 20px 0;
+            border-left: 1px solid #d1d1d1;
+
+            &.is-open{
+                width: 432px;
+                padding: 20px;
+                border-left: 1px solid #d1d1d1;
+            }
+
+            .title{
+                font-weight: 600;
+                white-space: nowrap;
+                padding-bottom: 20px;
+            }
+
+            .content{
+                min-width: 392px;
+            }
+            
+        }
+
+    }
+}
+
