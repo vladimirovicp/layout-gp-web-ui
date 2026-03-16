@@ -1,5 +1,11 @@
 .gp {
 
+
+    &__container {
+        min-width: 1200px;
+    }
+
+
     &__main {
         width: 100%;
         height: calc( 100% - 64px - 48px );
@@ -22,6 +28,12 @@
 
         &-help{
             margin-left: auto;
+        }
+
+        &-admx{
+            padding: 0 16px;
+            display: flex;
+            gap: 20px;  
         }
     }
 }
