@@ -202,32 +202,84 @@
             </div>
             <div class="workspace">
                 <div class="gp__admx-wrapper">
-                    <div class="gp__admx-settings">
+                    <div class="gp__admx">
+                        <div class="gp__admx-settings">
 
-                        <div class="title">Политика: <span class="title__name">Разрешения для /bin/su</span></div>
-                        <div class="gp__admx-state-policy-title">Состояние политики:</div>
-                        <div class="gp__admx-state-policy">
-                            <label class="gp__admx-radio">
-                                <input type="radio" name="admx-state" value="not-configured" checked>
-                                <span>Не сконфигурировано</span>
-                            </label>
-                            <label class="gp__admx-radio">
-                                <input type="radio" name="admx-state" value="enabled">
-                                <span>Включено</span>
-                            </label>
-                            <label class="gp__admx-radio">
-                                <input type="radio" name="admx-state" value="disabled">
-                                <span>Отключено</span>
-                            </label>
+                            <div class="title">Политика: <span class="title__name">Разрешения для /bin/su</span></div>
+                            <div class="gp__admx-state-policy-title">Состояние политики:</div>
+                            <div class="gp__admx-state-policy">
+                                <label class="gp__admx-radio">
+                                    <input type="radio" name="admx-state" value="not-configured" checked>
+                                    <span>Не сконфигурировано</span>
+                                </label>
+                                <label class="gp__admx-radio">
+                                    <input type="radio" name="admx-state" value="enabled">
+                                    <span>Включено</span>
+                                </label>
+                                <label class="gp__admx-radio">
+                                    <input type="radio" name="admx-state" value="disabled">
+                                    <span>Отключено</span>
+                                </label>
+                            </div>
+    
+                            <div class="field__line"></div>
+        
+                        </div>
+    
+                        <div class="gp__admx-info">
+                            <div class="gp__admx-item">
+                                <div class="gp__admx-description">Описание</div>
+                                <div class="gp__admx-options">Опции</div>
+                            </div>
+                            <div class="gp__admx-item">
+                                <div class="gp__admx-description">Кому разрешено выполнять:</div>
+                                <div class="gp__admx-options">
+                                    <div class="field__element">
+                                        <select name="select">
+                                            <option value="value1" selected>Создать</option>
+                                            <option value="value2">Заменить</option>
+                                            <option value="value3">Обновить</option>
+                                            <option value="value3">Удалить</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="gp__admx-help">
+                        <div class="gp__admx-supported">
+                            <div class="title">Поддерживается на:</div>
+                            <div class="gp__admx-content">8 Платформа ALT как минимум</div>
+                            
+                        </div>
+                        <div class="gp__admx-comment">
+                            <div class="title">Комментарий:</div>
+                            <textarea name="comment"></textarea>
+                        </div>
+                        <div class="gp__admx-text-help">
+                            <div class="gp__atitle">Помощь:</div>
+                            <div class="gp__admx-text-help-content">
+                                Эта политика определяет разрешения для Xorg (/usr/bin/Xorg)
+                                <br>
+                                Не настроено — любому пользователю разрешено запускать /usr/bin/Xorg
+                                <br>
+                                Любой пользователь — любому пользователю разрешено запускать /usr/bin/Xorg
+                                <br>
+                                Группа xgrp — пользователям группы «xgrp» разрешено запускать /usr/bin/Xorg
+                                <br>
+                                Только root — только суперпользователь (root) может запускать /usr/bin/Xorg
+                            </div>
+                            
+                            
+                            
                         </div>
 
-                        <div class="field__line"></div>
-    
+
+                        comment
+                        
                     </div>
 
-                    <div class="gp__admx-info">
-                        dfgdfg gdfgdfgdf
-                    </div>
                 </div>
 
 

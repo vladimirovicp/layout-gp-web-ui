@@ -1,7 +1,10 @@
 .gp{
     &__admx{
+        flex: 1;
+        padding: 20px;
         &-wrapper{
-            padding: 20px;
+            display: flex;
+            height: 100%;
         }
 
         &-settings{
@@ -31,6 +34,61 @@
         &-radio{
 
         }
+
+        &-info{
+            
+        }
+
+        &-item{
+            display: flex;
+            gap: 20px;
+        }
+
+        &-description{
+            flex: 1;
+        }
+
+        &-options{
+            flex: 1;
+
+            .select{
+
+            }
+        }
+
+        &-help{
+            width: 432px;
+            padding: 20px;
+            border-left: 1px solid #d1d1d1;
+        }
+
+        &-supported{
+            padding-bottom: 10px;
+            .title{
+                padding-bottom: 5px;
+            }
+            .gp__admx-content{
+                padding: 5px;
+                border: 1px solid #d1d1d1;
+                height: 100px;
+                width: 100%;
+            }
+        }
+
+        &-comment{
+            padding-bottom: 10px;
+            textarea{
+                width: 100%;
+                height: 100px;
+                resize: none;
+                font-size: 12px;
+                border: 1px solid #D1D1D1;
+                padding: 5px;
+            }
+            
+        }
+
+
 
     }
 }
