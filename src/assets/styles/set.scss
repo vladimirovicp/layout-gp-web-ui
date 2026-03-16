@@ -73,7 +73,8 @@
             height: 10px;
             display: flex;
             margin-right: 8px;
-            flex-shrink: 0
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
         }
 
         .icon{
@@ -100,21 +101,29 @@
         }
 
 
-        .view{
+        .view.folder{
+            display: grid;
+            grid-template-rows: auto 1fr;
+            transition: grid-template-rows 0.3s ease;
+
+            > .tree-view__list{
+                overflow: hidden;
+                min-height: 0;
+            }
+
             &.opened{
+                grid-template-rows: auto 1fr;
+
                 .icon-switcher{
                     transform: rotate(0deg);
                 }
-                
             }
 
             &.closed{
+                grid-template-rows: auto 0fr;
+
                 .icon-switcher{
                     transform: rotate(-90deg);
-                }
-
-                .tree-view__list{
-                    display: none;
                 }
             }
         }
