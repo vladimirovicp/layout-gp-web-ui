@@ -123,7 +123,7 @@ function toggleFolder(listItem, item) {
     if (isOpened) {
         element.classList.remove('opened');
         element.classList.add('closed');
-        nestedList.style.display = 'none';
+        //nestedList.style.display = 'none';
         item.opened = false;
     } else {
         element.classList.remove('closed');
