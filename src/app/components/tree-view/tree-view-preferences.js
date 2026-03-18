@@ -17,42 +17,42 @@ export const treepreferences = [
         template: 'preferences'
     },
     {
-        title: 'Папки',
+        title: t('preferences.folders'),
         name: 'folders',
         type: 'file',
         icon: 'ico-file',
         template: 'preferences'
     },
     {
-        title: 'Реестр',
+        title: t('preferences.registry'),
         name: 'registry',
         type: 'file',
         icon: 'ico-file',
         template: 'preferences'
     },
     {
-        title: 'Сетевые диски',
+        title: t('preferences.driveMaps'),
         name: 'driveMaps',
         type: 'file',
         icon: 'ico-file',
         template: 'preferences'
     },
     {
-        title: 'Сетевые папки',
+        title: t('preferences.networkShares'),
         name: 'networkShares',
         type: 'file',
         icon: 'ico-file',
         template: 'preferences'
     },
     {
-        title: 'Файлы',
+        title: t('preferences.files'),
         name: 'files',
         type: 'file',
         icon: 'ico-file',
         template: 'preferences'
     },
     {
-        title: 'Ini файлы',
+        title: t('preferences.iniFiles'),
         name: 'iniFiles',
         type: 'file',
         icon: 'ico-file',
