@@ -1,5 +1,11 @@
 .gp {
 
+
+    &__container {
+        min-width: 1200px;
+    }
+
+
     &__main {
         width: 100%;
         height: calc( 100% - 64px - 48px );
@@ -7,18 +13,28 @@
     }
 
     &__search{
-        width: 432px;
+        width: 408px;
     }
 
     &__nav{
         padding: 0 5px;
-        width: 210px;
+        width: 206px;
     }
 
     &__control{
         padding: 0 16px;
         display: flex;
         gap: 20px;
+
+        &-help{
+            margin-left: auto;
+        }
+
+        &-admx{
+            padding: 0 16px;
+            display: flex;
+            gap: 20px;  
+        }
     }
 }
 
@@ -57,7 +73,8 @@
             height: 10px;
             display: flex;
             margin-right: 8px;
-            flex-shrink: 0
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
         }
 
         .icon{
@@ -84,21 +101,29 @@
         }
 
 
-        .view{
+        .view.folder{
+            display: grid;
+            grid-template-rows: auto 1fr;
+            transition: grid-template-rows 0.3s ease;
+
+            > .tree-view__list{
+                overflow: hidden;
+                min-height: 0;
+            }
+
             &.opened{
+                grid-template-rows: auto 1fr;
+
                 .icon-switcher{
                     transform: rotate(0deg);
                 }
-                
             }
 
             &.closed{
+                grid-template-rows: auto 0fr;
+
                 .icon-switcher{
                     transform: rotate(-90deg);
-                }
-
-                .tree-view__list{
-                    display: none;
                 }
             }
         }
@@ -106,6 +131,40 @@
 
 
 
+    }
+
+    .workspace{
+        flex: 1 1 0px;
+
+        .workspace-list-item{
+            display: flex;
+            align-items: center;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .icon{
+            width: 16px;
+            height: 16px;
+            display: flex;
+            margin-right: 8px;
+            flex-shrink: 0;
+            &.ico-computer{
+                background-image: url(../img/svg/ico/computer.svg);
+            }
+
+            &.ico-folder{
+                background-image: url(../img/svg/ico/folder.svg);
+            }
+
+            &.ico-user{
+                background-image: url(../img/svg/ico/user.svg);
+            }
+
+            &.ico-file{
+                background-image: url(../img/svg/ico/file.svg);
+            }
+        }
     }
 
     .divider{
@@ -121,10 +180,6 @@
             width: 1px;
             height: 100%;
         }
-    }
-
-    .workspace{
-        flex: 1 1 0px;
     }
 
 }
