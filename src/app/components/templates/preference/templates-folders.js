@@ -1,19 +1,19 @@
 import { createElement } from '../../util/element-creator.js';
 
 /**
- * Рендерит шаблон shortcuts
+ * Рендерит шаблон folders
  * @returns {ElementCreator} - Элемент с сообщением о том, что шаблон в процессе реализации
  */
-export function renderShortcutsTemplate() {
-    const shortcutsTemplate = createElement('div', {
+export function renderFoldersTemplate() {
+    const foldersTemplate = createElement('div', {
         className: 'gp__default-template',
         children: [
             createElement('div', {
                 className: 'default-template__message',
-                text: 'Шаблон shortcuts в процессе реализации'
+                text: 'Шаблон folders в процессе реализации'
             })
         ]
     });
 
-    return shortcutsTemplate;
+    return foldersTemplate;
 }

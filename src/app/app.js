@@ -45,13 +45,54 @@ const treeViewState = {
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         console.log('item', item);
-        console.log('element', element);
+        // console.log('element', element);
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        const template = item.template;
+
+        const type = item.type;
+
+        //console.log('type', type);
 
         
 
+        if(type === 'folder'){
+
+        }
+
+        if(type === 'file'){
+            const template = item.template;
+
+            if(template === 'preferences'){
+
+                const headerClass = item.header.class;
+
+                if (headerClass === 'Machine'){
+                    const namePreference = item.name;
+
+                    //shortcuts, 
+                    //environment,
+                    //folders,
+                    //registry,
+                    //driveMaps,
+                    //networkShares,
+                    //files,
+                    //iniFiles,
+
+                    
+                    //console.log('namePreference', namePreference);
+                }
+                
+
+                
+
+                
+            }
+
+        }
+
+        //const template = item.template;
+
+/*
         
         if(template === 'preferences'){
 
@@ -134,15 +175,8 @@ const treeViewState = {
                 });
             }
         }
+*/
 
-
-        // if (this.workspace) {
-        //     const titleElement = element.querySelector('.tree-item__title');
-        //     if (titleElement) {
-        //         const titleText = titleElement.textContent || titleElement.innerText;
-        //         this.workspace.setText(titleText);
-        //     }
-        // }
     }
 };
 
