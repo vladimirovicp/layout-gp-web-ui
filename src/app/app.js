@@ -4,7 +4,6 @@ import {renderMain} from './components/main/main';
 import {renderFooter} from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { t } from './locales/translations.js';
-import { renderPreferencesTemplate } from './components/workspace/preferences-template.js';
 import { renderPreferencesShortcutsTemplate } from './components/workspace/preferences-template-shortcuts.js';
 import { handleDeletePreference } from './components/workspace/delete-preference.js';
 import { openModalForEdit } from './components/workspace/edit-preference.js';

@@ -1,19 +1,14 @@
-import { createElement } from '../../../util/element-creator.js';
+import { renderPreferencesTemplate } from './preferences-view-template.js';
+import { renderPreferencesTableShortcuts } from '../../workspace/preferences-table-shortcuts.js';
+import { getShortcutsFromLocalStorage } from '../../../util/mainLocalStorage/shortcuts.js';
 
 /**
  * Рендерит шаблон shortcuts
- * @returns {ElementCreator} - Элемент с сообщением о том, что шаблон в процессе реализации
+ * @returns {ElementCreator} - Элемент с шаблоном preferences для shortcuts
  */
 export function renderShortcutsTemplate() {
-    const shortcutsTemplate = createElement('div', {
-        className: 'gp__default-template',
-        children: [
-            createElement('div', {
-                className: 'default-template__message',
-                text: 'Шаблон shortcuts в процессе реализации'
-            })
-        ]
+    return renderPreferencesTemplate({
+        renderTable: renderPreferencesTableShortcuts,
+        getDataFromStorage: getShortcutsFromLocalStorage,
     });
-
-    return shortcutsTemplate;
 }

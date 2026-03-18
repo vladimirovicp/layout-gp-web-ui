@@ -1,9 +1,7 @@
-import { createElement } from '../../util/element-creator.js';
-import { resizable } from '../../util/resizable.js';
-import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
-import { renderPreferencesTableShortcuts } from './preferences-table-shortcuts.js';
-import { savePreferencesFromModal, resetModalFormToDefaults } from './create-preference.js';
-import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
+import { createElement } from '../../../util/element-creator.js';
+import { resizable } from '../../../util/resizable.js';
+import { renderPreferencesCommonTemplate } from '../../workspace/preferences-template-common.js';
+import { savePreferencesFromModal, resetModalFormToDefaults } from '../../workspace/create-preference.js';
 
 
 
@@ -12,7 +10,7 @@ import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortc
  * Рендерит шаблон preferences для workspace
  * @returns {ElementCreator} - Элемент с шаблоном preferences
  */
-export function renderPreferencesTemplate() {
+export function renderPreferencesTemplate({ renderTable, getDataFromStorage } = {}) {
     const preference = createElement('div', {
         className: 'gp__preference',
         children: [
@@ -60,8 +58,8 @@ export function renderPreferencesTemplate() {
             // preference__data-table
             createElement('div', {
                 className: 'preference__data-table',
-                children: [
-                    renderPreferencesTableShortcuts()
+                    children: [
+                    renderTable ? renderTable() : null
                 ]
             }),
             createElement('div', {
@@ -155,23 +153,22 @@ export function renderPreferencesTemplate() {
                                                 const modal = event.target.closest('.preference__modal');
                                                 if (!modal) return;
                                                 const mode = modal.getAttribute('data-preferences-mode');
-                                                if (mode === 'create' || mode === 'edit') {
-                                                    savePreferencesFromModal(modal);
-                                                    const storageKey = modal.getAttribute('data-preferences-name');
-                                                    if (storageKey === 'shortcuts') {
-                                                        const preferenceRoot = modal.closest('.gp__preference');
-                                                        const tableContainer = preferenceRoot?.querySelector('.preference__data-table');
-                                                        if (tableContainer) {
-                                                            const indexAttr = modal.getAttribute('data-preferences-index');
-                                                            const list = getShortcutsFromLocalStorage();
-                                                            const activeIndex = (indexAttr !== null && indexAttr !== '')
-                                                                ? Math.min(parseInt(indexAttr, 10), list.length - 1)
-                                                                : list.length - 1;
-                                                            tableContainer.innerHTML = '';
-                                                            tableContainer.appendChild(renderPreferencesTableShortcuts([], activeIndex).getElement());
-                                                        }
-                                                    }
-                                                    modal.classList.remove('active');
+                                    if (mode === 'create' || mode === 'edit') {
+                                    savePreferencesFromModal(modal);
+                                    if (renderTable && getDataFromStorage) {
+                                        const preferenceRoot = modal.closest('.gp__preference');
+                                        const tableContainer = preferenceRoot?.querySelector('.preference__data-table');
+                                        if (tableContainer) {
+                                            const indexAttr = modal.getAttribute('data-preferences-index');
+                                            const list = getDataFromStorage();
+                                            const activeIndex = (indexAttr !== null && indexAttr !== '')
+                                                ? Math.min(parseInt(indexAttr, 10), list.length - 1)
+                                                : list.length - 1;
+                                            tableContainer.innerHTML = '';
+                                            tableContainer.appendChild(renderTable([], activeIndex).getElement());
+                                        }
+                                    }
+                                    modal.classList.remove('active');
                                                 }
                                             }
                                         }
