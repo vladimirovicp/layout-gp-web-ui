@@ -1,4 +1,4 @@
-import { createElement } from '../../util/element-creator.js';
+import { createElement } from '../../../util/element-creator.js';
 
 /**
  * Рендерит шаблон networkShares

@@ -10,6 +10,14 @@ import { handleDeletePreference } from './components/workspace/delete-preference
 import { openModalForEdit } from './components/workspace/edit-preference.js';
 import { setModalCreateMode, resetModalFormToDefaults } from './components/workspace/create-preference.js';
 import { renderDefaultTemplate } from './components/templates/default-template.js';
+import { renderShortcutsTemplate } from './components/templates/preference/templates-shortcuts.js';
+import { renderEnvironmentTemplate } from './components/templates/preference/templates-environment.js';
+import { renderFoldersTemplate } from './components/templates/preference/templates-folders.js';
+import { renderRegistryTemplate } from './components/templates/preference/templates-registry.js';
+import { renderDriveMapsTemplate } from './components/templates/preference/templates-driveMaps.js';
+import { renderNetworkSharesTemplate } from './components/templates/preference/templates-networkShares.js';
+import { renderFilesTemplate } from './components/templates/preference/templates-files.js';
+import { renderIniFilesTemplate } from './components/templates/preference/templates-iniFiles.js';
 import './util/mainLocalStorage/shortcuts.js';
 
 /**
@@ -44,7 +52,7 @@ const treeViewState = {
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        console.log('item', item);
+        //console.log('item', item);
         // console.log('element', element);
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -69,17 +77,24 @@ const treeViewState = {
                 if (headerClass === 'Machine'){
                     const namePreference = item.name;
 
-                    //shortcuts, 
-                    //environment,
-                    //folders,
-                    //registry,
-                    //driveMaps,
-                    //networkShares,
-                    //files,
-                    //iniFiles,
+                    const preferenceTemplateMap = {
+                        shortcuts: renderShortcutsTemplate,
+                        environment: renderEnvironmentTemplate,
+                        folders: renderFoldersTemplate,
+                        registry: renderRegistryTemplate,
+                        driveMaps: renderDriveMapsTemplate,
+                        networkShares: renderNetworkSharesTemplate,
+                        files: renderFilesTemplate,
+                        iniFiles: renderIniFilesTemplate,
+                    };
 
-                    
-                    //console.log('namePreference', namePreference);
+                    const renderTemplate = preferenceTemplateMap[namePreference] || renderDefaultTemplate;
+
+                    if (this.workspace) {
+                        this.workspace.clear();
+                        const templateResult = renderTemplate();
+                        this.workspace.append(templateResult);
+                    }
                 }
                 
 
