@@ -1,7 +1,7 @@
-import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
-import { renderPreferencesShortcutsTemplate } from './preferences-template-shortcuts.js';
-import { renderPreferencesCommonTemplate } from './preferences-template-common.js';
-import { getValueElement, getFieldValue } from '../../util/form-utils.js';
+import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage } from '../../../util/mainLocalStorage/shortcuts.js';
+import { renderPreferencesShortcutsTemplate } from './shortcuts/preferences-template-shortcuts.js';
+import { renderPreferencesCommonTemplate } from '../../workspace/preferences-template-common.js';
+import { getValueElement, getFieldValue } from '../../../util/form-utils.js';
 
 /** Поля ярлыков, которые в localStorage хранятся как number */
 const SHORTCUT_NUMBER_KEYS = ['ACTION', 'TARGET_TYPE', 'LOCATION', 'WINDOW', 'ICON_INDEX'];

@@ -1,5 +1,5 @@
-import { createElement } from '../../util/element-creator.js';
-import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
+import { createElement } from '../../../../util/element-creator.js';
+import { getShortcutsFromLocalStorage } from '../../../../util/mainLocalStorage/shortcuts.js';
 
 const ACTION_LABELS = { 0: 'Создать', 1: 'Заменить', 2: 'Обновить', 3: 'Удалить' };
 

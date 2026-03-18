@@ -1,5 +1,5 @@
 import { renderPreferencesTemplate } from './preferences-view-template.js';
-import { renderPreferencesTableShortcuts } from '../../workspace/preferences-table-shortcuts.js';
+import { renderPreferencesTableShortcuts } from './shortcuts/preferences-table-shortcuts.js';
 import { getShortcutsFromLocalStorage } from '../../../util/mainLocalStorage/shortcuts.js';
 
 /**

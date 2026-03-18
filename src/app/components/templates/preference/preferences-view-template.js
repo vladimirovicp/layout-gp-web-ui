@@ -1,7 +1,7 @@
 import { createElement } from '../../../util/element-creator.js';
 import { resizable } from '../../../util/resizable.js';
 import { renderPreferencesCommonTemplate } from '../../workspace/preferences-template-common.js';
-import { savePreferencesFromModal, resetModalFormToDefaults } from '../../workspace/create-preference.js';
+import { savePreferencesFromModal, resetModalFormToDefaults } from './create-preference.js';
 
 
 
