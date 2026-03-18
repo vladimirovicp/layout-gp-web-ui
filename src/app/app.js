@@ -9,7 +9,7 @@ import { renderPreferencesShortcutsTemplate } from './components/workspace/prefe
 import { handleDeletePreference } from './components/workspace/delete-preference.js';
 import { openModalForEdit } from './components/workspace/edit-preference.js';
 import { setModalCreateMode, resetModalFormToDefaults } from './components/workspace/create-preference.js';
-import { renderDefaultTemplate } from './components/tree-view/default-template.js';
+import { renderDefaultTemplate } from './components/templates/default-template.js';
 import './util/mainLocalStorage/shortcuts.js';
 
 /**
@@ -49,6 +49,8 @@ const treeViewState = {
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         const template = item.template;
+
+        
 
         
         if(template === 'preferences'){
