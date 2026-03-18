@@ -250,6 +250,7 @@ if(container){
                     const tabBasicElement = document.getElementById('tab-basic');
                     if (tabBasicElement) {
                         tabBasicElement.innerHTML = '';
+                        console.log('name', name);
                         if (name === 'shortcuts') {
                             const shortcutsTemplate = renderPreferencesShortcutsTemplate();
 
@@ -261,6 +262,8 @@ if(container){
                             }
                         }
                     }
+
+                    console.log('8888');
 
                     openModalForEdit(btnEdit, preferenceModal);
                 }
