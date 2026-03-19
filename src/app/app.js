@@ -87,11 +87,11 @@ const treeViewState = {
                         iniFiles: renderIniFilesTemplate,
                     };
 
-                    const renderTemplate = preferenceTemplateMap[namePreference] || renderDefaultTemplate;
+                        const renderTemplate = preferenceTemplateMap[namePreference] || renderDefaultTemplate;
 
                     if (this.workspace) {
                         this.workspace.clear();
-                        const templateResult = renderTemplate();
+                        const templateResult = renderTemplate({ header: this.header });
                         this.workspace.append(templateResult);
                     }
                 }
@@ -212,6 +212,7 @@ if(container){
     
     resizable(dividerElement, treeViewElement, mainElement);
 
+    /*
     document.addEventListener('preferences-row-select', (e) => {
         const headerEl = header.getElement();
         const btnCreate = headerEl.querySelector('.preferences__btn-create');
@@ -229,7 +230,9 @@ if(container){
         if (btnDelete) btnDelete.classList.add('active');
         if (btnEdit) btnEdit.classList.add('active');
     });
+    */
 
+    /*
     const btnDelete = header.getElement().querySelector('.preferences__btn-delete');
     if (btnDelete) {
         btnDelete.addEventListener('click', () => {
@@ -238,7 +241,9 @@ if(container){
             }
         });
     }
+        */
 
+    /*
     const btnEdit = header.getElement().querySelector('.preferences__btn-edit');
     if (btnEdit) {
         btnEdit.addEventListener('click', () => {
@@ -270,6 +275,7 @@ if(container){
             }
         });
     }
+        */
 
     // Изменяем текст header на "header2" через 5 секунд используя ElementCreator
     // setTimeout(() => {
@@ -279,7 +285,7 @@ if(container){
 
     // Пример вывода переводов
 
-    console.log(t('policies.localGroupPolicy'));
+    //console.log(t('policies.localGroupPolicy'));
 }
 
 

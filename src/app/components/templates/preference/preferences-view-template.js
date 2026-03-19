@@ -6,11 +6,45 @@ import { savePreferencesFromModal, resetModalFormToDefaults } from './create-pre
 
 
 
+function initHeaderButtons(header) {
+    const headerEl = header?.getElement();
+    const control = headerEl?.querySelector('.gp__control');
+    const btnCreate = control?.querySelector('.preferences__btn-create');
+    const btnEdit = control?.querySelector('.preferences__btn-edit');
+    const btnDelete = control?.querySelector('.preferences__btn-delete');
+
+    if (btnCreate && !btnCreate.classList.contains('active')) {
+        btnCreate.classList.add('active');
+    }
+    if (btnEdit) btnEdit.classList.remove('active');
+    if (btnDelete) btnDelete.classList.remove('active');
+
+    const controlAdmx = headerEl?.querySelector('.gp__control-admx');
+    const btnApply = controlAdmx?.querySelector('.admx__btn-apply');
+    const btnCancel = controlAdmx?.querySelector('.admx__btn-cancel');
+    if (btnApply) btnApply.classList.remove('active');
+    if (btnCancel) btnCancel.classList.remove('active');
+
+    const controlHelp = headerEl?.querySelector('.gp__control-help');
+    const btnInformation = controlHelp?.querySelector('.btn-information');
+    if (btnInformation) btnInformation.classList.remove('active');
+
+    return { btnCreate, btnEdit, btnDelete, btnApply, btnCancel, btnInformation };
+}
+
 /**
  * Рендерит шаблон preferences для workspace
  * @returns {ElementCreator} - Элемент с шаблоном preferences
  */
-export function renderPreferencesTemplate({ renderTable, getDataFromStorage } = {}) {
+export function renderPreferencesTemplate({ renderTable, getDataFromStorage, header } = {}) {
+    const { btnCreate, btnEdit, btnDelete, btnApply, btnCancel, btnInformation } = initHeaderButtons(header);
+
+    const list = getDataFromStorage ? getDataFromStorage() : [];
+    if (list.length > 0) {
+        if (btnEdit) btnEdit.classList.add('active');
+        if (btnDelete) btnDelete.classList.add('active');
+    }
+
     const preference = createElement('div', {
         className: 'gp__preference',
         children: [

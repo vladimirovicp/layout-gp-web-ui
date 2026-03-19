@@ -6,9 +6,10 @@ import { getShortcutsFromLocalStorage } from '../../../util/mainLocalStorage/sho
  * Рендерит шаблон shortcuts
  * @returns {ElementCreator} - Элемент с шаблоном preferences для shortcuts
  */
-export function renderShortcutsTemplate() {
+export function renderShortcutsTemplate({ header } = {}) {
     return renderPreferencesTemplate({
         renderTable: renderPreferencesTableShortcuts,
         getDataFromStorage: getShortcutsFromLocalStorage,
+        header,
     });
 }
