@@ -5,8 +5,27 @@ import { savePreferencesFromModal, resetModalFormToDefaults, setModalCreateMode 
 import { handleDeletePreference } from './delete-preference.js';
 import { openModalForEdit } from './edit-preference.js';
 
+function addManagedEventListener(cleanups, target, eventName, handler, options) {
+    if (!target || typeof target.addEventListener !== 'function' || typeof handler !== 'function') {
+        return;
+    }
 
+    target.addEventListener(eventName, handler, options);
+    cleanups.push(() => target.removeEventListener(eventName, handler, options));
+}
 
+function clearHeaderButtonState({ btnCreate, btnEdit, btnDelete, btnApply, btnCancel, btnInformation } = {}) {
+    [btnCreate, btnEdit, btnDelete, btnApply, btnCancel, btnInformation]
+        .filter(Boolean)
+        .forEach((buttonEl) => buttonEl.classList.remove('active'));
+
+    [btnCreate, btnEdit, btnDelete]
+        .filter(Boolean)
+        .forEach((buttonEl) => {
+            buttonEl.removeAttribute('data-preferences-name');
+            buttonEl.removeAttribute('data-preferences-index');
+        });
+}
 
 function initHeaderButtons(header) {
     const headerEl = header?.getElement();
@@ -18,6 +37,7 @@ function initHeaderButtons(header) {
     if (btnCreate && !btnCreate.classList.contains('active')) {
         btnCreate.classList.add('active');
     }
+
     if (btnEdit) btnEdit.classList.remove('active');
     if (btnDelete) btnDelete.classList.remove('active');
 
@@ -34,60 +54,99 @@ function initHeaderButtons(header) {
     return { btnCreate, btnEdit, btnDelete, btnApply, btnCancel, btnInformation };
 }
 
-/**
- * Инициализирует обработчики для btnEdit и btnDelete,
- * а также слушатель события выбора строки таблицы.
- */
-function initButtonHandlers({ btnEdit, btnDelete, preferenceModal, rootEl, name, renderTable, getDataFromStorage }) {
-    // Block 1: row selected → activate edit/delete, set index
-    document.addEventListener('preferences-row-select', (e) => {
+function initButtonHandlers({
+    btnCreate,
+    btnEdit,
+    btnDelete,
+    preferenceModal,
+    rootEl,
+    name,
+    renderTable,
+    getDataFromStorage,
+    cleanups,
+}) {
+    const handleRowSelect = (e) => {
         const index = e.detail.index;
+
         [btnEdit, btnDelete].forEach((btn) => {
-            if (btn) {
-                btn.setAttribute('data-preferences-index', String(index));
-                if (name != null) btn.setAttribute('data-preferences-name', name);
+            if (!btn) return;
+
+            btn.setAttribute('data-preferences-index', String(index));
+            if (name != null) {
+                btn.setAttribute('data-preferences-name', name);
             }
         });
+
         if (btnEdit) btnEdit.classList.add('active');
         if (btnDelete) btnDelete.classList.add('active');
-    });
+    };
 
-    // Block 2: delete
+    addManagedEventListener(cleanups, document, 'preferences-row-select', handleRowSelect);
+
     if (btnDelete) {
-        btnDelete.addEventListener('click', () => {
-            if (btnDelete.classList.contains('active')) {
-                handleDeletePreference(btnDelete, rootEl);
-                const list = getDataFromStorage ? getDataFromStorage() : [];
-                if (list.length === 0) {
-                    if (btnEdit) {
-                        btnEdit.classList.remove('active');
-                        btnEdit.removeAttribute('data-preferences-index');
-                    }
-                    btnDelete.classList.remove('active');
-                    btnDelete.removeAttribute('data-preferences-index');
-                }
+        const handleDelete = () => {
+            if (!btnDelete.classList.contains('active')) {
+                return;
             }
-        });
+
+            handleDeletePreference(btnDelete, rootEl);
+
+            const list = getDataFromStorage ? getDataFromStorage() : [];
+            if (list.length === 0) {
+                if (btnEdit) {
+                    btnEdit.classList.remove('active');
+                    btnEdit.removeAttribute('data-preferences-index');
+                }
+
+                btnDelete.classList.remove('active');
+                btnDelete.removeAttribute('data-preferences-index');
+            }
+        };
+
+        addManagedEventListener(cleanups, btnDelete, 'click', handleDelete);
     }
 
-    // Block 3: edit
     if (btnEdit && preferenceModal) {
-        btnEdit.addEventListener('click', () => {
-            if (btnEdit.classList.contains('active')) {
-                if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
-                resetModalFormToDefaults(preferenceModal);
-                openModalForEdit(btnEdit, preferenceModal);
+        const handleEdit = () => {
+            if (!btnEdit.classList.contains('active')) {
+                return;
             }
-        });
+
+            if (name != null) {
+                preferenceModal.setAttribute('data-preferences-name', name);
+            }
+
+            resetModalFormToDefaults(preferenceModal);
+            openModalForEdit(btnEdit, preferenceModal);
+        };
+
+        addManagedEventListener(cleanups, btnEdit, 'click', handleEdit);
+    }
+
+    if (btnCreate && preferenceModal) {
+        const handleCreate = () => {
+            if (!btnCreate.classList.contains('active')) {
+                return;
+            }
+
+            if (name != null) {
+                preferenceModal.setAttribute('data-preferences-name', name);
+            }
+
+            resetModalFormToDefaults(preferenceModal);
+            preferenceModal.removeAttribute('data-preferences-index');
+            setModalCreateMode(preferenceModal);
+            preferenceModal.classList.add('active');
+        };
+
+        addManagedEventListener(cleanups, btnCreate, 'click', handleCreate);
     }
 }
 
-/**
- * Рендерит шаблон preferences для workspace
- * @returns {ElementCreator} - Элемент с шаблоном preferences
- */
 export function renderPreferencesTemplate({ renderTable, getDataFromStorage, header, name } = {}) {
-    const { btnCreate, btnEdit, btnDelete, btnApply, btnCancel, btnInformation } = initHeaderButtons(header);
+    const headerButtons = initHeaderButtons(header);
+    const { btnCreate, btnEdit, btnDelete } = headerButtons;
+    const cleanups = [];
 
     if (name && btnCreate) {
         btnCreate.setAttribute('data-preferences-name', name);
@@ -100,6 +159,7 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
             if (name) btnEdit.setAttribute('data-preferences-name', name);
             btnEdit.setAttribute('data-preferences-index', '0');
         }
+
         if (btnDelete) {
             btnDelete.classList.add('active');
             if (name) btnDelete.setAttribute('data-preferences-name', name);
@@ -110,11 +170,9 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
     const preference = createElement('div', {
         className: 'gp__preference',
         children: [
-            // preference__info
             createElement('div', {
                 className: 'preference__info',
                 children: [
-                    // preference__settings
                     createElement('div', {
                         className: 'preference__settings',
                         children: [
@@ -127,7 +185,6 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
                             })
                         ]
                     }),
-                    // preference__description
                     createElement('div', {
                         className: 'preference__description',
                         children: [
@@ -142,7 +199,6 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
                     })
                 ]
             }),
-            // preference__divider
             createElement('div', {
                 className: 'preference__divider',
                 children: [
@@ -151,10 +207,9 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
                     })
                 ]
             }),
-            // preference__data-table
             createElement('div', {
                 className: 'preference__data-table',
-                    children: [
+                children: [
                     renderTable ? renderTable() : null
                 ]
             }),
@@ -248,24 +303,31 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
                                             click: (event) => {
                                                 const modal = event.target.closest('.preference__modal');
                                                 if (!modal) return;
+
                                                 const mode = modal.getAttribute('data-preferences-mode');
-                                    if (mode === 'create' || mode === 'edit') {
-                                    savePreferencesFromModal(modal);
-                                    if (renderTable && getDataFromStorage) {
-                                        const preferenceRoot = modal.closest('.gp__preference');
-                                        const tableContainer = preferenceRoot?.querySelector('.preference__data-table');
-                                        if (tableContainer) {
-                                            const indexAttr = modal.getAttribute('data-preferences-index');
-                                            const list = getDataFromStorage();
-                                            const activeIndex = (indexAttr !== null && indexAttr !== '')
-                                                ? Math.min(parseInt(indexAttr, 10), list.length - 1)
-                                                : list.length - 1;
-                                            tableContainer.innerHTML = '';
-                                            tableContainer.appendChild(renderTable([], activeIndex).getElement());
-                                        }
-                                    }
-                                    modal.classList.remove('active');
+                                                if (mode !== 'create' && mode !== 'edit') {
+                                                    return;
                                                 }
+
+                                                savePreferencesFromModal(modal);
+
+                                                if (renderTable && getDataFromStorage) {
+                                                    const preferenceRoot = modal.closest('.gp__preference');
+                                                    const tableContainer = preferenceRoot?.querySelector('.preference__data-table');
+
+                                                    if (tableContainer) {
+                                                        const indexAttr = modal.getAttribute('data-preferences-index');
+                                                        const currentList = getDataFromStorage();
+                                                        const activeIndex = (indexAttr !== null && indexAttr !== '')
+                                                            ? Math.min(parseInt(indexAttr, 10), currentList.length - 1)
+                                                            : currentList.length - 1;
+
+                                                        tableContainer.innerHTML = '';
+                                                        tableContainer.appendChild(renderTable([], activeIndex).getElement());
+                                                    }
+                                                }
+
+                                                modal.classList.remove('active');
                                             }
                                         }
                                     })
@@ -278,60 +340,85 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
         ]
     });
 
-    // Настройка переключения вкладок "Основные настройки" и "Общие"
     const rootEl = preference.getElement();
-
     const basicTabButton = rootEl.querySelector('.preference__tab-button[data-tab="tab-basic"]');
     const generalTabButton = rootEl.querySelector('.preference__tab-button[data-tab="tab-general"]');
     const basicTabContent = rootEl.querySelector('#tab-basic');
     const generalTabContent = rootEl.querySelector('#tab-general');
 
     if (basicTabButton && generalTabButton && basicTabContent && generalTabContent) {
-        basicTabButton.addEventListener('click', () => {
-            if (!basicTabButton.classList.contains('active')) {
-                basicTabButton.classList.add('active');
-                basicTabContent.classList.add('active');
-
-                generalTabButton.classList.remove('active');
-                generalTabContent.classList.remove('active');
+        const activateBasicTab = () => {
+            if (basicTabButton.classList.contains('active')) {
+                return;
             }
-        });
 
-        generalTabButton.addEventListener('click', () => {
-            if (!generalTabButton.classList.contains('active')) {
-                generalTabButton.classList.add('active');
-                generalTabContent.classList.add('active');
+            basicTabButton.classList.add('active');
+            basicTabContent.classList.add('active');
+            generalTabButton.classList.remove('active');
+            generalTabContent.classList.remove('active');
+        };
 
-                basicTabButton.classList.remove('active');
-                basicTabContent.classList.remove('active');
+        const activateGeneralTab = () => {
+            if (generalTabButton.classList.contains('active')) {
+                return;
             }
-        });
+
+            generalTabButton.classList.add('active');
+            generalTabContent.classList.add('active');
+            basicTabButton.classList.remove('active');
+            basicTabContent.classList.remove('active');
+        };
+
+        addManagedEventListener(cleanups, basicTabButton, 'click', activateBasicTab);
+        addManagedEventListener(cleanups, generalTabButton, 'click', activateGeneralTab);
     }
 
-    // Инициализация resizable для preference__divider после добавления в DOM
     const dividerElement = rootEl.querySelector('.preference__divider');
     const infoElement = rootEl.querySelector('.preference__info');
-    const containerElement = rootEl;
-    requestAnimationFrame(() => {
-        if (dividerElement && infoElement && containerElement) {
-            resizable(dividerElement, infoElement, containerElement, { minWidth: 100 });
+    let cleanupPreferenceResizable = null;
+    const frameId = requestAnimationFrame(() => {
+        if (dividerElement && infoElement && rootEl) {
+            cleanupPreferenceResizable = resizable(dividerElement, infoElement, rootEl, { minWidth: 100 });
+        }
+    });
+
+    cleanups.push(() => {
+        cancelAnimationFrame(frameId);
+
+        if (typeof cleanupPreferenceResizable === 'function') {
+            cleanupPreferenceResizable();
+            cleanupPreferenceResizable = null;
         }
     });
 
     const preferenceModal = rootEl.querySelector('.preference__modal');
-    if (btnCreate && preferenceModal) {
-        btnCreate.addEventListener('click', () => {
-            if (btnCreate.classList.contains('active')) {
-                if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
-                resetModalFormToDefaults(preferenceModal);
-                preferenceModal.removeAttribute('data-preferences-index');
-                setModalCreateMode(preferenceModal);
-                preferenceModal.classList.add('active');
-            }
-        });
-    }
 
-    initButtonHandlers({ btnEdit, btnDelete, preferenceModal, rootEl, name, renderTable, getDataFromStorage });
+    initButtonHandlers({
+        btnCreate,
+        btnEdit,
+        btnDelete,
+        preferenceModal,
+        rootEl,
+        name,
+        renderTable,
+        getDataFromStorage,
+        cleanups,
+    });
+
+    let cleanedUp = false;
+    preference.cleanup = () => {
+        if (cleanedUp) return;
+        cleanedUp = true;
+
+        while (cleanups.length > 0) {
+            const cleanup = cleanups.pop();
+            if (typeof cleanup === 'function') {
+                cleanup();
+            }
+        }
+
+        clearHeaderButtonState(headerButtons);
+    };
 
     return preference;
 }
