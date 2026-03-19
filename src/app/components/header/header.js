@@ -26,6 +26,28 @@ export function renderHeader(container) {
                         text: 'Удалить'
                     })
                 ]
+            }),
+            createElement('div', {
+                className: 'gp__control-admx',
+                children: [
+                    createElement('button', {
+                        className: ['button', 'admx__btn-apply'],
+                        text: 'Применить'
+                    }),
+                    createElement('button', {
+                        className: ['button', 'admx__btn-cancel'],
+                        text: 'Отмена'
+                    })
+                ]
+            }),
+            createElement('div', {
+                className: 'gp__control-help',
+                children: [
+                    createElement('button', {
+                        className: ['button', 'btn-information'],
+                        text: 'Сведения'
+                    })
+                ]
             })
         ]
     });
