@@ -11,5 +11,6 @@ export function renderShortcutsTemplate({ header } = {}) {
         renderTable: renderPreferencesTableShortcuts,
         getDataFromStorage: getShortcutsFromLocalStorage,
         header,
+        name: 'shortcuts',
     });
 }

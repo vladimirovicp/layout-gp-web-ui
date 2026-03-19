@@ -1,7 +1,7 @@
 import { createElement } from '../../../util/element-creator.js';
 import { resizable } from '../../../util/resizable.js';
 import { renderPreferencesCommonTemplate } from '../../workspace/preferences-template-common.js';
-import { savePreferencesFromModal, resetModalFormToDefaults } from './create-preference.js';
+import { savePreferencesFromModal, resetModalFormToDefaults, setModalCreateMode } from './create-preference.js';
 
 
 
@@ -36,8 +36,12 @@ function initHeaderButtons(header) {
  * Рендерит шаблон preferences для workspace
  * @returns {ElementCreator} - Элемент с шаблоном preferences
  */
-export function renderPreferencesTemplate({ renderTable, getDataFromStorage, header } = {}) {
+export function renderPreferencesTemplate({ renderTable, getDataFromStorage, header, name } = {}) {
     const { btnCreate, btnEdit, btnDelete, btnApply, btnCancel, btnInformation } = initHeaderButtons(header);
+
+    if (name && btnCreate) {
+        btnCreate.setAttribute('data-preferences-name', name);
+    }
 
     const list = getDataFromStorage ? getDataFromStorage() : [];
     if (list.length > 0) {
@@ -255,6 +259,19 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
             resizable(dividerElement, infoElement, containerElement, { minWidth: 100 });
         }
     });
+
+    const preferenceModal = rootEl.querySelector('.preference__modal');
+    if (btnCreate && preferenceModal) {
+        btnCreate.addEventListener('click', () => {
+            if (btnCreate.classList.contains('active')) {
+                if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
+                resetModalFormToDefaults(preferenceModal);
+                preferenceModal.removeAttribute('data-preferences-index');
+                setModalCreateMode(preferenceModal);
+                preferenceModal.classList.add('active');
+            }
+        });
+    }
 
     return preference;
 }
