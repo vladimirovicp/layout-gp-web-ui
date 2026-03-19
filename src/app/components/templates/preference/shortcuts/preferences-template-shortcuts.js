@@ -275,7 +275,6 @@ export function renderPreferencesShortcutsTemplate() {
                             createElement('input', {
                                 attrs: {
                                     type: 'text',
-                                    placeholder: '/home/user'
                                 }
                             })
                         ]

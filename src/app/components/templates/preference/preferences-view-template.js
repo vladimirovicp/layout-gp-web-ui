@@ -2,6 +2,8 @@ import { createElement } from '../../../util/element-creator.js';
 import { resizable } from '../../../util/resizable.js';
 import { renderPreferencesCommonTemplate } from '../../workspace/preferences-template-common.js';
 import { savePreferencesFromModal, resetModalFormToDefaults, setModalCreateMode } from './create-preference.js';
+import { handleDeletePreference } from './delete-preference.js';
+import { openModalForEdit } from './edit-preference.js';
 
 
 
@@ -33,6 +35,54 @@ function initHeaderButtons(header) {
 }
 
 /**
+ * Инициализирует обработчики для btnEdit и btnDelete,
+ * а также слушатель события выбора строки таблицы.
+ */
+function initButtonHandlers({ btnEdit, btnDelete, preferenceModal, rootEl, name, renderTable, getDataFromStorage }) {
+    // Block 1: row selected → activate edit/delete, set index
+    document.addEventListener('preferences-row-select', (e) => {
+        const index = e.detail.index;
+        [btnEdit, btnDelete].forEach((btn) => {
+            if (btn) {
+                btn.setAttribute('data-preferences-index', String(index));
+                if (name != null) btn.setAttribute('data-preferences-name', name);
+            }
+        });
+        if (btnEdit) btnEdit.classList.add('active');
+        if (btnDelete) btnDelete.classList.add('active');
+    });
+
+    // Block 2: delete
+    if (btnDelete) {
+        btnDelete.addEventListener('click', () => {
+            if (btnDelete.classList.contains('active')) {
+                handleDeletePreference(btnDelete, rootEl);
+                const list = getDataFromStorage ? getDataFromStorage() : [];
+                if (list.length === 0) {
+                    if (btnEdit) {
+                        btnEdit.classList.remove('active');
+                        btnEdit.removeAttribute('data-preferences-index');
+                    }
+                    btnDelete.classList.remove('active');
+                    btnDelete.removeAttribute('data-preferences-index');
+                }
+            }
+        });
+    }
+
+    // Block 3: edit
+    if (btnEdit && preferenceModal) {
+        btnEdit.addEventListener('click', () => {
+            if (btnEdit.classList.contains('active')) {
+                if (name != null) preferenceModal.setAttribute('data-preferences-name', name);
+                resetModalFormToDefaults(preferenceModal);
+                openModalForEdit(btnEdit, preferenceModal);
+            }
+        });
+    }
+}
+
+/**
  * Рендерит шаблон preferences для workspace
  * @returns {ElementCreator} - Элемент с шаблоном preferences
  */
@@ -45,8 +95,16 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
 
     const list = getDataFromStorage ? getDataFromStorage() : [];
     if (list.length > 0) {
-        if (btnEdit) btnEdit.classList.add('active');
-        if (btnDelete) btnDelete.classList.add('active');
+        if (btnEdit) {
+            btnEdit.classList.add('active');
+            if (name) btnEdit.setAttribute('data-preferences-name', name);
+            btnEdit.setAttribute('data-preferences-index', '0');
+        }
+        if (btnDelete) {
+            btnDelete.classList.add('active');
+            if (name) btnDelete.setAttribute('data-preferences-name', name);
+            btnDelete.setAttribute('data-preferences-index', '0');
+        }
     }
 
     const preference = createElement('div', {
@@ -272,6 +330,8 @@ export function renderPreferencesTemplate({ renderTable, getDataFromStorage, hea
             }
         });
     }
+
+    initButtonHandlers({ btnEdit, btnDelete, preferenceModal, rootEl, name, renderTable, getDataFromStorage });
 
     return preference;
 }
