@@ -37,13 +37,15 @@
         }
     }
 
-    &__default-template{
+    &__default-template,
+    &__folder-template{
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
 
-        .default-template__message{
+        .default-template__message,
+        .folder-template__message{
             text-align: center;
             padding-top: 10px;
             font-size: 14px;

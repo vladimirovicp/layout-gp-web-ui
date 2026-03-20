@@ -76,6 +76,10 @@ function renderTreeItem(item, treeViewState) {
         
         // Добавляем класс active к кликнутому элементу
         clickedElement.classList.add('active');
+
+        // if (item.type === 'folder') {
+        //     console.log('click folder');
+        // }
         
         // Для папок переключаем состояние открыто/закрыто
         if (item.type === 'folder' && item.children && item.children.length > 0) {

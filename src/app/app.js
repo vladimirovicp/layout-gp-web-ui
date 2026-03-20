@@ -3,6 +3,7 @@ import { renderMain } from './components/main/main';
 import { renderFooter } from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { renderDefaultTemplate } from './components/templates/default-template.js';
+import { renderFolderTemplate } from './components/templates/folder-template.js';
 import { renderShortcutsTemplate } from './components/templates/preference/templates-shortcuts.js';
 import { renderEnvironmentTemplate } from './components/templates/preference/templates-environment.js';
 import { renderFoldersTemplate } from './components/templates/preference/templates-folders.js';
@@ -50,6 +51,15 @@ const treeViewState = {
 
         this.setCurrentView(null);
         this.selectedItem = { item, element };
+
+        if (item?.type === 'folder') {
+            if (this.workspace) {
+                const templateResult = renderFolderTemplate();
+                this.workspace.append(templateResult);
+                this.setCurrentView(templateResult);
+            }
+            return;
+        }
 
         if (item?.type !== 'file') {
             return;
