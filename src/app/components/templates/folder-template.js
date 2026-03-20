@@ -1,19 +1,68 @@
 import { createElement } from '../../util/element-creator.js';
 
+const SAMPLE_CHILDREN = [
+    { icon: 'ico-folder', title: 'Безопасность2' },
+    { icon: 'ico-folder', title: 'Виртуализация' },
+    { icon: 'ico-folder', title: 'Графическая подсистема' },
+    { icon: 'ico-file', title: 'Виртуализация' },
+    { icon: 'ico-file', title: 'Графическая подсистема' },
+];
+
+const HELP_PLACEHOLDER = [
+    'какой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, больше',
+    'какой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, больше',
+    'какой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, больше',
+    'какой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, больше',
+].join('\n');
+
+function renderChildRow({ icon, title }) {
+    return createElement('li', {
+        className: ['gp__list-children__item', 'folder'],
+        children: [
+            createElement('span', {
+                className: 'workspace-list-item',
+                children: [
+                    createElement('span', { className: ['icon', icon] }),
+                    createElement('span', {
+                        className: 'gp__list-children__item__title',
+                        text: title,
+                    }),
+                ],
+            }),
+        ],
+    });
+}
+
 /**
  * Рендерит шаблон при выборе папки в дереве
- * @returns {ElementCreator} - Элемент с сообщением о выборе папки
+ * @returns {ElementCreator} — контент папки: список дочерних элементов и блок помощи
  */
 export function renderFolderTemplate() {
-    const folderTemplate = createElement('div', {
-        className: 'gp__folder-template',
+    return createElement('div', {
+        className: 'gp__list-children-wrapper',
         children: [
             createElement('div', {
-                className: 'folder-template__message',
-                text: 'Нажата папка'
-            })
-        ]
+                className: 'gp__list-children',
+                children: [
+                    createElement('ul', {
+                        className: 'gp__list-children__list',
+                        children: SAMPLE_CHILDREN.map(renderChildRow),
+                    }),
+                ],
+            }),
+            createElement('div', {
+                className: ['gp__list-children-help', 'is-open'],
+                children: [
+                    createElement('div', {
+                        className: 'title',
+                        text: 'Помощь:',
+                    }),
+                    createElement('div', {
+                        className: 'content',
+                        text: HELP_PLACEHOLDER,
+                    }),
+                ],
+            }),
+        ],
     });
-
-    return folderTemplate;
 }
