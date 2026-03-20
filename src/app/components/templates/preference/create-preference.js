@@ -1,4 +1,4 @@
-import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage } from '../../../util/mainLocalStorage/shortcuts.js';
+import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage, VALID_TARGET_TYPES } from '../../../util/mainLocalStorage/shortcuts.js';
 import { renderPreferencesShortcutsTemplate } from './shortcuts/preferences-template-shortcuts.js';
 import { renderPreferencesCommonTemplate } from '../../workspace/preferences-template-common.js';
 import { getValueElement, getFieldValue } from '../../../util/form-utils.js';
@@ -106,10 +106,23 @@ export function savePreferencesFromModal(modalEl) {
                 normalizedBasic[key] = Number.isNaN(n) ? normalizedBasic[key] : n;
             }
         });
-        // TARGET_TYPE: 0 (FILESYSTEM), 1 (URL), 2 (SHELL) — всегда число
+        /*
+         * TARGET_TYPE: explicit validation, no silent coercion.
+         * The form <select> only offers values in VALID_TARGET_TYPES {0, 1, 2},
+         * so after Number() conversion the value is always valid for normal flow.
+         * If an out-of-range value appears (legacy data loaded into form),
+         * we warn explicitly — schema validation in saveShortcutsToLocalStorage
+         * will reject the write. Legacy data needs a dedicated migration,
+         * not a hidden clamp on save.
+         */
         if ('TARGET_TYPE' in normalizedBasic) {
-            const v = Number(normalizedBasic.TARGET_TYPE);
-            normalizedBasic.TARGET_TYPE = Number.isNaN(v) ? 0 : Math.max(0, Math.min(2, Math.floor(v)));
+            const v = normalizedBasic.TARGET_TYPE;
+            if (typeof v !== 'number' || !VALID_TARGET_TYPES.has(v)) {
+                console.warn(
+                    `[shortcuts] TARGET_TYPE has unexpected value: ${v}.`,
+                    'Legacy data may need explicit migration.'
+                );
+            }
         }
         const normalizedCommon = { ...commonData };
         const list = getShortcutsFromLocalStorage();

@@ -18,6 +18,9 @@ import {
 
 const STORAGE_KEY = 'shortcuts';
 
+/** Valid TARGET_TYPE values matching the UI form select: 0 (filesystem), 1 (URL), 2 (shell) */
+export const VALID_TARGET_TYPES = new Set([0, 1, 2]);
+
 /** Default seed data — structure matches Shortcuts.md field spec */
 const SHORTCUTS_SEED = [
     {
@@ -68,7 +71,7 @@ const SHORTCUTS_SEED = [
         basic: {
             "ACTION": 2,
             "SHORTCUT_PATH": "Mail",
-            "TARGET_TYPE": 3,
+            "TARGET_TYPE": 2,
             "TARGET_PATH": "/usr/bin/thunderbird",
             "LOCATION": 9,
             "ARGUMENTS": "",
@@ -94,11 +97,15 @@ const SHORTCUTS_SEED = [
  * Required fields and types:
  *   basic.ACTION          — number  (0–3: create/replace/update/delete)
  *   basic.SHORTCUT_PATH   — string
- *   basic.TARGET_TYPE      — number  (0: filesystem, 1: url, 2: shell)
+ *   basic.TARGET_TYPE      — number, must be in VALID_TARGET_TYPES {0, 1, 2}
  *   basic.TARGET_PATH      — string
  *   common.stopOnErrorCheckBox  — boolean
  *   common.userContextCheckBox  — boolean
  *   common.removeThisCheckBox   — boolean
+ *
+ * MIGRATION POINT: if legacy data contains TARGET_TYPE values outside {0,1,2},
+ * it will fail this validation. Add version-aware migration before this check
+ * if backward-compatible loading of old data is needed.
  *
  * @param {unknown} item
  * @returns {boolean}
@@ -112,7 +119,7 @@ function isValidShortcutEntry(item) {
 
     if (typeof basic.ACTION !== 'number') return false;
     if (typeof basic.SHORTCUT_PATH !== 'string') return false;
-    if (typeof basic.TARGET_TYPE !== 'number') return false;
+    if (typeof basic.TARGET_TYPE !== 'number' || !VALID_TARGET_TYPES.has(basic.TARGET_TYPE)) return false;
     if (typeof basic.TARGET_PATH !== 'string') return false;
 
     if (typeof common.stopOnErrorCheckBox !== 'boolean') return false;
