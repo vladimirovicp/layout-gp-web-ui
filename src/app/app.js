@@ -11,7 +11,7 @@ import { renderDriveMapsTemplate } from './components/templates/preference/templ
 import { renderNetworkSharesTemplate } from './components/templates/preference/templates-networkShares.js';
 import { renderFilesTemplate } from './components/templates/preference/templates-files.js';
 import { renderIniFilesTemplate } from './components/templates/preference/templates-iniFiles.js';
-import './util/mainLocalStorage/shortcuts.js';
+import { initShortcutsStorage } from './util/mainLocalStorage/shortcuts.js';
 
 const treeViewState = {
     selectedItem: null,
@@ -94,6 +94,8 @@ const treeViewState = {
         }
     }
 };
+
+initShortcutsStorage();
 
 const container = document.getElementById('gp__container');
 
