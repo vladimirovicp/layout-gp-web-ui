@@ -7,30 +7,42 @@ const HELP_PLACEHOLDER = [
     'какой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, больше',
 ].join('\n');
 
-function renderChildRow({ icon, title }) {
-    return createElement('li', {
-        className: ['gp__list-children__item', 'folder'],
+function renderChildRow(item, onItemClick) {
+    const row = createElement('span', {
+        className: 'workspace-list-item',
+        attrs: typeof onItemClick === 'function'
+            ? {
+                role: 'button',
+                tabindex: '0',
+            }
+            : {},
         children: [
+            createElement('span', { className: ['icon', item.icon] }),
             createElement('span', {
-                className: 'workspace-list-item',
-                children: [
-                    createElement('span', { className: ['icon', icon] }),
-                    createElement('span', {
-                        className: 'gp__list-children__item__title',
-                        text: title,
-                    }),
-                ],
+                className: 'gp__list-children__item__title',
+                text: item.title,
             }),
         ],
     });
+
+    if (typeof onItemClick === 'function') {
+        row.on('click', () => onItemClick(item));
+        row.on('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                onItemClick(item);
+            }
+        });
+    }
+
+    return createElement('li', {
+        className: ['gp__list-children__item', item.type],
+        children: [row],
+    });
 }
 
-/**
- * Рендерит шаблон при выборе папки в дереве
- * @returns {ElementCreator} — контент папки: список дочерних элементов и блок помощи
- */
-export function renderFolderTemplate({ children = [] } = {}) {
-    const SAMPLE_CHILDREN = Array.isArray(children)
+export function renderFolderTemplate({ children = [], onItemClick = null } = {}) {
+    const folderChildren = Array.isArray(children)
         ? children
         : [];
 
@@ -42,7 +54,7 @@ export function renderFolderTemplate({ children = [] } = {}) {
                 children: [
                     createElement('ul', {
                         className: 'gp__list-children__list',
-                        children: SAMPLE_CHILDREN.map(renderChildRow),
+                        children: folderChildren.map((child) => renderChildRow(child, onItemClick)),
                     }),
                 ],
             }),
