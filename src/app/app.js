@@ -54,7 +54,9 @@ const treeViewState = {
 
         if (item?.type === 'folder') {
             if (this.workspace) {
-                const templateResult = renderFolderTemplate();
+                const templateResult = renderFolderTemplate({
+                    children: item.children ?? [],
+                });
                 this.workspace.append(templateResult);
                 this.setCurrentView(templateResult);
             }

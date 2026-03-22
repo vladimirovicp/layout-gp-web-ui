@@ -1,13 +1,5 @@
 import { createElement } from '../../util/element-creator.js';
 
-const SAMPLE_CHILDREN = [
-    { icon: 'ico-folder', title: 'Безопасность2' },
-    { icon: 'ico-folder', title: 'Виртуализация' },
-    { icon: 'ico-folder', title: 'Графическая подсистема' },
-    { icon: 'ico-file', title: 'Виртуализация' },
-    { icon: 'ico-file', title: 'Графическая подсистема' },
-];
-
 const HELP_PLACEHOLDER = [
     'какой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, больше',
     'какой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, большекакой-то рандомный текст, не знаю о чем)  текста больше, больше',
@@ -37,7 +29,11 @@ function renderChildRow({ icon, title }) {
  * Рендерит шаблон при выборе папки в дереве
  * @returns {ElementCreator} — контент папки: список дочерних элементов и блок помощи
  */
-export function renderFolderTemplate() {
+export function renderFolderTemplate({ children = [] } = {}) {
+    const SAMPLE_CHILDREN = Array.isArray(children)
+        ? children
+        : [];
+
     return createElement('div', {
         className: 'gp__list-children-wrapper',
         children: [
