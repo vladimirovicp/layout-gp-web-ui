@@ -76,7 +76,17 @@ function renderTreeItem(item, treeViewState) {
         
         // Добавляем класс active к кликнутому элементу
         clickedElement.classList.add('active');
-        
+
+
+        // ееееееееееееее
+        if (item.type === 'folder') {
+            const kids = item.children ?? [];
+            //console.log('Folder children:', item.title, kids);
+            kids.forEach((child) => {
+                console.log(child.type, child.title);
+            });
+        }
+
         // Для папок переключаем состояние открыто/закрыто
         if (item.type === 'folder' && item.children && item.children.length > 0) {
             toggleFolder(listItem, item);

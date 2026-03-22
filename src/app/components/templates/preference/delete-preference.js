@@ -1,5 +1,5 @@
-import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
-import { renderPreferencesTableShortcuts } from './preferences-table-shortcuts.js';
+import { getShortcutsFromLocalStorage, saveShortcutsToLocalStorage } from '../../../util/mainLocalStorage/shortcuts.js';
+import { renderPreferencesTableShortcuts } from './shortcuts/preferences-table-shortcuts.js';
 
 /**
  * Удаляет запись из localStorage по имени (data-preferences-name) и индексу (data-preferences-index).

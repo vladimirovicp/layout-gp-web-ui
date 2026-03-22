@@ -1,4 +1,4 @@
-import { createElement } from '../../util/element-creator.js';
+import { createElement } from '../../../../util/element-creator.js';
 
 /**
  * Рендерит шаблон настроек ярлыка (горячей клавиши)
@@ -275,7 +275,6 @@ export function renderPreferencesShortcutsTemplate() {
                             createElement('input', {
                                 attrs: {
                                     type: 'text',
-                                    placeholder: '/home/user'
                                 }
                             })
                         ]

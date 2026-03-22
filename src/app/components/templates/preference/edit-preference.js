@@ -1,6 +1,6 @@
-import { getShortcutsFromLocalStorage } from '../../util/mainLocalStorage/shortcuts.js';
+import { getShortcutsFromLocalStorage } from '../../../util/mainLocalStorage/shortcuts.js';
 import { resetActiveTabToBasic } from './create-preference.js';
-import { getValueElement, getFieldValue } from '../../util/form-utils.js';
+import { getValueElement, getFieldValue } from '../../../util/form-utils.js';
 
 /**
  * Устанавливает значение в элемент поля.
