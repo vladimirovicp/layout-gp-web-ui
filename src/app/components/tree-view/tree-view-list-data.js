@@ -10,7 +10,7 @@ export const treeViewList = [
     {
         title: t('policies.localGroupPolicy'),
         type: 'folder',
-        opened: true,
+        opened: false,
         icon: null,
         help: 'Local group policies templates',
       
@@ -18,7 +18,7 @@ export const treeViewList = [
             {
                 title: t('policies.machine'),
                 type: 'folder',
-                opened: true,
+                opened: false,
                 icon: 'ico-computer',
                 help: 'Machine level policies',
                 children: [
@@ -33,14 +33,14 @@ export const treeViewList = [
                     {
                         title: t('preferences.title'),
                         type: 'folder',
-                        opened: true,
+                        opened: false,
                         icon: 'ico-folder',
                         help: 'Preferences policies.',
                         children: [
                             {
                                 title: t('preferences.systemSettings'), //'Настройки системы',  
                                 type: 'folder',
-                                opened: true,
+                                opened: false,
                                 icon: 'ico-folder',
                                 children: treepreferences,
                                 help: 'Policies that set system settings.',
@@ -66,7 +66,7 @@ export const treeViewList = [
             {
                 title: t('policies.user'),
                 type: 'folder',
-                opened: true,
+                opened: false,
                 icon: 'ico-user',
                 help: 'User level policies',
                 children: [

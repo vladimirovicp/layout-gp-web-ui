@@ -270,7 +270,7 @@ const treeViewState = {
                 }
             }
 
-            renderedWorkspaceView = this.buildViewWithPersistentHelp(templateResult);
+            renderedWorkspaceView = templateResult;
         }
 
         if (this.workspace && renderedWorkspaceView) {
