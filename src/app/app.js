@@ -3,7 +3,7 @@ import { renderMain } from './components/main/main';
 import { renderFooter } from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { renderDefaultTemplate } from './components/templates/default-template.js';
-import { renderFolderTemplate } from './components/templates/folder-template.js';
+import { renderFolderTemplate, renderHelpBlock } from './components/templates/folder-template.js';
 import { renderShortcutsTemplate } from './components/templates/preference/templates-shortcuts.js';
 import { renderEnvironmentTemplate } from './components/templates/preference/templates-environment.js';
 import { renderFoldersTemplate } from './components/templates/preference/templates-folders.js';
@@ -13,6 +13,7 @@ import { renderNetworkSharesTemplate } from './components/templates/preference/t
 import { renderFilesTemplate } from './components/templates/preference/templates-files.js';
 import { renderIniFilesTemplate } from './components/templates/preference/templates-iniFiles.js';
 import { setFolderOpenedState, setTreeItemActive } from './components/tree-view/tree-view-list.js';
+import { createElement } from './util/element-creator.js';
 import { initShortcutsStorage } from './util/mainLocalStorage/shortcuts.js';
 
 const treeViewState = {
@@ -20,6 +21,7 @@ const treeViewState = {
     selectedPath: [],
     workspace: null,
     header: null,
+    isHelpOpen: false,
     currentViewCleanup: null,
     treeData: [],
     treeItemElements: new WeakMap(),
@@ -38,6 +40,21 @@ const treeViewState = {
 
     setHeader(header) {
         this.header = header;
+    },
+
+    initHelpControls() {
+        const btnInformation = this.header?.getElement?.()
+            ?.querySelector('.gp__control-help .btn-information');
+
+        if (!btnInformation) {
+            return;
+        }
+
+        btnInformation.addEventListener('click', () => {
+            this.toggleHelp();
+        });
+
+        this.syncHelpButtonState();
     },
 
     registerTreeNode(item, { treeItemElement = null, listItemElement = null, parentItem = null } = {}) {
@@ -131,6 +148,77 @@ const treeViewState = {
             : null;
     },
 
+    isFolderItemSelected() {
+        return this.selectedItem?.item?.type === 'folder';
+    },
+
+    getCurrentHelpSourceItem() {
+        if (this.isFolderItemSelected()) {
+            return this.selectedItem?.item ?? null;
+        }
+
+        return [...this.selectedPath]
+            .reverse()
+            .find((pathItem) => pathItem?.type === 'folder') ?? null;
+    },
+
+    buildViewWithPersistentHelp(view) {
+        if (!this.isHelpOpen) {
+            return view;
+        }
+
+        const helpSourceItem = this.getCurrentHelpSourceItem();
+        const helpBlock = renderHelpBlock({
+            help: helpSourceItem?.help,
+            isOpen: this.isHelpOpen,
+        });
+
+        if (!helpBlock) {
+            return view;
+        }
+
+        return createElement('div', {
+            className: 'gp__list-children-wrapper',
+            children: [view, helpBlock],
+        });
+    },
+
+    syncHelpButtonState() {
+        const btnInformation = this.header?.getElement?.()
+            ?.querySelector('.gp__control-help .btn-information');
+
+        if (!btnInformation) {
+            return;
+        }
+
+        btnInformation.classList.toggle('active', this.isFolderItemSelected());
+    },
+
+    syncHelpBlockState() {
+        const workspaceEl = this.workspace?.getElement?.();
+        const helpBlock = workspaceEl?.querySelector('.gp__list-children-help');
+
+        if (!helpBlock) {
+            return;
+        }
+
+        helpBlock.classList.toggle('is-open', this.isHelpOpen);
+    },
+
+    setHelpOpen(opened) {
+        this.isHelpOpen = Boolean(opened);
+        this.syncHelpBlockState();
+        return this.isHelpOpen;
+    },
+
+    toggleHelp() {
+        if (!this.isFolderItemSelected()) {
+            return this.isHelpOpen;
+        }
+
+        return this.setHelpOpen(!this.isHelpOpen);
+    },
+
     renderSelectedItem(item, element = null) {
         this.cleanupCurrentView();
 
@@ -141,66 +229,57 @@ const treeViewState = {
         this.setCurrentView(null);
         this.selectedPath = this.getPathToItem(item);
         this.selectedItem = { item, element };
+        let templateResult = null;
+        let renderedWorkspaceView = null;
 
         if (item?.type === 'folder') {
-            if (this.workspace) {
-                const templateResult = renderFolderTemplate({
-                    children: item.children ?? [],
-                    help: item.help,
-                    onItemClick: (childItem) => {
-                        this.navigateToNode(childItem, {
-                            openPath: true,
-                            openCurrentFolder: childItem?.type === 'folder' ? true : undefined,
-                        });
-                    },
-                });
-                this.workspace.append(templateResult);
-                this.setCurrentView(templateResult);
+            templateResult = renderFolderTemplate({
+                children: item.children ?? [],
+                help: item.help,
+                isHelpOpen: this.isHelpOpen,
+                onItemClick: (childItem) => {
+                    this.navigateToNode(childItem, {
+                        openPath: true,
+                        openCurrentFolder: childItem?.type === 'folder' ? true : undefined,
+                    });
+                },
+            });
+            renderedWorkspaceView = templateResult;
+        } else if (item?.type === 'file') {
+            if (item.template !== 'preferences') {
+                templateResult = renderDefaultTemplate();
+            } else {
+                const headerClass = item.header?.class;
+
+                if (headerClass !== 'Machine') {
+                    templateResult = renderDefaultTemplate();
+                } else {
+                    const preferenceTemplateMap = {
+                        shortcuts: renderShortcutsTemplate,
+                        environment: renderEnvironmentTemplate,
+                        folders: renderFoldersTemplate,
+                        registry: renderRegistryTemplate,
+                        driveMaps: renderDriveMapsTemplate,
+                        networkShares: renderNetworkSharesTemplate,
+                        files: renderFilesTemplate,
+                        iniFiles: renderIniFilesTemplate,
+                    };
+
+                    const renderTemplate = preferenceTemplateMap[item.name] || renderDefaultTemplate;
+                    templateResult = renderTemplate({ header: this.header });
+                }
             }
-            return;
+
+            renderedWorkspaceView = this.buildViewWithPersistentHelp(templateResult);
         }
 
-        if (item?.type !== 'file') {
-            return;
-        }
-
-        if (item.template !== 'preferences') {
-            if (this.workspace) {
-                const templateResult = renderDefaultTemplate();
-                this.workspace.append(templateResult);
-                this.setCurrentView(templateResult);
-            }
-            return;
-        }
-
-        const headerClass = item.header?.class;
-        if (headerClass !== 'Machine') {
-            if (this.workspace) {
-                const templateResult = renderDefaultTemplate();
-                this.workspace.append(templateResult);
-                this.setCurrentView(templateResult);
-            }
-            return;
-        }
-
-        const preferenceTemplateMap = {
-            shortcuts: renderShortcutsTemplate,
-            environment: renderEnvironmentTemplate,
-            folders: renderFoldersTemplate,
-            registry: renderRegistryTemplate,
-            driveMaps: renderDriveMapsTemplate,
-            networkShares: renderNetworkSharesTemplate,
-            files: renderFilesTemplate,
-            iniFiles: renderIniFilesTemplate,
-        };
-
-        const renderTemplate = preferenceTemplateMap[item.name] || renderDefaultTemplate;
-
-        if (this.workspace) {
-            const templateResult = renderTemplate({ header: this.header });
-            this.workspace.append(templateResult);
+        if (this.workspace && renderedWorkspaceView) {
+            this.workspace.append(renderedWorkspaceView);
             this.setCurrentView(templateResult);
         }
+
+        this.syncHelpButtonState();
+        this.syncHelpBlockState();
     },
 
     navigateToNode(item, { treeItemElement = null, openPath = true, openCurrentFolder = undefined } = {}) {
@@ -245,6 +324,7 @@ const container = document.getElementById('gp__container');
 if (container) {
     const header = renderHeader(container);
     treeViewState.setHeader(header);
+    treeViewState.initHelpControls();
 
     const { main, treeView, divider } = renderMain(container, treeViewState);
     renderFooter(container);

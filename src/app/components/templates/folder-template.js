@@ -41,7 +41,7 @@ function renderChildRow(item, onItemClick) {
     });
 }
 
-function renderHelpBlock(help) {
+export function renderHelpBlock({ help = undefined, isOpen = false } = {}) {
     if (help === '') {
         return null;
     }
@@ -51,7 +51,7 @@ function renderHelpBlock(help) {
         : help;
 
     return createElement('div', {
-        className: ['gp__list-children-help', 'is-open'],
+        className: ['gp__list-children-help', isOpen ? 'is-open' : null],
         children: [
             createElement('div', {
                 className: 'title',
@@ -65,11 +65,19 @@ function renderHelpBlock(help) {
     });
 }
 
-export function renderFolderTemplate({ children = [], help = undefined, onItemClick = null } = {}) {
+export function renderFolderTemplate({
+    children = [],
+    help = undefined,
+    onItemClick = null,
+    isHelpOpen = false,
+} = {}) {
     const folderChildren = Array.isArray(children)
         ? children
         : [];
-    const helpBlock = renderHelpBlock(help);
+    const helpBlock = renderHelpBlock({
+        help,
+        isOpen: isHelpOpen,
+    });
 
     return createElement('div', {
         className: 'gp__list-children-wrapper',
