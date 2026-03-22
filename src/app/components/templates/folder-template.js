@@ -41,10 +41,35 @@ function renderChildRow(item, onItemClick) {
     });
 }
 
-export function renderFolderTemplate({ children = [], onItemClick = null } = {}) {
+function renderHelpBlock(help) {
+    if (help === '') {
+        return null;
+    }
+
+    const helpText = help === undefined
+        ? HELP_PLACEHOLDER
+        : help;
+
+    return createElement('div', {
+        className: ['gp__list-children-help', 'is-open'],
+        children: [
+            createElement('div', {
+                className: 'title',
+                text: 'Помощь:',
+            }),
+            createElement('div', {
+                className: 'content',
+                text: helpText,
+            }),
+        ],
+    });
+}
+
+export function renderFolderTemplate({ children = [], help = undefined, onItemClick = null } = {}) {
     const folderChildren = Array.isArray(children)
         ? children
         : [];
+    const helpBlock = renderHelpBlock(help);
 
     return createElement('div', {
         className: 'gp__list-children-wrapper',
@@ -58,19 +83,7 @@ export function renderFolderTemplate({ children = [], onItemClick = null } = {})
                     }),
                 ],
             }),
-            createElement('div', {
-                className: ['gp__list-children-help', 'is-open'],
-                children: [
-                    createElement('div', {
-                        className: 'title',
-                        text: 'Помощь:',
-                    }),
-                    createElement('div', {
-                        className: 'content',
-                        text: HELP_PLACEHOLDER,
-                    }),
-                ],
-            }),
+            helpBlock,
         ],
     });
 }

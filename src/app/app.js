@@ -146,6 +146,7 @@ const treeViewState = {
             if (this.workspace) {
                 const templateResult = renderFolderTemplate({
                     children: item.children ?? [],
+                    help: item.help,
                     onItemClick: (childItem) => {
                         this.navigateToNode(childItem, {
                             openPath: true,
