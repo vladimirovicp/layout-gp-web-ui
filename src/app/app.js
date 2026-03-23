@@ -4,6 +4,7 @@ import { renderFooter } from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { renderDefaultTemplate } from './components/templates/default-template.js';
 import { renderScriptsTemplate } from './components/templates/scripts-template.js';
+import { renderAdmxTemplate } from './components/templates/admx-template.js';
 import { renderFolderTemplate, renderHelpBlock } from './components/templates/folder-template.js';
 import { renderShortcutsTemplate } from './components/templates/preference/templates-shortcuts.js';
 import { renderEnvironmentTemplate } from './components/templates/preference/templates-environment.js';
@@ -257,6 +258,8 @@ const treeViewState = {
                 } else {
                     templateResult = renderDefaultTemplate();
                 }
+            } else if (item.template === 'admx') {
+                templateResult = renderAdmxTemplate();
             } else if (item.template !== 'preferences') {
                 templateResult = renderDefaultTemplate();
             } else {
