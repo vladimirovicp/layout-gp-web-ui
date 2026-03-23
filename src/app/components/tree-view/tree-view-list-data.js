@@ -57,7 +57,11 @@ export const treeViewList = [
                                 title: 'Скрипты',
                                 type: 'file',
                                 opened: false,
-                                icon: 'ico-file'
+                                icon: 'ico-file',
+                                template: 'scripts',
+                                header: {
+                                    class: 'Machine'
+                                }
                             }
                         ]
                     }

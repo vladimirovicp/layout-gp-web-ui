@@ -3,6 +3,7 @@ import { renderMain } from './components/main/main';
 import { renderFooter } from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { renderDefaultTemplate } from './components/templates/default-template.js';
+import { renderScriptsTemplate } from './components/templates/scripts-template.js';
 import { renderFolderTemplate, renderHelpBlock } from './components/templates/folder-template.js';
 import { renderShortcutsTemplate } from './components/templates/preference/templates-shortcuts.js';
 import { renderEnvironmentTemplate } from './components/templates/preference/templates-environment.js';
@@ -232,6 +233,8 @@ const treeViewState = {
         let templateResult = null;
         let renderedWorkspaceView = null;
 
+        console.log('item)',item);
+
         if (item?.type === 'folder') {
             templateResult = renderFolderTemplate({
                 children: item.children ?? [],
@@ -246,7 +249,15 @@ const treeViewState = {
             });
             renderedWorkspaceView = templateResult;
         } else if (item?.type === 'file') {
-            if (item.template !== 'preferences') {
+            if (item.template === 'scripts') {
+                const headerClass = item.header?.class;
+
+                if (headerClass === 'Machine') {
+                    templateResult = renderScriptsTemplate();
+                } else {
+                    templateResult = renderDefaultTemplate();
+                }
+            } else if (item.template !== 'preferences') {
                 templateResult = renderDefaultTemplate();
             } else {
                 const headerClass = item.header?.class;
