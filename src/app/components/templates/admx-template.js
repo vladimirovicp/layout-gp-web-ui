@@ -1,10 +1,18 @@
 import { createElement } from '../../util/element-creator.js';
 
+function formatExplainText(explainText = '') {
+    return explainText
+        .split(/\r?\n/)
+        .flatMap((line, index, lines) => (index < lines.length - 1 ? [line, createElement('br')] : [line]));
+}
+
 /**
  * Рендерит рабочую область для политики из административных шаблонов (ADMX).
  * @returns {ElementCreator}
  */
-export function renderAdmxTemplate({ isHelpOpen = false } = {}) {
+export function renderAdmxTemplate({ isHelpOpen = false, item = {} } = {}) {
+    const policyHeader = item.policyData?.header ?? {};
+
     const admxTemplate = createElement('div', {
         className: 'gp__admx-wrapper',
         children: [
@@ -20,7 +28,7 @@ export function renderAdmxTemplate({ isHelpOpen = false } = {}) {
                                     'Политика: ',
                                     createElement('span', {
                                         className: 'title__name',
-                                        text: 'Разрешения для /bin/su'
+                                        text: policyHeader.displayName ?? ''
                                     })
                                 ]
                             }),
@@ -227,7 +235,7 @@ export function renderAdmxTemplate({ isHelpOpen = false } = {}) {
                             }),
                             createElement('div', {
                                 className: 'gp__admx-content',
-                                text: '8 Платформа ALT как минимум'
+                                text: policyHeader.supportedOn ?? ''
                             })
                         ]
                     }),
@@ -254,17 +262,7 @@ export function renderAdmxTemplate({ isHelpOpen = false } = {}) {
                             }),
                             createElement('div', {
                                 className: 'gp__admx-content',
-                                children: [
-                                    'Эта политика определяет разрешения для Xorg (/usr/bin/Xorg)',
-                                    createElement('br'),
-                                    'Не настроено — любому пользователю разрешено запускать /usr/bin/Xorg',
-                                    createElement('br'),
-                                    'Любой пользователь — любому пользователю разрешено запускать /usr/bin/Xorg',
-                                    createElement('br'),
-                                    'Группа xgrp — пользователям группы «xgrp» разрешено запускать /usr/bin/Xorg',
-                                    createElement('br'),
-                                    'Только root — только суперпользователь (root) может запускать /usr/bin/Xorg'
-                                ]
+                                children: formatExplainText(policyHeader.explainText)
                             })
                         ]
                     })
