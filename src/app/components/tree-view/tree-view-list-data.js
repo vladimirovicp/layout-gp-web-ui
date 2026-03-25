@@ -10,7 +10,7 @@ export const treeViewList = [
     {
         title: t('policies.localGroupPolicy'),
         type: 'folder',
-        opened: false,
+        opened: true,
         icon: null,
         help: 'Local group policies templates',
       
@@ -18,14 +18,14 @@ export const treeViewList = [
             {
                 title: t('policies.machine'),
                 type: 'folder',
-                opened: false,
+                opened: true,
                 icon: 'ico-computer',
                 help: 'Machine level policies',
                 children: [
                     {
                         title: t('policies.adminTemplates'),
                         type: 'folder',
-                        opened: false,
+                        opened: true,
                         icon: 'ico-folder',
                         children: machineCategories,
                         help: 'Machine administrative templates',
