@@ -4,7 +4,7 @@ import { createElement } from '../../util/element-creator.js';
  * Рендерит рабочую область для политики из административных шаблонов (ADMX).
  * @returns {ElementCreator}
  */
-export function renderAdmxTemplate() {
+export function renderAdmxTemplate({ isHelpOpen = false } = {}) {
     const admxTemplate = createElement('div', {
         className: 'gp__admx-wrapper',
         children: [
@@ -216,7 +216,7 @@ export function renderAdmxTemplate() {
                 ]
             }),
             createElement('div', {
-                className: 'gp__admx-help',
+                className: ['gp__admx-help', isHelpOpen ? 'is-open' : null],
                 children: [
                     createElement('div', {
                         className: 'gp__admx-supported',
