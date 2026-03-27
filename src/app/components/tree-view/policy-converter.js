@@ -30,7 +30,8 @@ function convertPolicyCategory(categoryNode) {
                 type: 'file',
                 icon: 'ico-file',
                 policyKey: key,
-                policyData: policy
+                policyData: policy,
+                template: 'admx',
             });
         }
     }

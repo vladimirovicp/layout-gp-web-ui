@@ -4,6 +4,7 @@ import { renderFooter } from './components/footer/footer';
 import { resizable } from './util/resizable.js';
 import { renderDefaultTemplate } from './components/templates/default-template.js';
 import { renderScriptsTemplate } from './components/templates/scripts-template.js';
+import { renderAdmxTemplate } from './components/templates/admx-template.js';
 import { renderFolderTemplate, renderHelpBlock } from './components/templates/folder-template.js';
 import { renderShortcutsTemplate } from './components/templates/preference/templates-shortcuts.js';
 import { renderEnvironmentTemplate } from './components/templates/preference/templates-environment.js';
@@ -153,6 +154,15 @@ const treeViewState = {
         return this.selectedItem?.item?.type === 'folder';
     },
 
+    isAdmxItemSelected() {
+        return this.selectedItem?.item?.type === 'file'
+            && this.selectedItem?.item?.template === 'admx';
+    },
+
+    isHelpToggleAvailable() {
+        return this.isFolderItemSelected() || this.isAdmxItemSelected();
+    },
+
     getCurrentHelpSourceItem() {
         if (this.isFolderItemSelected()) {
             return this.selectedItem?.item ?? null;
@@ -192,18 +202,20 @@ const treeViewState = {
             return;
         }
 
-        btnInformation.classList.toggle('active', this.isFolderItemSelected());
+        btnInformation.classList.toggle('active', this.isHelpToggleAvailable());
     },
 
     syncHelpBlockState() {
         const workspaceEl = this.workspace?.getElement?.();
-        const helpBlock = workspaceEl?.querySelector('.gp__list-children-help');
+        const helpBlocks = workspaceEl?.querySelectorAll('.gp__list-children-help, .gp__admx-help');
 
-        if (!helpBlock) {
+        if (!helpBlocks || helpBlocks.length === 0) {
             return;
         }
 
-        helpBlock.classList.toggle('is-open', this.isHelpOpen);
+        helpBlocks.forEach((helpBlock) => {
+            helpBlock.classList.toggle('is-open', this.isHelpOpen);
+        });
     },
 
     setHelpOpen(opened) {
@@ -213,7 +225,7 @@ const treeViewState = {
     },
 
     toggleHelp() {
-        if (!this.isFolderItemSelected()) {
+        if (!this.isHelpToggleAvailable()) {
             return this.isHelpOpen;
         }
 
@@ -257,6 +269,11 @@ const treeViewState = {
                 } else {
                     templateResult = renderDefaultTemplate();
                 }
+            } else if (item.template === 'admx') {
+                templateResult = renderAdmxTemplate({
+                    isHelpOpen: this.isHelpOpen,
+                    item,
+                });
             } else if (item.template !== 'preferences') {
                 templateResult = renderDefaultTemplate();
             } else {
