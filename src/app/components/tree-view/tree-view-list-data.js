@@ -3,8 +3,8 @@ import { treepreferences } from './tree-view-preferences.js';
 import { convertPolicySection } from './policy-converter.js';
 import policyData from './policy-en.json';
 
-const machineCategories = convertPolicySection(policyData.Machine);
-const userCategories = convertPolicySection(policyData.User);
+const machineCategories = convertPolicySection(policyData.Machine, 'Machine');
+const userCategories = convertPolicySection(policyData.User, 'User');
 
 export const treeViewList = [
     {

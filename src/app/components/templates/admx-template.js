@@ -239,7 +239,11 @@ function syncControlsWithPolicyState(rootElement) {
  * Рендерит рабочую область для политики из административных шаблонов (ADMX).
  * @returns {ElementCreator}
  */
-export function renderAdmxTemplate({ isHelpOpen = false, item = {} } = {}) {
+export function renderAdmxTemplate({ isHelpOpen = false, item = {}, admxTreePath = null } = {}) {
+    const effectiveAdmxTreePath = admxTreePath ?? item?.admxTreePath ?? null;
+    
+    console.log('admxTreePath', effectiveAdmxTreePath);
+
     const policyData = item.policyData ?? {};
     const policyHeader = policyData.header ?? {};
     const { controlEntries, policyValueEntry } = normalizePolicyEntries(policyData, policyHeader);

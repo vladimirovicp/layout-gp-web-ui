@@ -273,6 +273,7 @@ const treeViewState = {
                 templateResult = renderAdmxTemplate({
                     isHelpOpen: this.isHelpOpen,
                     item,
+                    admxTreePath: item?.admxTreePath,
                 });
             } else if (item.template !== 'preferences') {
                 templateResult = renderDefaultTemplate();
