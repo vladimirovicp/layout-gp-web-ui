@@ -484,6 +484,8 @@ export function renderAdmxTemplate({ isHelpOpen = false, item = {}, admxTreePath
 
         const policyData = item.policyData;
 
+        
+
         //const admxMetadata= []
 
         console.log('click on apply');
