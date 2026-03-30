@@ -1,5 +1,14 @@
 import { createElement } from '../../util/element-creator.js';
 
+function addManagedEventListener(cleanups, target, eventName, handler, options) {
+    if (!target || typeof target.addEventListener !== 'function' || typeof handler !== 'function') {
+        return;
+    }
+
+    target.addEventListener(eventName, handler, options);
+    cleanups.push(() => target.removeEventListener(eventName, handler, options));
+}
+
 function formatExplainText(explainText = '') {
     return explainText
         .split(/\r?\n/)
@@ -239,10 +248,16 @@ function syncControlsWithPolicyState(rootElement) {
  * Рендерит рабочую область для политики из административных шаблонов (ADMX).
  * @returns {ElementCreator}
  */
-export function renderAdmxTemplate({ isHelpOpen = false, item = {}, admxTreePath = null } = {}) {
+export function renderAdmxTemplate({ isHelpOpen = false, item = {}, admxTreePath = null, header = null } = {}) {
     const effectiveAdmxTreePath = admxTreePath ?? item?.admxTreePath ?? null;
     
     console.log('admxTreePath', effectiveAdmxTreePath);
+
+    const headerEl = header?.getElement?.();
+    const btnApply = headerEl?.querySelector('.admx__btn-apply') ?? null;
+    const btnCancel = headerEl?.querySelector('.admx__btn-cancel') ?? null;
+    const cleanups = [];
+    let hasAdmxStateChanged = false;
 
     const policyData = item.policyData ?? {};
     const policyHeader = policyData.header ?? {};
@@ -409,7 +424,16 @@ export function renderAdmxTemplate({ isHelpOpen = false, item = {}, admxTreePath
     const admxTemplateElement = admxTemplate.getElement();
     const statePolicyElement = admxTemplateElement.querySelector('.gp__admx-state-policy');
 
-    statePolicyElement?.addEventListener('change', (event) => {
+    const initialAdmxState = admxTemplateElement.querySelector('input[name="admx-state"]:checked')?.value ?? 'not-configured';
+
+    const setHeaderAdmxButtonsActive = (active) => {
+        if (btnApply) btnApply.classList.toggle('active', active);
+        if (btnCancel) btnCancel.classList.toggle('active', active);
+    };
+
+    setHeaderAdmxButtonsActive(false);
+
+    const handleStatePolicyChange = (event) => {
         const targetElement = event.target;
 
         if (!(targetElement instanceof HTMLInputElement)) {
@@ -420,10 +444,81 @@ export function renderAdmxTemplate({ isHelpOpen = false, item = {}, admxTreePath
             return;
         }
 
+        if (!hasAdmxStateChanged) {
+            hasAdmxStateChanged = true;
+            setHeaderAdmxButtonsActive(true);
+        }
+
         syncControlsWithPolicyState(admxTemplateElement);
-    });
+    };
+
+    addManagedEventListener(cleanups, statePolicyElement, 'change', handleStatePolicyChange);
 
     syncControlsWithPolicyState(admxTemplateElement);
+
+    const handleCancel = () => {
+        if (!btnCancel?.classList.contains('active')) {
+            return;
+        }
+
+        const radioToSelect = admxTemplateElement.querySelector(`input[name="admx-state"][value="${CSS.escape(initialAdmxState)}"]`);
+        if (radioToSelect instanceof HTMLInputElement) {
+            radioToSelect.checked = true;
+        }
+
+        syncControlsWithPolicyState(admxTemplateElement);
+
+        hasAdmxStateChanged = false;
+        setHeaderAdmxButtonsActive(false);
+    };
+
+    const handleApply = () => {
+
+        //кликаем по кнопке Применить (apply)
+
+
+        //const admxMetadata = item.policyData.header.key + '\\\\' + item.title;
+        
+        const admxKey = item.policyData.header.key;
+        const admxPath = item.admxTreePath + '/' + item.title;
+
+        const policyData = item.policyData;
+
+        //const admxMetadata= []
+
+        console.log('click on apply');
+        //console.log('admxMetadata', admxMetadata);
+        console.log('admxPath', admxPath);
+
+
+        if (!btnApply?.classList.contains('active')) {
+
+            
+            return;
+        }
+
+        // NOTE: actual persistence of ADMX state is not implemented yet.
+        hasAdmxStateChanged = false;
+        setHeaderAdmxButtonsActive(false);
+    };
+
+    addManagedEventListener(cleanups, btnCancel, 'click', handleCancel);
+    addManagedEventListener(cleanups, btnApply, 'click', handleApply);
+
+    let cleanedUp = false;
+    admxTemplate.cleanup = () => {
+        if (cleanedUp) return;
+        cleanedUp = true;
+
+        while (cleanups.length > 0) {
+            const cleanup = cleanups.pop();
+            if (typeof cleanup === 'function') {
+                cleanup();
+            }
+        }
+
+        setHeaderAdmxButtonsActive(false);
+    };
 
     return admxTemplate;
 }
