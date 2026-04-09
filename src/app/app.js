@@ -17,6 +17,7 @@ import { renderIniFilesTemplate } from './components/templates/preference/templa
 import { setFolderOpenedState, setTreeItemActive } from './components/tree-view/tree-view-list.js';
 import { createElement } from './util/element-creator.js';
 import { initShortcutsStorage } from './util/mainLocalStorage/shortcuts.js';
+import { initAdmxStorage } from './util/mainLocalStorage/admx.js';
 
 const treeViewState = {
     selectedItem: null,
@@ -272,7 +273,9 @@ const treeViewState = {
             } else if (item.template === 'admx') {
                 templateResult = renderAdmxTemplate({
                     isHelpOpen: this.isHelpOpen,
+                    header: this.header,
                     item,
+                    admxTreePath: item?.admxTreePath,
                 });
             } else if (item.template !== 'preferences') {
                 templateResult = renderDefaultTemplate();
@@ -345,7 +348,10 @@ const treeViewState = {
     }
 };
 
+// Запуск инициализации localStorage
 initShortcutsStorage();
+initAdmxStorage();
+//end Запуск инициализации localStorage
 
 const container = document.getElementById('gp__container');
 
