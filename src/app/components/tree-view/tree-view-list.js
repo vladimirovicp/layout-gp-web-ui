@@ -1,7 +1,4 @@
 import { createElement } from '../../util/element-creator.js';
-import { treeViewList } from './tree-view-list-data.js';
-
-export { treeViewList };
 
 export function setTreeItemActive(treeItemElement, container = document) {
     if (!treeItemElement) {
@@ -133,11 +130,15 @@ function renderTreeList(items, treeViewState, parentItem = null) {
     });
 }
 
-export function renderTreeViewList(data = treeViewList, workspace = null, treeViewState = null) {
+export function renderTreeViewList(data = [], workspace = null, treeViewState = null) {
+    const treeData = Array.isArray(data)
+        ? data
+        : [];
+
     if (workspace && treeViewState) {
         treeViewState.setWorkspace(workspace);
-        treeViewState.setTreeData(data);
+        treeViewState.setTreeData(treeData);
     }
 
-    return renderTreeList(data, treeViewState);
+    return renderTreeList(treeData, treeViewState);
 }
