@@ -53,6 +53,12 @@
     }
 }
 
+@keyframes tree-view-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .gp__container{
 
     .tree-view {
@@ -61,6 +67,31 @@
         width: 432px;
         height: 100%;
         overflow: auto;
+
+        .tree-view__status{
+            min-height: 120px;
+            padding: 24px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: #555555;
+            font-size: 14px;
+        }
+
+        .tree-view__status-spinner{
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d1d1;
+            border-top-color: #297FB0;
+            border-radius: 50%;
+            animation: tree-view-spinner 0.8s linear infinite;
+        }
+
+        .tree-view__status--error{
+            color: #8c2b2b;
+        }
 
         ul{
             list-style-type: none;

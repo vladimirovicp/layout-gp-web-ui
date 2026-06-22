@@ -368,5 +368,4 @@ if (container) {
     const mainElement = main.getElement();
 
     resizable(dividerElement, treeViewElement, mainElement);
-    treeViewState.initializeSelection();
 }
