@@ -194,7 +194,151 @@
             <div class="workspace">
                 <div class="gp__scripts">
                     <div class="btn btn-startup">Запуск</div>
-                    <div class="btn btn-tartdown">Завершение работы</div>
+                    <div class="btn btn-shutdown">Завершение работы</div>
+
+                    <div class="scripts__modal">
+                        <div class="scripts__modal-wrapper">
+                            <div class="scripts__modal-header">
+                                <div class="title">Диалог настроек</div>
+                                <div class="close"></div>
+                            </div>
+
+                            <div class="scripts__modal-content">
+
+                                <div class="scripts__modal-tabs">
+                                    <div class="tab-buttons">
+                                        <div class="scripts__tab-button active" data-tab="tab-script">Сценарий</div>
+                                        <div class="scripts__tab-button" data-tab="tab-powershell">Скрипты PowerShell</div>
+                                    </div>
+
+                                    <div id="tab-script" class="tab-content active">
+                                        <div class="field__label-global">Сценарии: “Запуск” для локальной групповой политики</div>
+
+                                        <div class="script__windows">
+                                            <div class="script__data">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Arguments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span data="data-name">n2</span></td>
+                                                            <td><span data="data-arguments">b2</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span data="data-name">n1 dsfdsf dfsgsdgsdf sdfsdfs </span></td>
+                                                            <td><span data="data-arguments">b1 gdfgdf fgdfgdf dfggdfgdf gfgdfgdf gdfgd</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span data="data-name">n1 dsfdsf dfsgsdgsdf sdfsdfs </span></td>
+                                                            <td><span data="data-arguments">b1 gdfgdf fgdfgdf dfggdfgdf gfgdfgdf gdfgd</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span data="data-name">n1 dsfdsf dfsgsdgsdf sdfsdfs </span></td>
+                                                            <td><span data="data-arguments">b1 gdfgdf fgdfgdf dfggdfgdf gfgdfgdf gdfgd</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="script__controle">
+                                                <div class="script__controle-top">
+                                                    <div class="btn btn-up">Вверх</div>
+                                                    <div class="btn btn-down">Вниз</div>
+                                                </div>
+
+                                                <div class="script__controle-bottom">
+                                                    <div class="btn btn-add">Добавить</div>
+                                                    <div class="btn btn-edit">Изменить</div>
+                                                    <div class="btn btn-remove">Удалить</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="field__line"></div>
+                                        <div class="field__label-global">Чтобы посмотреть файлы сценариев, хранящиеся в этом объекте групповой политики, нажмите кнопку ниже</div>
+                                        <div class="btn btn-show-files">Показать файлы</div>
+
+                                    </div>
+                                    <div id="tab-powershell" class="tab-content">
+
+                                        <div class="field__label-global">Сценарии: “Запуск” для локальной групповой политики</div>
+
+                                        <div class="script__windows">
+                                            <div class="script__data">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Arguments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span data="data-name">n2</span></td>
+                                                            <td><span data="data-arguments">b2</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span data="data-name">n1 dsfdsf dfsgsdgsdf sdfsdfs </span></td>
+                                                            <td><span data="data-arguments">b1 gdfgdf fgdfgdf dfggdfgdf gfgdfgdf gdfgd</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span data="data-name">n1 dsfdsf dfsgsdgsdf sdfsdfs </span></td>
+                                                            <td><span data="data-arguments">b1 gdfgdf fgdfgdf dfggdfgdf gfgdfgdf gdfgd</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span data="data-name">n1 dsfdsf dfsgsdgsdf sdfsdfs </span></td>
+                                                            <td><span data="data-arguments">b1 gdfgdf fgdfgdf dfggdfgdf gfgdfgdf gdfgd</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="script__controle">
+                                                <div class="script__controle-top">
+                                                    <div class="btn btn-up">Вверх</div>
+                                                    <div class="btn btn-down">Вниз</div>
+                                                </div>
+
+                                                <div class="script__controle-bottom">
+                                                    <div class="btn btn-add">Добавить</div>
+                                                    <div class="btn btn-edit">Изменить</div>
+                                                    <div class="btn btn-remove">Удалить</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="field__line"></div>
+                                        <div class="field__label-global">Запуск скриптов для этого объекта в следующем порядке:</div>
+
+                                        <div class="field field__input">
+                                            <div class="field__element">
+                                                <select name="running-scripts" disabled>
+                                                    <option value="value1" selected="">Не настроено</option>
+                                                    <option value="value2">1</option>
+                                                    <option value="value3">2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="field__line"></div>
+                                        <div class="field__label-global">Для сценариев Powershell требуется как минимум Windows 7 или Windows Server 2008 R2</div>
+                                        <div class="btn btn-show-files">Показать файлы</div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scripts__modal-footer">
+                                <div class="btn btn-cancel">Применить</div>
+                                <div class="btn btn-cancel">Отмена</div>
+                                <div class="btn btn-ok">Ок</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

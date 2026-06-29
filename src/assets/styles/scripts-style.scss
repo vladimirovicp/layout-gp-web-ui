@@ -1,1 +1,21 @@
 @use 'components/scripts.scss';
+
+.scripts__modal-wrapper {
+    .script__data {
+        tbody tr {
+            cursor: pointer;
+
+            &.selected {
+                background-color: #e6f2fb;
+            }
+        }
+    }
+
+    .script__controle {
+        .btn.disabled {
+            opacity: 0.5;
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+}
