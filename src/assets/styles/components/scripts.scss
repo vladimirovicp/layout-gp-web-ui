@@ -1,0 +1,209 @@
+.gp__scripts{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+
+    .btn{
+        width: 157px;
+    }
+}
+
+.scripts{
+    &__modal{
+        position: relative;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: 0.5s all;
+        z-index: 100;
+
+        border: 1px solid #d1d1d1;
+        background-color: #fff;
+        border-radius: 3px;
+        overflow: hidden;
+
+        &.active{
+            transform: translate(-50%, -50%) scale(1);
+            transition: 0.5s all;
+        }
+
+        &-wrapper{
+            width: 408px;
+        }
+
+        &-header{
+            background: #f5f5f5;
+            border-bottom: 1px solid #d1d1d1;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            .title{
+                font-weight: 600;
+                color: #363636;
+            }
+
+            .close{
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                cursor: pointer;
+                right: 12px;
+                top: 12px;
+                background-image: url(../../img/svg/close.svg);
+            }
+
+        }
+
+        &-tabs{
+            height: 492px;
+
+            &-big{
+                height: 560px; 
+            }
+
+            .tab-buttons{
+                display: flex;
+                height: 26px;
+                .scripts__tab-button{
+                    width: 50%;
+                    height: 26px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &.active{
+                        color: #297fb0;
+                    }
+
+                    &:not(.active){
+                        background-color: #f5f5f5;
+                        border-bottom: 1px solid #d1d1d1;
+                        cursor: pointer;
+                    }
+
+                    &:first{
+                        border-right: 1px solid #d1d1d1;
+                    }
+
+                    &:last-child{
+                        border-left: 1px solid #d1d1d1;
+                    }
+                }
+            }
+
+            .tab-content{
+                display: none;
+                
+                flex-direction: column;
+                height: calc(100% - 26px);
+
+                &.active{
+                    padding: 20px;
+                    display: flex;
+                }
+
+                .preferences-common{
+                    display: flex;
+                    flex-direction: column;
+                    height: calc(100% - 26px);
+                }
+            }
+        }
+
+        &-footer{
+            height: 45px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            gap: 10px;
+            padding: 0 20px;
+            border-top: 1px solid #d1d1d1;
+        }
+    }
+}
+
+.scripts__modal-wrapper{
+    .script{
+        &__windows{
+            display: flex;
+            gap: 5px;
+        }
+
+        &__data{
+            width: 275px;
+            height: 220px;
+            border: 1px solid #d1d1d1;
+            overflow-y: auto;
+
+            table{
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            thead {
+                background-color: #f8f9fa;
+                border-bottom: 2px solid #dee2e6;
+            }
+
+            th {
+                text-align: left;
+                padding: 12px 16px;
+                font-weight: 600;
+                color: #495057;
+            }
+
+            td {
+                padding: 12px 16px;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+        }
+
+        &__controle{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            &-top, &-bottom{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn{
+                width: 88px;
+            }
+        }
+    }
+}
+
+.scripts-add__modal,
+.scripts-edit__modal{
+        position: relative;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: 0.5s all;
+        z-index: 100;
+
+        border: 1px solid #d1d1d1;
+        background-color: #fff;
+        border-radius: 3px;
+        overflow: hidden;
+
+        &.active{
+            transform: translate(-50%, -50%) scale(1);
+            transition: 0.5s all;
+        }
+
+        &-content{
+            padding: 20px;
+        }
+}
